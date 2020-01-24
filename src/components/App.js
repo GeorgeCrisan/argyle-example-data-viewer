@@ -1,15 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import UserDetailsContainer from '../containers/UserDetailsContainer'
-
-import UserList from './UserList'
+import UserListContainer from '../containers/UserListContainer'
 
 const App = () => (
   <Router>
     <Switch>
-      <Route exact path="/">
-        <UserList />
-      </Route>
+      <Route exact path="/" component={UserListContainer} />
       <Route exact path="/start" component={UserDetailsContainer} />
     </Switch>
   </Router>

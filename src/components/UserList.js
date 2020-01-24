@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-import api from '../api/api'
-
-const UserList = () => {
-  const [users, setUsers] = useState([])
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const results = await api.getUsers()
-      console.log('RESULTS', results)
-      setUsers(results)
-    }
-    fetchUsers()
-  }, [])
+const UserList = ({ users }) => {
   return (
     <div>
       {users.map(user => (
         <div>
+          {user.firstName}
+          {user.lastName}
           <a href={`/users/${user.id}`}>{user.id}</a>
         </div>
       ))}
