@@ -45,16 +45,16 @@ class UserDetailsContainer extends Component {
     const database = firebase.database()
     const uid = localStorage.getItem('uid')
 
-    // Create a child reference
-    var imagesRef = storageRef.child(uid)
-    // imagesRef now points to 'images'
-
-    imagesRef.put(file).then(snapshot => {
-      console.log(11, snapshot)
-    })
-
     window.argyle.open()
     window.userCreated = ({ userToken, userId }) => {
+      // Create a child reference
+      var imagesRef = storageRef.child(userId)
+      // imagesRef now points to 'images'
+
+      imagesRef.put(file).then(snapshot => {
+        console.log(11, snapshot)
+      })
+
       database.ref(`user-details/${userId}`).set({
         uid,
         firstName,

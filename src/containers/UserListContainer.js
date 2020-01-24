@@ -10,6 +10,9 @@ class UserListContainer extends Component {
 
   async componentDidMount() {
     const database = firebase.database()
+    const storage = firebase.storage()
+    var storageRef = storage.ref()
+
     const results = await api.getUsers()
 
     let updatedUsers = []
@@ -18,6 +21,31 @@ class UserListContainer extends Component {
       const currentUser = {}
 
       database.ref(`user-details/${id}`).on('child_added', snapshot => {
+        // const spaceRef = storage.ref().child(id)
+        storageRef
+          .child(id)
+          .getDownloadURL()
+          .then(function(url) {
+            // `url` is the download URL for 'images/stars.jpg'
+            console.log({ url })
+            // This can be downloaded directly:
+            var xhr = new XMLHttpRequest()
+            xhr.responseType = 'blob'
+            xhr.onload = function(event) {
+              var blob = xhr.response
+            }
+            xhr.open('GET', url)
+            xhr.send()
+
+            // Or inserted into an <img> element:
+            var img = document.getElementById('myimg')
+            img.src = url
+          })
+          .catch(function(error) {
+            // Handle any errors
+          })
+
+        // console.log(spaceRef)
         currentUser[snapshot.key] = snapshot.node_.value_
         currentUser.id = id
 
