@@ -36,7 +36,7 @@ const Report = props => {
       setAccounts(results)
     }
     fetchAccounts()
-  })
+  }, [userId])
   return (
     <CenteredContainer>
       {accounts.map(account => (
