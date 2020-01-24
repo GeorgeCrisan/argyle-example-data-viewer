@@ -30,8 +30,19 @@ const Name = styled.div`
   margin-right: 2rem;
 `
 
-const StyledImg = styled.div`
+const StyledImg = styled.img`
   margin-right: 3rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+`
+
+const ImgPlaceholder = styled.div`
+  margin-right: 3rem;
+  width: 30px;
+  height: 30px;
+  background-color: lightgray;
+  border-radius: 50%;
 `
 
 const UserList = ({ users }) => {
@@ -41,7 +52,12 @@ const UserList = ({ users }) => {
         <StyledCard href={`/reports/${user.id}`} key={user.id + user.firstName}>
           <Card interactive={true} elevation={Elevation.TWO}>
             <Details>
-              <StyledImg>img</StyledImg>
+              {user.imgUrl ? (
+                <StyledImg src={user.imgUrl} />
+              ) : (
+                <ImgPlaceholder />
+              )}
+
               <Text>
                 <Name>{user.firstName}</Name>
                 <Name>{user.lastName}</Name>

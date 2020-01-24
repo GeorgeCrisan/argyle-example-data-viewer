@@ -19,37 +19,17 @@ class UserListContainer extends Component {
 
     results.forEach(({ id }) => {
       const currentUser = {}
+      let count = 0
 
-      database.ref(`user-details/${id}`).on('child_added', snapshot => {
-        // const spaceRef = storage.ref().child(id)
-        storageRef
-          .child(id)
-          .getDownloadURL()
-          .then(function(url) {
-            // `url` is the download URL for 'images/stars.jpg'
-            console.log({ url })
-            // This can be downloaded directly:
-            var xhr = new XMLHttpRequest()
-            xhr.responseType = 'blob'
-            xhr.onload = function(event) {
-              var blob = xhr.response
-            }
-            xhr.open('GET', url)
-            xhr.send()
+      database.ref(`user-details/${id}`).on('child_added', async snapshot => {
+        const url = await storageRef.child(id).getDownloadURL()
+        currentUser.imgUrl = url
 
-            // Or inserted into an <img> element:
-            var img = document.getElementById('myimg')
-            img.src = url
-          })
-          .catch(function(error) {
-            // Handle any errors
-          })
-
-        // console.log(spaceRef)
         currentUser[snapshot.key] = snapshot.node_.value_
         currentUser.id = id
+        count = count + 1
 
-        if (currentUser.firstName && currentUser.lastName) {
+        if (currentUser.firstName && currentUser.lastName && count > 4) {
           updatedUsers.push(currentUser)
         }
         this.setState({ users: updatedUsers })
