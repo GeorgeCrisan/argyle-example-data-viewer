@@ -31,7 +31,7 @@ class Api {
         ordering: '-created_at'
       }
     })
-    console.log(resp.data.results)
+    return resp.data.results
   }
 }
 
