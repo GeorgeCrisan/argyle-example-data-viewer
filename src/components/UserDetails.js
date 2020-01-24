@@ -1,13 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-  InputGroup,
-  Button,
-  Icon,
-  Card,
-  Elevation,
-  FileInput
-} from '@blueprintjs/core'
+import { InputGroup, Button, Icon, Card, Elevation } from '@blueprintjs/core'
 
 const StyledUserDetails = styled.div`
   margin: 10rem auto;
@@ -36,7 +29,13 @@ const HiddenInput = styled.input`
 
 const StyledButton = styled(Button)``
 
-const UserDetails = ({ onAddImage }) => (
+const UserDetails = ({
+  onAddImage,
+  onInputChange,
+  firstName,
+  lastName,
+  onSubmit
+}) => (
   <StyledUserDetails>
     <Card interactive={true} elevation={Elevation.TWO}>
       <Title>The Client name</Title>
@@ -45,12 +44,18 @@ const UserDetails = ({ onAddImage }) => (
         large={true}
         placeholder="First Name"
         small={false}
+        onChange={onInputChange}
+        value={firstName}
+        name="firstName"
       />
       <StyledInput
         disabled={false}
         large={true}
         placeholder="Last Name"
         small={false}
+        onChange={onInputChange}
+        value={lastName}
+        name="lastName"
       />
       <ButtonGroup>
         <HiddenInput id="file_input" type="file" onChange={onAddImage} />
@@ -61,9 +66,8 @@ const UserDetails = ({ onAddImage }) => (
         >
           <Icon icon="document" /> Upload Photo... <Icon icon="small-cross" />
         </StyledButton>
-        <StyledButton intent="primary">
+        <StyledButton onClick={onSubmit} intent="primary">
           Open Plugin
-          {/* <Icon icon="tick" /> */}
         </StyledButton>
       </ButtonGroup>
     </Card>
