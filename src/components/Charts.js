@@ -85,31 +85,34 @@ const generateChart = async (account, activities) => {
     .attr('class', 'month')
     .attr('d', monthPath)
 
-  d3.csv('http://localhost:3001/data.csv', function(error, csv) {
-    if (error) throw error
+  d3.csv(
+    'https://gist.githubusercontent.com/GuilloOme/75f51c64c2132899d58d4cd6a23506d3/raw/92882e79720605aae653398a9e8b5862e91a96f8/dji.csv',
+    function(error, csv) {
+      if (error) throw error
 
-    var data = d3
-      .nest()
-      .key(function(d) {
-        return d.Date
-      })
-      .rollup(function(d) {
-        return (d[0].Close - d[0].Open) / d[0].Open
-      })
-      .map(csv)
+      var data = d3
+        .nest()
+        .key(function(d) {
+          return d.Date
+        })
+        .rollup(function(d) {
+          return (d[0].Close - d[0].Open) / d[0].Open
+        })
+        .map(csv)
 
-    rect
-      .filter(function(d) {
-        return data.has(d)
-      })
-      .attr('class', function(d) {
-        return 'day ' + color(data.get(d))
-      })
-      .select('title')
-      .text(function(d) {
-        return d + ': ' + percent(data.get(d))
-      })
-  })
+      rect
+        .filter(function(d) {
+          return data.has(d)
+        })
+        .attr('class', function(d) {
+          return 'day ' + color(data.get(d))
+        })
+        .select('title')
+        .text(function(d) {
+          return d + ': ' + percent(data.get(d))
+        })
+    }
+  )
 
   function monthPath(t0) {
     var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
