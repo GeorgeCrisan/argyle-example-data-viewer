@@ -7,7 +7,7 @@ const UserList = ({ users }) => {
         <div>
           {user.firstName}
           {user.lastName}
-          <a href={`/users/${user.id}`}>{user.id}</a>
+          <a href={`/reports/${user.id}`}>{user.id}</a>
         </div>
       ))}
     </div>

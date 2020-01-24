@@ -33,6 +33,29 @@ class Api {
     })
     return resp.data.results
   }
+
+  async getAccounts(userId) {
+    const resp = await this.api.get('/accounts', {
+      params: {
+        user: userId,
+        limit: 100,
+        ordering: '-created_at'
+      }
+    })
+    console.log('accounts', resp)
+    return resp.data.results
+  }
+
+  async getActivities(accountId) {
+    const resp = await this.api.get('/activities', {
+      params: {
+        limit: 100,
+        ordering: '-created_at',
+        account: accountId
+      }
+    })
+    return resp.data.results
+  }
 }
 
 export default new Api()
