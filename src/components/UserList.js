@@ -7,7 +7,6 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const results = await api.getUsers()
-      console.log('RESULTS', results)
       setUsers(results)
     }
     fetchUsers()
@@ -16,7 +15,7 @@ const UserList = () => {
     <div>
       {users.map(user => (
         <div>
-          <a href={`/users/${user.id}`}>{user.id}</a>
+          <a href={`/reports/${user.id}`}>{user.id}</a>
         </div>
       ))}
     </div>
