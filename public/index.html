@@ -27,6 +27,21 @@
     <title>React App</title>
   </head>
   <body>
+      <script src="https://plugin.argyle.io/argyle.web.v1.js"></script>
+      <script type="text/javascript">
+        window.argyle = Argyle.create({
+          pluginKey: '%REACT_APP_PLUGIN_KEY%',
+          apiHost: '%REACT_APP_API_URL%',
+          // dataPartners: ['uber'],
+          // onAccountCreated: ({ accountId, userId }) => {
+          //   window.accountCreated({ accountId, userId })
+          // },
+          onUserCreated: ({ userId, userToken }) => {
+            window.userCreated({ userId, userToken })
+          }
+        });
+      </script>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

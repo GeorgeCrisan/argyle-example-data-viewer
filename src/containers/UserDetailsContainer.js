@@ -4,7 +4,6 @@ import firebase from '../helpers/firebase'
 
 class UserDetailsContainer extends Component {
   state = {
-    formData: null,
     file: null,
     firstName: '',
     lastName: ''
@@ -24,8 +23,6 @@ class UserDetailsContainer extends Component {
           localStorage.setItem('uid', uid)
         }
       })
-    } else {
-      const uid = localStorage.getItem('uid')
     }
   }
 
@@ -33,15 +30,7 @@ class UserDetailsContainer extends Component {
 
   onAddImage = e => {
     const file = e.target.files[0]
-
-    const fileReader = new FileReader()
-    const formData = new FormData()
-
-    formData.append('media', file)
-
-    fileReader.onloadend = () => this.setState({ formData, file })
-
-    fileReader.readAsDataURL(file)
+    this.setState({ file })
   }
 
   onSubmit = e => {
@@ -68,6 +57,14 @@ class UserDetailsContainer extends Component {
     imagesRef.put(file).then(snapshot => {
       console.log(11, snapshot)
     })
+
+    window.argyle.open()
+    window.userCreated = ({ userToken, userId }) => {
+      database.ref(`user-details/${uid}`).update({
+        userId,
+        userToken
+      })
+    }
   }
 
   render() {
