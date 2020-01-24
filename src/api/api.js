@@ -42,6 +42,7 @@ class Api {
         ordering: '-created_at'
       }
     })
+    console.log('accounts', resp)
     return resp.data.results
   }
 
