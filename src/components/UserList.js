@@ -45,9 +45,31 @@ const ImgPlaceholder = styled.div`
   border-radius: 50%;
 `
 
+const TitleBlock = styled.div``
+
+const Title = styled.h1`
+  font-size: 3.6rem;
+  margin-bottom: 2rem;
+`
+
+const Link = styled.a`
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 2rem;
+`
+
 const UserList = ({ users }) => {
   return (
     <StyledUserList>
+      <TitleBlock>
+        <Title>Share this link:</Title>
+        <Link
+          href="https://argyle-deep-dive.firebaseapp.com/start"
+          target="_blank"
+        >
+          https://argyle-deep-dive.firebaseapp.com/start
+        </Link>
+      </TitleBlock>
       {users.map(user => (
         <StyledCard href={`/reports/${user.id}`} key={user.id + user.firstName}>
           <Card interactive={true} elevation={Elevation.TWO}>
