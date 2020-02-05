@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import api from '../api/api'
-import { Charts } from './Charts'
+import React from 'react'
+import styled from 'styled-components'
 
-import styled from 'styled-components/macro'
+const StyledReport = styled.div``
 
 const CenteredContainer = styled.div`
   margin: 10rem auto;
   max-width: 60rem;
-  font-family: 'Roboto Condensed', sans-serif;
   display: flex;
   flex-direction: column;
 `
@@ -18,42 +16,64 @@ const Row = styled.div`
 `
 
 const DataPartnerLogo = styled.img`
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   margin-right: 10px;
 `
 
 const PartnerName = styled.span`
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 24px;
 `
 
-const Report = props => {
-  const userId = props.match.params.userId
-  const [accounts, setAccounts] = useState([])
-  useEffect(() => {
-    const fetchAccounts = async () => {
-      const results = await api.getAccounts(userId)
-      setAccounts(results)
-    }
-    fetchAccounts()
-  }, [userId])
-  return (
+const Profile = styled.div`
+  display: flex;
+`
+
+const Image = styled.img`
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+`
+
+const ProfileDetails = styled.div``
+
+const Detail = styled.div`
+  font-size: 24px;
+`
+
+const Name = styled.h3`
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+  font-size: 32px;
+`
+
+const DataPartnets = styled.div``
+
+const Report = ({ accounts, image, fullName, email, phoneNumber, address }) => (
+  <StyledReport>
     <CenteredContainer>
-      {accounts.map(account => (
-        <div>
-          <Row>
+      <Profile>
+        <Image src={image} />
+        <ProfileDetails>
+          <Name>{fullName}</Name>
+          <Detail>{email}</Detail>
+          <Detail>{phoneNumber}</Detail>
+        </ProfileDetails>
+      </Profile>
+      <DataPartnets>
+        {accounts.map(account => (
+          <Row key={account.id}>
             <DataPartnerLogo
               alt={account.data_partner}
               src={`https://storage.googleapis.com/argyle-api-media/images/${account.data_partner}.png`}
             />
             <PartnerName>{account.data_partner}</PartnerName>
-            <Charts userId={userId} />
           </Row>
-        </div>
-      ))}
+        ))}
+      </DataPartnets>
     </CenteredContainer>
-  )
-}
+  </StyledReport>
+)
 
 export default Report

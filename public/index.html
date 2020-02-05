@@ -9,83 +9,28 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>React App</title>
-    <script src="http://d3js.org/d3.v4.min.js"></script>
-    <style>
-
-      .chart-content {
-        font: 10px sans-serif;
-        shape-rendering: crispEdges;
-      }
-
-      .day {
-        fill: #fff;
-        stroke: #ccc;
-      }
-
-      .month {
-        fill: none;
-        stroke: #000;
-        stroke-width: 2px;
-      }
-
-      .RdYlGn .q0-11{fill:rgb(165,0,38)}
-      .RdYlGn .q1-11{fill:rgb(215,48,39)}
-      .RdYlGn .q2-11{fill:rgb(244,109,67)}
-      .RdYlGn .q3-11{fill:rgb(253,174,97)}
-      .RdYlGn .q4-11{fill:rgb(254,224,139)}
-      .RdYlGn .q5-11{fill:rgb(255,255,191)}
-      .RdYlGn .q6-11{fill:rgb(217,239,139)}
-      .RdYlGn .q7-11{fill:rgb(166,217,106)}
-      .RdYlGn .q8-11{fill:rgb(102,189,99)}
-      .RdYlGn .q9-11{fill:rgb(26,152,80)}
-      .RdYlGn .q10-11{fill:rgb(0,104,55)}
-
-    </style>
   </head>
   <body>
       <script src="https://plugin.argyle.io/argyle.web.v1.js"></script>
       <script type="text/javascript">
-        window.argyle = Argyle.create({
+        window.initArgyle = () => {
+          const token = localStorage.getItem('jwtToken')
+          const userToken = token ? { userToken: token } : {}
+          return Argyle.create({
           pluginKey: '%REACT_APP_PLUGIN_KEY%',
           apiHost: '%REACT_APP_API_URL%',
-          // dataPartners: ['uber'],
-          // onAccountCreated: ({ accountId, userId }) => {
-          //   window.accountCreated({ accountId, userId })
-          // },
+          ...userToken,
           onUserCreated: ({ userId, userToken }) => {
-            window.userCreated({ userId, userToken })
+              localStorage.setItem('jwtToken', userToken)
+              window.userCreated({ userToken, userId }) 
           }
         });
+      }
       </script>
       <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
-
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

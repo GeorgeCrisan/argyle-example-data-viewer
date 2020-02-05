@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from 'react'
+import React, { Component } from 'react'
 import api from '../api/api'
 import UserList from '../components/UserList'
 import firebase from '../helpers/firebase'
