@@ -1,10 +1,7 @@
 import axios from 'axios'
 
 const API_URL = process.env.REACT_APP_API_URL
-const AUTH = {
-  username: process.env.REACT_APP_API_USERNAME,
-  password: process.env.REACT_APP_API_PASSWORD
-}
+
 const DEFAULT_HEADERS = {
   'Accept': 'application/json',
   'Content-Type': 'application/json'
@@ -12,16 +9,36 @@ const DEFAULT_HEADERS = {
 
 class Api {
   constructor() {
+    const token = localStorage.getItem('userToken')
+
     this.api = axios.create({
       baseURL: API_URL,
       timeout: 3000,
       headers: {
-        ...DEFAULT_HEADERS
-      },
-      auth: {
-        ...AUTH
+        ...DEFAULT_HEADERS,
+        Authorization: `Bearer ${token}`
       }
     })
+  }
+
+  async signIn({ email, password }) {
+    const resp = await axios.post(
+      '/tokens',
+      {
+        username: email,
+        password
+      },
+      {
+        baseURL: API_URL,
+        timeout: 3000,
+        headers: {
+          ...DEFAULT_HEADERS
+        }
+      }
+    )
+
+    localStorage.setItem('userToken', resp.data.access)
+    return resp.data.access
   }
 
   async getUsers() {
@@ -46,12 +63,12 @@ class Api {
     return resp.data.results
   }
 
-  async getActivities(accountId) {
+  async getActivities(userId) {
     const resp = await this.api.get('/activities', {
       params: {
         limit: 100,
         ordering: '-created_at',
-        account: accountId
+        user: userId
       }
     })
     return resp.data.results

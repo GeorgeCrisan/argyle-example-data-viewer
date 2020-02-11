@@ -50,7 +50,25 @@ const Name = styled.h3`
 
 const DataPartnets = styled.div``
 
-const Report = ({ accounts, image, fullName, email, phoneNumber, address }) => (
+const Activities = styled.div`
+  display: flex;
+`
+
+const ActivityColumn = styled.div``
+
+const ActivityTitle = styled.div``
+
+const Activity = styled.div``
+
+const Report = ({
+  accounts,
+  image,
+  fullName,
+  email,
+  phoneNumber,
+  address,
+  activities
+}) => (
   <StyledReport>
     <CenteredContainer>
       <Profile>
@@ -59,6 +77,12 @@ const Report = ({ accounts, image, fullName, email, phoneNumber, address }) => (
           <Name>{fullName}</Name>
           <Detail>{email}</Detail>
           <Detail>{phoneNumber}</Detail>
+          <Detail>{address.city}</Detail>
+          <Detail>{address.line1}</Detail>
+          <Detail>{address.line2}</Detail>
+          <Detail>{address.state}</Detail>
+          <Detail>{address.country}</Detail>
+          <Detail>{address.postal_code}</Detail>
         </ProfileDetails>
       </Profile>
       <DataPartnets>
@@ -72,6 +96,19 @@ const Report = ({ accounts, image, fullName, email, phoneNumber, address }) => (
           </Row>
         ))}
       </DataPartnets>
+      <Activities>
+        {activities.map(({ start_date, type, status, income }) => (
+          <>
+            <Activity>{start_date}</Activity>
+            <Activity>{type}</Activity>
+            <Activity>{status}</Activity>
+            <Activity>
+              {income.total_charge}
+              {income.currency}
+            </Activity>
+          </>
+        ))}
+      </Activities>
     </CenteredContainer>
   </StyledReport>
 )
