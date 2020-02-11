@@ -39,6 +39,17 @@ const Image = styled.img`
 
 const ProfileDetails = styled.div``
 
+const DetailWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const DetailLabel = styled.div`
+  font-size: 24px;
+  font-weight: 500;
+  margin-right: 1rem;
+`
+
 const Detail = styled.div`
   font-size: 24px;
 `
@@ -83,14 +94,38 @@ const Report = ({
         <Image src={image} />
         <ProfileDetails>
           <Name>{fullName}</Name>
-          <Detail>{email}</Detail>
-          <Detail>{phoneNumber}</Detail>
-          <Detail>{address.city}</Detail>
-          <Detail>{address.line1}</Detail>
-          <Detail>{address.line2}</Detail>
-          <Detail>{address.state}</Detail>
-          <Detail>{address.country}</Detail>
-          <Detail>{address.postal_code}</Detail>
+          <DetailWrapper>
+            <DetailLabel>Email:</DetailLabel>
+            <Detail>{email}</Detail>
+          </DetailWrapper>
+          <DetailWrapper>
+            <DetailLabel>Phone number:</DetailLabel>
+            <Detail>{phoneNumber}</Detail>
+          </DetailWrapper>
+          <DetailWrapper>
+            <DetailLabel>City:</DetailLabel>
+            <Detail>{address.city}</Detail>
+          </DetailWrapper>
+          <DetailWrapper>
+            <DetailLabel>Line1:</DetailLabel>
+            <Detail>{address.line1}</Detail>
+          </DetailWrapper>
+          <DetailWrapper>
+            <DetailLabel>Line2:</DetailLabel>
+            <Detail>{address.line2}</Detail>
+          </DetailWrapper>
+          <DetailWrapper>
+            <DetailLabel>State:</DetailLabel>
+            <Detail>{address.state}</Detail>
+          </DetailWrapper>
+          <DetailWrapper>
+            <DetailLabel>Country:</DetailLabel>
+            <Detail>{address.country}</Detail>
+          </DetailWrapper>
+          <DetailWrapper>
+            <DetailLabel>Postal Code:</DetailLabel>
+            <Detail>{address.postal_code}</Detail>
+          </DetailWrapper>
         </ProfileDetails>
       </Profile>
       <Activities>
