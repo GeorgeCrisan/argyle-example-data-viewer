@@ -10,9 +10,10 @@ const CenteredContainer = styled.div`
   flex-direction: column;
 `
 
-const Row = styled.div`
+const Account = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 2rem;
 `
 
 const DataPartnerLogo = styled.img`
@@ -61,7 +62,7 @@ const ActivityTitle = styled.div``
 const Activity = styled.div``
 
 const Report = ({
-  accounts,
+  account,
   image,
   fullName,
   email,
@@ -71,6 +72,13 @@ const Report = ({
 }) => (
   <StyledReport>
     <CenteredContainer>
+      <Account key={account.id}>
+        <DataPartnerLogo
+          alt={account.data_partner}
+          src={`https://storage.googleapis.com/argyle-api-media/images/${account.data_partner}.png`}
+        />
+        <PartnerName>{account.data_partner}</PartnerName>
+      </Account>
       <Profile>
         <Image src={image} />
         <ProfileDetails>
@@ -85,17 +93,6 @@ const Report = ({
           <Detail>{address.postal_code}</Detail>
         </ProfileDetails>
       </Profile>
-      <DataPartnets>
-        {accounts.map(account => (
-          <Row key={account.id}>
-            <DataPartnerLogo
-              alt={account.data_partner}
-              src={`https://storage.googleapis.com/argyle-api-media/images/${account.data_partner}.png`}
-            />
-            <PartnerName>{account.data_partner}</PartnerName>
-          </Row>
-        ))}
-      </DataPartnets>
       <Activities>
         {activities.map(({ start_date, type, status, income }) => (
           <>
