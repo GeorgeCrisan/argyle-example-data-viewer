@@ -10,7 +10,8 @@ class SignInContainer extends Component {
 
   onInputChange = e => this.setState({ [e.target.name]: e.target.value })
 
-  signIn = async () => {
+  signIn = async e => {
+    e.preventDefault()
     const { email, password } = this.state
     const { history } = this.props
 

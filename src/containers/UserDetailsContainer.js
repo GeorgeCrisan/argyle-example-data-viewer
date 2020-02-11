@@ -4,9 +4,7 @@ import firebase from '../helpers/firebase'
 
 class UserDetailsContainer extends Component {
   state = {
-    file: null,
-    firstName: '',
-    lastName: ''
+    email: ''
   }
 
   componentDidMount() {
@@ -28,37 +26,17 @@ class UserDetailsContainer extends Component {
 
   onInputChange = e => this.setState({ [e.target.name]: e.target.value })
 
-  onAddImage = e => {
-    const file = e.target.files[0]
-    this.setState({ file })
-  }
-
   onSubmit = e => {
     e.preventDefault()
-    const { firstName, lastName, file } = this.state
-
-    // Get a reference to the storage service, which is used to create references in your storage bucket
-    var storage = firebase.storage()
-
-    // Create a storage reference from our storage service
-    var storageRef = storage.ref()
+    const { email } = this.state
     const database = firebase.database()
     const uid = localStorage.getItem('uid')
 
     window.initArgyle().open()
     window.userCreated = ({ userToken, userId }) => {
-      // Create a child reference
-      var imagesRef = storageRef.child(userId)
-      // imagesRef now points to 'images'
-
-      imagesRef.put(file).then(snapshot => {
-        console.log(11, snapshot)
-      })
-
       database.ref(`user-details/${userId}`).set({
         uid,
-        firstName,
-        lastName,
+        email,
         userId,
         userToken
       })
@@ -66,15 +44,13 @@ class UserDetailsContainer extends Component {
   }
 
   render() {
-    const { firstName, lastName } = this.state
+    const { email } = this.state
 
     return (
       <UserDetails
-        onAddImage={this.onAddImage}
         onInputChange={this.onInputChange}
-        firstName={firstName}
-        lastName={lastName}
         onSubmit={this.onSubmit}
+        email={email}
       />
     )
   }

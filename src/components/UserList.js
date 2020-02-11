@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { InputGroup, Button, Icon, Card, Elevation } from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 const StyledUserList = styled.div`
   margin: 10rem auto;
@@ -30,21 +30,6 @@ const Name = styled.div`
   margin-right: 2rem;
 `
 
-const StyledImg = styled.img`
-  margin-right: 3rem;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-`
-
-const ImgPlaceholder = styled.div`
-  margin-right: 3rem;
-  width: 30px;
-  height: 30px;
-  background-color: lightgray;
-  border-radius: 50%;
-`
-
 const TitleBlock = styled.div``
 
 const Title = styled.h1`
@@ -62,7 +47,7 @@ const UserList = ({ users }) => {
   return (
     <StyledUserList>
       <TitleBlock>
-        <Title>Share this link:</Title>
+        <Title>Share this link to connect:</Title>
         <Link
           href="https://argyle-deep-dive.firebaseapp.com/start"
           target="_blank"
@@ -71,18 +56,11 @@ const UserList = ({ users }) => {
         </Link>
       </TitleBlock>
       {users.map(user => (
-        <StyledCard href={`/reports/${user.id}`} key={user.id + user.firstName}>
+        <StyledCard href={`/reports/${user.id}`} key={user.id + user.email}>
           <Card interactive={true} elevation={Elevation.TWO}>
             <Details>
-              {user.imgUrl ? (
-                <StyledImg src={user.imgUrl} />
-              ) : (
-                <ImgPlaceholder />
-              )}
-
               <Text>
-                <Name>{user.firstName}</Name>
-                <Name>{user.lastName}</Name>
+                <Name>{user.email}</Name>
               </Text>
             </Details>
           </Card>

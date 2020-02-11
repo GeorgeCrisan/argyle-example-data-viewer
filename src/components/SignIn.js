@@ -17,42 +17,36 @@ const StyledInput = styled(InputGroup)`
   margin-bottom: 3rem;
 `
 
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
-
 const StyledButton = styled(Button)``
 
 const UserDetails = ({ onInputChange, email, password, onSubmit }) => (
   <StyledUserDetails>
     <Card interactive={true} elevation={Elevation.TWO}>
-      <Title>Sign In</Title>
-      <StyledInput
-        disabled={false}
-        large={true}
-        placeholder="Email"
-        small={false}
-        onChange={onInputChange}
-        value={email}
-        name="email"
-      />
-      <StyledInput
-        disabled={false}
-        large={true}
-        placeholder="Password"
-        small={false}
-        onChange={onInputChange}
-        value={password}
-        name="password"
-        type="password"
-      />
-      <ButtonGroup>
+      <form onSubmit={onSubmit}>
+        <Title>Sign In</Title>
+        <StyledInput
+          disabled={false}
+          large={true}
+          placeholder="Email"
+          small={false}
+          onChange={onInputChange}
+          value={email}
+          name="email"
+        />
+        <StyledInput
+          disabled={false}
+          large={true}
+          placeholder="Password"
+          small={false}
+          onChange={onInputChange}
+          value={password}
+          name="password"
+          type="password"
+        />
         <StyledButton onClick={onSubmit} intent="primary">
           Sign in
         </StyledButton>
-      </ButtonGroup>
+      </form>
     </Card>
   </StyledUserDetails>
 )
