@@ -37,7 +37,13 @@ class Api {
       }
     )
 
-    localStorage.setItem('userToken', resp.data.access)
+    const prom = () =>
+      new Promise(resolve => {
+        localStorage.setItem('userToken', resp.data.access)
+        resolve()
+      })
+
+    await prom()
     return resp.data.access
   }
 
