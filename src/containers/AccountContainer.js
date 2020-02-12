@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import api from '../api/api'
 import Report from '../components/Report'
+import Spinner from '../components/Spinner'
+
+const StyledSpinner = styled.div`
+  min-height: 10rem;
+`
 
 const ReportContainer = ({ account }) => {
   const [profile, setProfile] = useState(null)
@@ -33,7 +39,12 @@ const ReportContainer = ({ account }) => {
     fetchAccounts()
   }, [account])
 
-  if (!profile) return null
+  if (!profile)
+    return (
+      <StyledSpinner>
+        <Spinner />
+      </StyledSpinner>
+    )
 
   const { full_name, email, phone_number, picture_url, address } = profile
 

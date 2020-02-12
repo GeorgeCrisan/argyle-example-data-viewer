@@ -30,6 +30,7 @@ class UserListContainer extends Component {
       })
     })
   }
+
   render() {
     const { users } = this.state
     return <UserList users={users} />
