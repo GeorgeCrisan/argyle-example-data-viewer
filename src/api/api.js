@@ -124,6 +124,17 @@ class Api {
     })
     return resp.data.results
   }
+
+  async getCareers(accountId) {
+    const resp = await this.api.get('/careers', {
+      params: {
+        limit: 100,
+        ordering: '-created_at',
+        account: accountId
+      }
+    })
+    return resp.data.results
+  }
 }
 
 export default new Api()

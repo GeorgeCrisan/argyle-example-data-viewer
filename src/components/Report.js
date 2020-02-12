@@ -67,12 +67,14 @@ const Report = ({
   activities,
   vehicles,
   documents,
-  incomes
+  incomes,
+  careers
 }) => {
   const [showActivities, toggleShowActivities] = useState(false)
   const [showVehicles, toggleVehicles] = useState(false)
   const [showDocuments, toggleDocuments] = useState(false)
   const [showIncomes, toggleIncomes] = useState(false)
+  const [showCareers, toggleCareers] = useState(false)
 
   return (
     <StyledReport>
@@ -192,6 +194,41 @@ const Report = ({
                   fees,
                   total,
                   currency
+                })
+              )}
+            />
+          )}
+        </Section>
+
+        <Section>
+          <ToggleButton onClick={() => toggleCareers(!showCareers)}>
+            {showCareers ? 'hide careers' : 'show careers'}
+          </ToggleButton>
+          {showCareers && (
+            <Table
+              headerItems={[
+                'Total Hours Working',
+                'First Activity Date',
+                'Last Activity Date',
+                'Length of work (Days)'
+              ]}
+              items={careers.map(
+                ({
+                  id,
+                  total_hours_spent_working,
+                  first_activity_date,
+                  last_activity_date,
+                  length_of_work
+                }) => ({
+                  id,
+                  total_hours_spent_working,
+                  first_activity_date: new Date(
+                    first_activity_date
+                  ).toDateString(),
+                  last_activity_date: new Date(
+                    last_activity_date
+                  ).toDateString(),
+                  length_of_work
                 })
               )}
             />
