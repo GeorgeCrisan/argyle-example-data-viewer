@@ -89,12 +89,22 @@ class Api {
       }
     })
 
-    console.log('profiles', resp.data.results)
     return resp.data.results[0]
   }
 
   async getVehicles(accountId) {
     const resp = await this.api.get('/vehicles', {
+      params: {
+        limit: 100,
+        ordering: '-created_at',
+        account: accountId
+      }
+    })
+    return resp.data.results
+  }
+
+  async getDocuments(accountId) {
+    const resp = await this.api.get('/documents', {
       params: {
         limit: 100,
         ordering: '-created_at',

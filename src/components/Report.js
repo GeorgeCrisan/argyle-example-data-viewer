@@ -38,12 +38,12 @@ const Divider = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
 `
 
-const StyledActivities = styled.div`
-  margin: 2rem 0;
+const Section = styled.div`
+  margin: 2rem 0 0 0;
   text-align: center;
 `
 
-const ActivitiesButton = styled.button`
+const ToggleButton = styled.button`
   margin-bottom: 2.5rem;
   padding: 1rem 2rem;
   border-radius: 4px;
@@ -65,10 +65,12 @@ const Report = ({
   phoneNumber,
   address,
   activities,
-  vehicles
+  vehicles,
+  documents
 }) => {
   const [showActivities, toggleShowActivities] = useState(false)
   const [showVehicles, toggleVehicles] = useState(false)
+  const [showDocuments, toggleDocuments] = useState(false)
 
   return (
     <StyledReport>
@@ -92,12 +94,10 @@ const Report = ({
 
         <Divider />
 
-        <StyledActivities>
-          <ActivitiesButton
-            onClick={() => toggleShowActivities(!showActivities)}
-          >
+        <Section>
+          <ToggleButton onClick={() => toggleShowActivities(!showActivities)}>
             {showActivities ? 'hide activities' : 'show activities'}
-          </ActivitiesButton>
+          </ToggleButton>
           {showActivities && (
             <Table
               headerItems={['Start Date', 'Type', 'Status', 'Income']}
@@ -112,12 +112,12 @@ const Report = ({
               )}
             />
           )}
-        </StyledActivities>
+        </Section>
 
-        <StyledActivities>
-          <ActivitiesButton onClick={() => toggleVehicles(!showVehicles)}>
+        <Section>
+          <ToggleButton onClick={() => toggleVehicles(!showVehicles)}>
             {showVehicles ? 'hide vehicles' : 'show vehicles'}
-          </ActivitiesButton>
+          </ToggleButton>
           {showVehicles && (
             <Table
               headerItems={['Make', 'Model', 'Year', 'Identification']}
@@ -132,7 +132,40 @@ const Report = ({
               )}
             />
           )}
-        </StyledActivities>
+        </Section>
+
+        <Section>
+          <ToggleButton onClick={() => toggleDocuments(!showDocuments)}>
+            {showDocuments ? 'hide documents' : 'show documents'}
+          </ToggleButton>
+          {showDocuments && (
+            <Table
+              headerItems={[
+                'Document Number',
+                'Document Type',
+                'Expiration Date',
+                'Created At'
+              ]}
+              items={documents.map(
+                ({
+                  id,
+                  document_number,
+                  document_type,
+                  expiration_date,
+                  created_at
+                }) => ({
+                  id,
+                  document_number,
+                  document_type,
+                  expiration_date: expiration_date
+                    ? new Date(expiration_date).toDateString()
+                    : null,
+                  created_at: new Date(created_at).toDateString()
+                })
+              )}
+            />
+          )}
+        </Section>
       </CenteredContainer>
     </StyledReport>
   )
