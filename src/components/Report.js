@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import Profile from './Profile'
+import Activities from './Activities'
 
 const StyledReport = styled.div``
 
@@ -26,51 +28,34 @@ const PartnerName = styled.span`
   font-size: 24px;
 `
 
-const Profile = styled.div`
-  display: flex;
+const StyledProfile = styled.div`
+  margin-bottom: 3rem;
 `
 
-const Image = styled.img`
-  width: 150px;
-  height: 150px;
-  margin-bottom: 10px;
-  margin-right: 20px;
+const Divider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
 `
 
-const ProfileDetails = styled.div``
-
-const DetailWrapper = styled.div`
-  display: flex;
-  align-items: center;
+const StyledActivities = styled.div`
+  margin: 2rem 0;
+  text-align: center;
 `
 
-const DetailLabel = styled.div`
-  font-size: 24px;
-  font-weight: 500;
-  margin-right: 1rem;
+const ActivitiesButton = styled.button`
+  margin-bottom: 2.5rem;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
 `
-
-const Detail = styled.div`
-  font-size: 24px;
-`
-
-const Name = styled.h3`
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: bold;
-  font-size: 32px;
-`
-
-const DataPartnets = styled.div``
-
-const Activities = styled.div`
-  display: flex;
-`
-
-const ActivityColumn = styled.div``
-
-const ActivityTitle = styled.div``
-
-const Activity = styled.div``
 
 const Report = ({
   account,
@@ -80,69 +65,42 @@ const Report = ({
   phoneNumber,
   address,
   activities
-}) => (
-  <StyledReport>
-    <CenteredContainer>
-      <Account key={account.id}>
-        <DataPartnerLogo
-          alt={account.data_partner}
-          src={`https://storage.googleapis.com/argyle-api-media/images/${account.data_partner}.png`}
-        />
-        <PartnerName>{account.data_partner}</PartnerName>
-      </Account>
-      <Profile>
-        <Image src={image} />
-        <ProfileDetails>
-          <Name>{fullName}</Name>
-          <DetailWrapper>
-            <DetailLabel>Email:</DetailLabel>
-            <Detail>{email}</Detail>
-          </DetailWrapper>
-          <DetailWrapper>
-            <DetailLabel>Phone number:</DetailLabel>
-            <Detail>{phoneNumber}</Detail>
-          </DetailWrapper>
-          <DetailWrapper>
-            <DetailLabel>City:</DetailLabel>
-            <Detail>{address.city}</Detail>
-          </DetailWrapper>
-          <DetailWrapper>
-            <DetailLabel>Line1:</DetailLabel>
-            <Detail>{address.line1}</Detail>
-          </DetailWrapper>
-          <DetailWrapper>
-            <DetailLabel>Line2:</DetailLabel>
-            <Detail>{address.line2}</Detail>
-          </DetailWrapper>
-          <DetailWrapper>
-            <DetailLabel>State:</DetailLabel>
-            <Detail>{address.state}</Detail>
-          </DetailWrapper>
-          <DetailWrapper>
-            <DetailLabel>Country:</DetailLabel>
-            <Detail>{address.country}</Detail>
-          </DetailWrapper>
-          <DetailWrapper>
-            <DetailLabel>Postal Code:</DetailLabel>
-            <Detail>{address.postal_code}</Detail>
-          </DetailWrapper>
-        </ProfileDetails>
-      </Profile>
-      <Activities>
-        {activities.map(({ start_date, type, status, income }) => (
-          <>
-            <Activity>{start_date}</Activity>
-            <Activity>{type}</Activity>
-            <Activity>{status}</Activity>
-            <Activity>
-              {income.total_charge}
-              {income.currency}
-            </Activity>
-          </>
-        ))}
-      </Activities>
-    </CenteredContainer>
-  </StyledReport>
-)
+}) => {
+  const [showActivities, toggleShowActivities] = useState(false)
+
+  return (
+    <StyledReport>
+      <CenteredContainer>
+        <Account key={account.id}>
+          <DataPartnerLogo
+            alt={account.data_partner}
+            src={`https://storage.googleapis.com/argyle-api-media/images/${account.data_partner}.png`}
+          />
+          <PartnerName>{account.data_partner}</PartnerName>
+        </Account>
+        <StyledProfile>
+          <Profile
+            image={image}
+            fullName={fullName}
+            email={email}
+            phoneNumber={phoneNumber}
+            address={address}
+          />
+        </StyledProfile>
+
+        <Divider />
+
+        <StyledActivities>
+          <ActivitiesButton
+            onClick={() => toggleShowActivities(!showActivities)}
+          >
+            {showActivities ? 'hide activities' : 'show activities'}
+          </ActivitiesButton>
+          {showActivities && <Activities activities={activities} />}
+        </StyledActivities>
+      </CenteredContainer>
+    </StyledReport>
+  )
+}
 
 export default Report

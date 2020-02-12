@@ -69,12 +69,12 @@ class Api {
     return resp.data.results
   }
 
-  async getActivities(userId) {
+  async getActivities(accountId) {
     const resp = await this.api.get('/activities', {
       params: {
         limit: 100,
         ordering: '-created_at',
-        user: userId
+        account: accountId
       }
     })
     return resp.data.results

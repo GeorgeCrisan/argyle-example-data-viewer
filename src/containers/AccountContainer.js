@@ -11,6 +11,8 @@ const ReportContainer = ({ account }) => {
       const resp = await api.getProfile(account.id)
       const res = await api.getActivities(account.id)
 
+      console.log(res)
+
       setProfile(resp)
       setActivities(res)
     }
