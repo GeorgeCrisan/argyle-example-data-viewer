@@ -5,37 +5,31 @@ import Table from './Table'
 
 const StyledReport = styled.div``
 
-const CenteredContainer = styled.div`
-  margin: 10rem auto;
-  max-width: 60rem;
-  display: flex;
-  flex-direction: column;
-`
-
 const Account = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  cursor: pointer;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 `
 
 const DataPartnerLogo = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   margin-right: 10px;
 `
 
 const PartnerName = styled.span`
-  font-size: 24px;
+  font-size: 32px;
+  font-weight: 600;
 `
 
 const StyledProfile = styled.div`
   margin-bottom: 3rem;
-`
-
-const Divider = styled.div`
-  height: 1px;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
 `
 
 const Section = styled.div`
@@ -96,6 +90,7 @@ const Report = ({
   careers,
   reputations
 }) => {
+  const [showAccountDetails, toggleShowAccountDetails] = useState(false)
   const [showActivities, toggleShowActivities] = useState(false)
   const [showVehicles, toggleVehicles] = useState(false)
   const [showDocuments, toggleDocuments] = useState(false)
@@ -105,201 +100,201 @@ const Report = ({
 
   return (
     <StyledReport>
-      <CenteredContainer>
-        <Account key={account.id}>
-          <DataPartnerLogo
-            alt={account.data_partner}
-            src={`https://storage.googleapis.com/argyle-api-media/images/${account.data_partner}.png`}
-          />
-          <PartnerName>{account.data_partner}</PartnerName>
-        </Account>
-        <StyledProfile>
-          <Profile
-            image={image}
-            fullName={fullName}
-            email={email}
-            phoneNumber={phoneNumber}
-            address={address}
-          />
-        </StyledProfile>
-
-        <Divider />
-
-        <Section>
-          <ToggleButton onClick={() => toggleShowActivities(!showActivities)}>
-            {showActivities ? 'hide activities' : 'show activities'}
-          </ToggleButton>
-          {showActivities && (
-            <Table
-              headerItems={['Start Date', 'Type', 'Status', 'Income']}
-              items={activities.map(
-                ({ id, start_date, type, status, income }) => ({
-                  id,
-                  start_date: new Date(start_date).toDateString(),
-                  type,
-                  status,
-                  income: `${income.total_charge} ${income.currency}`
-                })
-              )}
+      <Account onClick={() => toggleShowAccountDetails(!showAccountDetails)}>
+        <DataPartnerLogo
+          alt={account.data_partner}
+          src={`https://storage.googleapis.com/argyle-api-media/images/${account.data_partner}.png`}
+        />
+        <PartnerName>{account.data_partner}</PartnerName>
+      </Account>
+      {showAccountDetails && (
+        <>
+          <StyledProfile>
+            <Profile
+              image={image}
+              fullName={fullName}
+              email={email}
+              phoneNumber={phoneNumber}
+              address={address}
             />
-          )}
-        </Section>
+          </StyledProfile>
 
-        <Section>
-          <ToggleButton onClick={() => toggleVehicles(!showVehicles)}>
-            {showVehicles ? 'hide vehicles' : 'show vehicles'}
-          </ToggleButton>
-          {showVehicles && (
-            <Table
-              headerItems={['Make', 'Model', 'Year', 'Identification']}
-              items={vehicles.map(
-                ({ id, make, model, year, identification }) => ({
-                  id,
-                  make,
-                  model,
-                  year,
-                  identification
-                })
-              )}
-            />
-          )}
-        </Section>
-
-        <Section>
-          <ToggleButton onClick={() => toggleDocuments(!showDocuments)}>
-            {showDocuments ? 'hide documents' : 'show documents'}
-          </ToggleButton>
-          {showDocuments && (
-            <Table
-              headerItems={[
-                'Document Number',
-                'Document Type',
-                'Expiration Date',
-                'Created At'
-              ]}
-              items={documents.map(
-                ({
-                  id,
-                  document_number,
-                  document_type,
-                  expiration_date,
-                  created_at
-                }) => ({
-                  id,
-                  document_number,
-                  document_type,
-                  expiration_date: expiration_date
-                    ? new Date(expiration_date).toDateString()
-                    : null,
-                  created_at: new Date(created_at).toDateString()
-                })
-              )}
-            />
-          )}
-        </Section>
-
-        <Section>
-          <ToggleButton onClick={() => toggleIncomes(!showIncomes)}>
-            {showIncomes ? 'hide incomes' : 'show incomes'}
-          </ToggleButton>
-          {showIncomes && (
-            <Table
-              headerItems={[
-                'Pay',
-                'Tips',
-                'Bonus',
-                'Fees',
-                'Total',
-                'Currency'
-              ]}
-              items={incomes.map(
-                ({ id, pay, tips, bonus, fees, total, currency }) => ({
-                  id,
-                  pay,
-                  tips,
-                  bonus,
-                  fees,
-                  total,
-                  currency
-                })
-              )}
-            />
-          )}
-        </Section>
-
-        <Section>
-          <ToggleButton onClick={() => toggleCareers(!showCareers)}>
-            {showCareers ? 'hide careers' : 'show careers'}
-          </ToggleButton>
-          {showCareers && (
-            <Table
-              headerItems={[
-                'Total Hours Working',
-                'First Activity Date',
-                'Last Activity Date',
-                'Length of work (Days)'
-              ]}
-              items={careers.map(
-                ({
-                  id,
-                  total_hours_spent_working,
-                  first_activity_date,
-                  last_activity_date,
-                  length_of_work
-                }) => ({
-                  id,
-                  total_hours_spent_working,
-                  first_activity_date: new Date(
-                    first_activity_date
-                  ).toDateString(),
-                  last_activity_date: new Date(
-                    last_activity_date
-                  ).toDateString(),
-                  length_of_work
-                })
-              )}
-            />
-          )}
-        </Section>
-
-        <Section>
-          <ToggleButton onClick={() => toggleReputations(!showReputations)}>
-            {showReputations ? 'hide reputations' : 'show reputations'}
-          </ToggleButton>
-          {showReputations && (
-            <>
+          <Section>
+            <ToggleButton onClick={() => toggleShowActivities(!showActivities)}>
+              {showActivities ? 'hide activities' : 'show activities'}
+            </ToggleButton>
+            {showActivities && (
               <Table
-                headerItems={['Rating', 'Acceptance Rate']}
-                items={reputations.map(({ id, rating, acceptance_rate }) => ({
-                  id,
-                  rating,
-                  acceptance_rate
-                }))}
-                reputations={reputations.map(({ id, achievements }) => ({
-                  id,
-                  achievements
-                }))}
+                headerItems={['Start Date', 'Type', 'Status', 'Income']}
+                items={activities.map(
+                  ({ id, start_date, type, status, income }) => ({
+                    id,
+                    start_date: new Date(start_date).toDateString(),
+                    type,
+                    status,
+                    income: `${income.total_charge} ${income.currency}`
+                  })
+                )}
               />
-              {reputations.map(
-                ({ id, achievements }) =>
-                  achievements && (
-                    <Achievements key={id}>
-                      <AchievementsTitle>Achievements</AchievementsTitle>
-                      {achievements.map(({ label, description }, i) => (
-                        <Achievement key={`${label}${i}`}>
-                          <AchievementLabel>{label}</AchievementLabel>
-                          <AchievementDescription>
-                            {description}
-                          </AchievementDescription>
-                        </Achievement>
-                      ))}
-                    </Achievements>
-                  )
-              )}
-            </>
-          )}
-        </Section>
-      </CenteredContainer>
+            )}
+          </Section>
+
+          <Section>
+            <ToggleButton onClick={() => toggleVehicles(!showVehicles)}>
+              {showVehicles ? 'hide vehicles' : 'show vehicles'}
+            </ToggleButton>
+            {showVehicles && (
+              <Table
+                headerItems={['Make', 'Model', 'Year', 'Identification']}
+                items={vehicles.map(
+                  ({ id, make, model, year, identification }) => ({
+                    id,
+                    make,
+                    model,
+                    year,
+                    identification
+                  })
+                )}
+              />
+            )}
+          </Section>
+
+          <Section>
+            <ToggleButton onClick={() => toggleDocuments(!showDocuments)}>
+              {showDocuments ? 'hide documents' : 'show documents'}
+            </ToggleButton>
+            {showDocuments && (
+              <Table
+                headerItems={[
+                  'Document Number',
+                  'Document Type',
+                  'Expiration Date',
+                  'Created At'
+                ]}
+                items={documents.map(
+                  ({
+                    id,
+                    document_number,
+                    document_type,
+                    expiration_date,
+                    created_at
+                  }) => ({
+                    id,
+                    document_number,
+                    document_type,
+                    expiration_date: expiration_date
+                      ? new Date(expiration_date).toDateString()
+                      : null,
+                    created_at: new Date(created_at).toDateString()
+                  })
+                )}
+              />
+            )}
+          </Section>
+
+          <Section>
+            <ToggleButton onClick={() => toggleIncomes(!showIncomes)}>
+              {showIncomes ? 'hide incomes' : 'show incomes'}
+            </ToggleButton>
+            {showIncomes && (
+              <Table
+                headerItems={[
+                  'Pay',
+                  'Tips',
+                  'Bonus',
+                  'Fees',
+                  'Total',
+                  'Currency'
+                ]}
+                items={incomes.map(
+                  ({ id, pay, tips, bonus, fees, total, currency }) => ({
+                    id,
+                    pay,
+                    tips,
+                    bonus,
+                    fees,
+                    total,
+                    currency
+                  })
+                )}
+              />
+            )}
+          </Section>
+
+          <Section>
+            <ToggleButton onClick={() => toggleCareers(!showCareers)}>
+              {showCareers ? 'hide careers' : 'show careers'}
+            </ToggleButton>
+            {showCareers && (
+              <Table
+                headerItems={[
+                  'Total Hours Working',
+                  'First Activity Date',
+                  'Last Activity Date',
+                  'Length of work (Days)'
+                ]}
+                items={careers.map(
+                  ({
+                    id,
+                    total_hours_spent_working,
+                    first_activity_date,
+                    last_activity_date,
+                    length_of_work
+                  }) => ({
+                    id,
+                    total_hours_spent_working,
+                    first_activity_date: new Date(
+                      first_activity_date
+                    ).toDateString(),
+                    last_activity_date: new Date(
+                      last_activity_date
+                    ).toDateString(),
+                    length_of_work
+                  })
+                )}
+              />
+            )}
+          </Section>
+
+          <Section>
+            <ToggleButton onClick={() => toggleReputations(!showReputations)}>
+              {showReputations ? 'hide reputations' : 'show reputations'}
+            </ToggleButton>
+            {showReputations && (
+              <>
+                <Table
+                  headerItems={['Rating', 'Acceptance Rate']}
+                  items={reputations.map(({ id, rating, acceptance_rate }) => ({
+                    id,
+                    rating,
+                    acceptance_rate
+                  }))}
+                  reputations={reputations.map(({ id, achievements }) => ({
+                    id,
+                    achievements
+                  }))}
+                />
+                {reputations.map(
+                  ({ id, achievements }) =>
+                    achievements && (
+                      <Achievements key={id}>
+                        <AchievementsTitle>Achievements</AchievementsTitle>
+                        {achievements.map(({ label, description }, i) => (
+                          <Achievement key={`${label}${i}`}>
+                            <AchievementLabel>{label}</AchievementLabel>
+                            <AchievementDescription>
+                              {description}
+                            </AchievementDescription>
+                          </Achievement>
+                        ))}
+                      </Achievements>
+                    )
+                )}
+              </>
+            )}
+          </Section>
+        </>
+      )}
     </StyledReport>
   )
 }
