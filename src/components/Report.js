@@ -57,6 +57,31 @@ const ToggleButton = styled.button`
   }
 `
 
+const Achievements = styled.div`
+  margin-top: 2rem;
+`
+
+const AchievementsTitle = styled.div`
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: left;
+`
+
+const Achievement = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+`
+
+const AchievementLabel = styled.div`
+  margin-right: 2rem;
+  font-weight: 500;
+`
+
+const AchievementDescription = styled.div``
+
 const Report = ({
   account,
   image,
@@ -68,13 +93,15 @@ const Report = ({
   vehicles,
   documents,
   incomes,
-  careers
+  careers,
+  reputations
 }) => {
   const [showActivities, toggleShowActivities] = useState(false)
   const [showVehicles, toggleVehicles] = useState(false)
   const [showDocuments, toggleDocuments] = useState(false)
   const [showIncomes, toggleIncomes] = useState(false)
   const [showCareers, toggleCareers] = useState(false)
+  const [showReputations, toggleReputations] = useState(false)
 
   return (
     <StyledReport>
@@ -232,6 +259,44 @@ const Report = ({
                 })
               )}
             />
+          )}
+        </Section>
+
+        <Section>
+          <ToggleButton onClick={() => toggleReputations(!showReputations)}>
+            {showReputations ? 'hide reputations' : 'show reputations'}
+          </ToggleButton>
+          {showReputations && (
+            <>
+              <Table
+                headerItems={['Rating', 'Acceptance Rate']}
+                items={reputations.map(({ id, rating, acceptance_rate }) => ({
+                  id,
+                  rating,
+                  acceptance_rate
+                }))}
+                reputations={reputations.map(({ id, achievements }) => ({
+                  id,
+                  achievements
+                }))}
+              />
+              {reputations.map(
+                ({ id, achievements }) =>
+                  achievements && (
+                    <Achievements key={id}>
+                      <AchievementsTitle>Achievements</AchievementsTitle>
+                      {achievements.map(({ label, description }, i) => (
+                        <Achievement key={`${label}${i}`}>
+                          <AchievementLabel>{label}</AchievementLabel>
+                          <AchievementDescription>
+                            {description}
+                          </AchievementDescription>
+                        </Achievement>
+                      ))}
+                    </Achievements>
+                  )
+              )}
+            </>
           )}
         </Section>
       </CenteredContainer>

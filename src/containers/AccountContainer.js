@@ -9,6 +9,7 @@ const ReportContainer = ({ account }) => {
   const [documents, setDocuments] = useState([])
   const [incomes, setIncomes] = useState([])
   const [careers, setCareers] = useState([])
+  const [reputations, setReputations] = useState([])
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -19,6 +20,7 @@ const ReportContainer = ({ account }) => {
       const documentsResponse = await api.getDocuments(id)
       const incomesResponse = await api.getIncomes(id)
       const careersResponse = await api.getCareers(id)
+      const reputationsResponse = await api.getReputations(id)
 
       setProfile(profileResponse)
       setActivities(activitiesResponse)
@@ -26,6 +28,7 @@ const ReportContainer = ({ account }) => {
       setDocuments(documentsResponse)
       setIncomes(incomesResponse)
       setCareers(careersResponse)
+      setReputations(reputationsResponse)
     }
     fetchAccounts()
   }, [account])
@@ -47,6 +50,7 @@ const ReportContainer = ({ account }) => {
       documents={documents}
       incomes={incomes}
       careers={careers}
+      reputations={reputations}
     />
   )
 }

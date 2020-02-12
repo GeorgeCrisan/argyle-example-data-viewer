@@ -135,6 +135,17 @@ class Api {
     })
     return resp.data.results
   }
+
+  async getReputations(accountId) {
+    const resp = await this.api.get('/reputations', {
+      params: {
+        limit: 100,
+        ordering: '-created_at',
+        account: accountId
+      }
+    })
+    return resp.data.results
+  }
 }
 
 export default new Api()
