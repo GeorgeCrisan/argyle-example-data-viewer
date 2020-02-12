@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Profile from './Profile'
-import Activities from './Activities'
+import Table from './Table'
 
 const StyledReport = styled.div``
 
@@ -64,9 +64,11 @@ const Report = ({
   email,
   phoneNumber,
   address,
-  activities
+  activities,
+  vehicles
 }) => {
   const [showActivities, toggleShowActivities] = useState(false)
+  const [showVehicles, toggleVehicles] = useState(false)
 
   return (
     <StyledReport>
@@ -96,7 +98,40 @@ const Report = ({
           >
             {showActivities ? 'hide activities' : 'show activities'}
           </ActivitiesButton>
-          {showActivities && <Activities activities={activities} />}
+          {showActivities && (
+            <Table
+              headerItems={['Start Date', 'Type', 'Status', 'Income']}
+              items={activities.map(
+                ({ id, start_date, type, status, income }) => ({
+                  id,
+                  start_date: new Date(start_date).toDateString(),
+                  type,
+                  status,
+                  income: `${income.total_charge} ${income.currency}`
+                })
+              )}
+            />
+          )}
+        </StyledActivities>
+
+        <StyledActivities>
+          <ActivitiesButton onClick={() => toggleVehicles(!showVehicles)}>
+            {showVehicles ? 'hide vehicles' : 'show vehicles'}
+          </ActivitiesButton>
+          {showVehicles && (
+            <Table
+              headerItems={['Make', 'Model', 'Year', 'Identification']}
+              items={vehicles.map(
+                ({ id, make, model, year, identification }) => ({
+                  id,
+                  make,
+                  model,
+                  year,
+                  identification
+                })
+              )}
+            />
+          )}
         </StyledActivities>
       </CenteredContainer>
     </StyledReport>
