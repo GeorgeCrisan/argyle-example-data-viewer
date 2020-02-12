@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Profile from './Profile'
 import Table from './Table'
+import Activities from './Activities'
 
 const StyledReport = styled.div``
 
@@ -123,20 +124,7 @@ const Report = ({
             <ToggleButton onClick={() => toggleShowActivities(!showActivities)}>
               {showActivities ? 'hide activities' : 'show activities'}
             </ToggleButton>
-            {showActivities && (
-              <Table
-                headerItems={['Start Date', 'Type', 'Status', 'Income']}
-                items={activities.map(
-                  ({ id, start_date, type, status, income }) => ({
-                    id,
-                    start_date: new Date(start_date).toDateString(),
-                    type,
-                    status,
-                    income: `${income.total_charge} ${income.currency}`
-                  })
-                )}
-              />
-            )}
+            {showActivities && <Activities activities={activities} />}
           </Section>
 
           <Section>
