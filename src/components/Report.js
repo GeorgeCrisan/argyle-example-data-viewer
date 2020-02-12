@@ -66,11 +66,13 @@ const Report = ({
   address,
   activities,
   vehicles,
-  documents
+  documents,
+  incomes
 }) => {
   const [showActivities, toggleShowActivities] = useState(false)
   const [showVehicles, toggleVehicles] = useState(false)
   const [showDocuments, toggleDocuments] = useState(false)
+  const [showIncomes, toggleIncomes] = useState(false)
 
   return (
     <StyledReport>
@@ -161,6 +163,35 @@ const Report = ({
                     ? new Date(expiration_date).toDateString()
                     : null,
                   created_at: new Date(created_at).toDateString()
+                })
+              )}
+            />
+          )}
+        </Section>
+
+        <Section>
+          <ToggleButton onClick={() => toggleIncomes(!showIncomes)}>
+            {showIncomes ? 'hide incomes' : 'show incomes'}
+          </ToggleButton>
+          {showIncomes && (
+            <Table
+              headerItems={[
+                'Pay',
+                'Tips',
+                'Bonus',
+                'Fees',
+                'Total',
+                'Currency'
+              ]}
+              items={incomes.map(
+                ({ id, pay, tips, bonus, fees, total, currency }) => ({
+                  id,
+                  pay,
+                  tips,
+                  bonus,
+                  fees,
+                  total,
+                  currency
                 })
               )}
             />

@@ -113,6 +113,17 @@ class Api {
     })
     return resp.data.results
   }
+
+  async getIncomes(accountId) {
+    const resp = await this.api.get('/incomes', {
+      params: {
+        limit: 100,
+        ordering: '-created_at',
+        account: accountId
+      }
+    })
+    return resp.data.results
+  }
 }
 
 export default new Api()

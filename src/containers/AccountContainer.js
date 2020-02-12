@@ -7,6 +7,7 @@ const ReportContainer = ({ account }) => {
   const [activities, setActivities] = useState([])
   const [vehicles, setVehicles] = useState([])
   const [documents, setDocuments] = useState([])
+  const [incomes, setIncomes] = useState([])
 
   useEffect(() => {
     const fetchAccounts = async () => {
@@ -15,12 +16,13 @@ const ReportContainer = ({ account }) => {
       const activitiesResponse = await api.getActivities(id)
       const vehiclesResponse = await api.getVehicles(id)
       const documentsResponse = await api.getDocuments(id)
-      console.log(documentsResponse)
+      const incomesResponse = await api.getIncomes(id)
 
       setProfile(profileResponse)
       setActivities(activitiesResponse)
       setVehicles(vehiclesResponse)
       setDocuments(documentsResponse)
+      setIncomes(incomesResponse)
     }
     fetchAccounts()
   }, [account])
@@ -40,6 +42,7 @@ const ReportContainer = ({ account }) => {
       account={account}
       vehicles={vehicles}
       documents={documents}
+      incomes={incomes}
     />
   )
 }
