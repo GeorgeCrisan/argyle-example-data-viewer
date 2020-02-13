@@ -15,18 +15,11 @@ class UserListContainer extends Component {
     let updatedUsers = []
 
     results.forEach(({ id }) => {
-      const currentUser = {}
-      let count = 0
-
-      database.ref(`user-details/${id}`).on('child_added', async snapshot => {
-        currentUser[snapshot.key] = snapshot.node_.value_
-        currentUser.id = id
-        count = count + 1
-
-        if (currentUser.email && count > 3) {
-          updatedUsers.push(currentUser)
+      database.ref(`user-details/${id}`).on('value', snapshot => {
+        if (snapshot.val()) {
+          updatedUsers.push(snapshot.val())
+          this.setState({ users: updatedUsers })
         }
-        this.setState({ users: updatedUsers })
       })
     })
   }

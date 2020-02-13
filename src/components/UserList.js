@@ -65,7 +65,10 @@ const UserList = ({ users }) => {
       </TitleBlock>
       {users.length ? (
         users.map(user => (
-          <StyledCard href={`/reports/${user.id}`} key={user.id + user.email}>
+          <StyledCard
+            href={`/reports/${user.userId}`}
+            key={user.userId + user.email}
+          >
             <Card interactive={true} elevation={Elevation.TWO}>
               <Details>
                 <Text>
