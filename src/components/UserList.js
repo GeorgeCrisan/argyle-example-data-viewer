@@ -66,7 +66,7 @@ const UserList = ({ users }) => {
       {users.length ? (
         users.map(user => (
           <StyledCard
-            href={`/reports/${user.userId}`}
+            href={`/user-data/${user.userId}`}
             key={user.userId + user.email}
           >
             <Card interactive={true} elevation={Elevation.TWO}>

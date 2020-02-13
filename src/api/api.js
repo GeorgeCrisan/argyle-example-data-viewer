@@ -13,7 +13,7 @@ class Api {
 
     this.api = axios.create({
       baseURL: API_URL,
-      timeout: 3000,
+      timeout: 10000,
       headers: {
         ...DEFAULT_HEADERS,
         Authorization: `Bearer ${token}`

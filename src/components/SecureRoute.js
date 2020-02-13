@@ -1,5 +1,4 @@
 import React from 'react'
-// import { Redirect } from 'react-router'
 import { Route, Redirect } from 'react-router-dom'
 
 const SecureRoute = ({ component: Component, path, exact }) => {
