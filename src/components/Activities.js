@@ -35,6 +35,7 @@ const Divider = styled.div`
   height: 1px;
   background-color: rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
+  ${({ header }) => header && 'height: 2px;'}
 `
 
 const headerItems = ['Start Date', 'Type', 'Status', 'Income']
@@ -49,6 +50,7 @@ const Activities = ({ activities }) => {
           <HeaderItem key={`${item}${i}`}>{item}</HeaderItem>
         ))}
       </Header>
+      <Divider header />
       {activities.map(
         ({
           id,

@@ -50,7 +50,7 @@ const Table = ({ items, headerItems }) => (
         <Item columns={headerItems.length}>
           {Object.keys(item).map(key => {
             if (key === 'id') return null
-            return <ItemValue key={key}>{item[key]}</ItemValue>
+            return <ItemValue key={key}>{item[key] || 'Null'}</ItemValue>
           })}
         </Item>
         <Divider />
