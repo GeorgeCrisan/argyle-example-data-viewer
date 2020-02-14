@@ -32,6 +32,8 @@ class UserDetailsContainer extends Component {
     const database = firebase.database()
     const uid = localStorage.getItem('uid')
 
+    if (!email) return
+
     window.initArgyle().open()
     window.userCreated = ({ userToken, userId }) => {
       database.ref(`user-details/${userId}`).set({

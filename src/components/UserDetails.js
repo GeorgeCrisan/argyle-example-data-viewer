@@ -11,18 +11,23 @@ const Title = styled.h1`
   margin-bottom: 3rem;
   color: #0f6ba3;
   font-weight: 500;
+  font-size: 3.6rem;
 `
 
 const StyledInput = styled(InputGroup)`
   margin-bottom: 3rem;
 `
 
-const StyledButton = styled(Button)``
+const StyledButton = styled(Button)`
+  &:focus {
+    outline: none;
+  }
+`
 
 const UserDetails = ({ onInputChange, email, onSubmit }) => (
   <StyledUserDetails>
     <Card interactive={true} elevation={Elevation.TWO}>
-      <Title>The Client name</Title>
+      <Title>Connect your account</Title>
       <StyledInput
         disabled={false}
         large={true}
