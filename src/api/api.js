@@ -13,38 +13,12 @@ class Api {
 
     this.api = axios.create({
       baseURL: API_URL,
-      timeout: 10000,
+      timeout: 5000,
       headers: {
         ...DEFAULT_HEADERS,
         Authorization: `Bearer ${token}`
       }
     })
-  }
-
-  async signIn({ email, password }) {
-    const resp = await axios.post(
-      '/tokens',
-      {
-        username: email,
-        password
-      },
-      {
-        baseURL: API_URL,
-        timeout: 3000,
-        headers: {
-          ...DEFAULT_HEADERS
-        }
-      }
-    )
-
-    const prom = () =>
-      new Promise(resolve => {
-        localStorage.setItem('userToken', resp.data.access)
-        resolve()
-      })
-
-    await prom()
-    return resp.data.access
   }
 
   async getUsers() {

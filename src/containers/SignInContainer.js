@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import api from '../api/api'
+import { signIn } from '../api'
 import SignIn from '../components/SignIn'
 
 class SignInContainer extends Component {
@@ -15,12 +15,8 @@ class SignInContainer extends Component {
     const { email, password } = this.state
     const { history } = this.props
 
-    await api.signIn({ email, password })
-
-    const timeout = setTimeout(() => {
-      history.push('/')
-      clearTimeout(timeout)
-    }, 1500)
+    await signIn({ email, password })
+    history.push('/')
   }
 
   render() {
