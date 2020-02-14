@@ -9,6 +9,14 @@ import Documents from './DocumentsContainer'
 import Incomes from './IncomesContainer'
 import Careers from './CareersContainer'
 import Reputations from './ReputationsContainer'
+import Spinner from '../components/Spinner'
+
+const StyledSpinner = styled.div`
+  min-height: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const renderRoutes = userId => [
   {
@@ -159,10 +167,14 @@ const NavigationContainer = ({ match, history }) => {
   const { userId } = match.params
   const [accounts, setAccounts] = useState([])
   const [selectedAccountId, selectAccount] = useState(null)
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchAccounts = async () => {
+      setLoading(true)
       const results = await api.getAccounts(userId)
+      setLoading(false)
+
       if (!results.length) {
         setAccounts([])
         selectAccount(null)
@@ -198,6 +210,14 @@ const NavigationContainer = ({ match, history }) => {
       )}
     />
   )
+
+  if (isLoading) {
+    return (
+      <StyledSpinner>
+        <Spinner />
+      </StyledSpinner>
+    )
+  }
 
   return (
     <div>

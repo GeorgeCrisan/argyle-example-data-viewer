@@ -16,13 +16,13 @@ const ActivitiesContainer = ({ accountId }) => {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchAccounts = async () => {
+    const fetchActivities = async () => {
       setLoading(true)
       const activitiesResponse = await api.getActivities(accountId)
       setActivities(activitiesResponse)
       setLoading(false)
     }
-    fetchAccounts()
+    fetchActivities()
   }, [accountId])
 
   if (isLoading)
