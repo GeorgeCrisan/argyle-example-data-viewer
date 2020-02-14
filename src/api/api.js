@@ -9,14 +9,15 @@ const DEFAULT_HEADERS = {
 
 class Api {
   constructor() {
-    const token = localStorage.getItem('userToken')
-
     this.api = axios.create({
       baseURL: API_URL,
       timeout: 5000,
       headers: {
-        ...DEFAULT_HEADERS,
-        Authorization: `Bearer ${token}`
+        ...DEFAULT_HEADERS
+      },
+      auth: {
+        username: process.env.REACT_APP_CLIENT_ID,
+        password: process.env.REACT_APP_CLIENT_SECRET
       }
     })
   }

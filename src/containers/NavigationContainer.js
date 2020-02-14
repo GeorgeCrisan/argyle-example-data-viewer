@@ -132,13 +132,18 @@ const Content = styled.div`
 const LeftNavigation = styled.div`
   background-color: white;
   width: 25rem;
-  padding-top: 60px;
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   z-index: 2;
   box-shadow: 9px 75px 33px -5px rgba(0, 0, 0, 0.08);
+`
+
+const BackButton = styled.div`
+  padding: 2rem;
+  cursor: pointer;
+  font-size: 2.4rem;
 `
 
 const LeftNavItems = styled.div`
@@ -251,6 +256,7 @@ const NavigationContainer = ({ match, history }) => {
         </SignOutButton>
       </TopNavigation>
       <LeftNavigation>
+        <BackButton onClick={() => history.push('/')}>Go Back</BackButton>
         <LeftNavItems>
           {renderRoutes(userId).map(({ path, navLinkName }) => (
             <StyledNavLink key={path} to={path} activeClassName="selected">
