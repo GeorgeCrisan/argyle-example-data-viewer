@@ -2,7 +2,55 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Switch, Route, NavLink } from 'react-router-dom'
 import api from '../api/api'
+import Profiles from './ProfilesContainer'
 import Activities from './ActivitiesContainer'
+import Vehicles from './VehiclesContainer'
+import Documents from './DocumentsContainer'
+import Incomes from './IncomesContainer'
+import Careers from './CareersContainer'
+import Reputations from './ReputationsContainer'
+
+const renderRoutes = userId => [
+  {
+    path: `/user-data/${userId}`,
+    component: Profiles
+  },
+  {
+    path: `/user-data/${userId}/profiles`,
+    component: Profiles,
+    navLinkName: 'Profiles'
+  },
+  {
+    path: `/user-data/${userId}/activities`,
+    component: Activities,
+    navLinkName: 'Activities'
+  },
+  {
+    path: `/user-data/${userId}/vehicles`,
+    component: Vehicles,
+    navLinkName: 'Vehicles'
+  },
+  {
+    path: `/user-data/${userId}/documents`,
+    component: Documents,
+    navLinkName: 'Documents'
+  },
+  {
+    path: `/user-data/${userId}/incomes`,
+    component: Incomes,
+    navLinkName: 'Incomes'
+  },
+  {
+    path: `/user-data/${userId}/careers`,
+    component: Careers,
+    navLinkName: 'Careers'
+  },
+  {
+    path: `/user-data/${userId}/reputations`,
+    component: Reputations,
+    navLinkName: 'Reputations'
+  }
+]
 
 const TopNavigation = styled.div`
   height: 60px;
@@ -103,25 +151,25 @@ const NavigationContainer = ({ match }) => {
     fetchAccounts()
   }, [userId])
 
-  const renderRoutes = () => (
+  const getRoutes = () => (
     <Route
       path="/user-data/:userId"
-      render={({ match }, props) => (
+      render={props => (
         <Switch>
-          <Route
-            exact
-            path={`${match.url}`}
-            render={() => (
-              <Activities {...props} accountId={selectedAccountId} />
-            )}
-          />
-          <Route
-            exact
-            path={`${match.url}/activities`}
-            render={() => (
-              <Activities {...props} accountId={selectedAccountId} />
-            )}
-          />
+          {renderRoutes(userId).map(({ path, component: Component }) => (
+            <Route
+              key={path}
+              exact
+              path={path}
+              render={routeProps => (
+                <Component
+                  {...props}
+                  {...routeProps}
+                  accountId={selectedAccountId}
+                />
+              )}
+            />
+          ))}
         </Switch>
       )}
     />
@@ -148,51 +196,14 @@ const NavigationContainer = ({ match }) => {
       </TopNavigation>
       <LeftNavigation>
         <LeftNavItems>
-          <StyledNavLink
-            to={`/user-data/${userId}/profiles`}
-            activeClassName="selected"
-          >
-            Profiles
-          </StyledNavLink>
-          <StyledNavLink
-            to={`/user-data/${userId}/activities`}
-            activeClassName="selected"
-          >
-            Activities
-          </StyledNavLink>
-          <StyledNavLink
-            to={`/user-data/${userId}/vehicles`}
-            activeClassName="selected"
-          >
-            Vehicles
-          </StyledNavLink>
-          <StyledNavLink
-            to={`/user-data/${userId}/documents`}
-            activeClassName="selected"
-          >
-            Documents
-          </StyledNavLink>
-          <StyledNavLink
-            to={`/user-data/${userId}/incomes`}
-            activeClassName="selected"
-          >
-            Incomes
-          </StyledNavLink>
-          <StyledNavLink
-            to={`/user-data/${userId}/careers`}
-            activeClassName="selected"
-          >
-            Careers
-          </StyledNavLink>
-          <StyledNavLink
-            to={`/user-data/${userId}/reputations`}
-            activeClassName="selected"
-          >
-            Reputations
-          </StyledNavLink>
+          {renderRoutes(userId).map(({ path, navLinkName }) => (
+            <StyledNavLink key={path} to={path} activeClassName="selected">
+              {navLinkName}
+            </StyledNavLink>
+          ))}
         </LeftNavItems>
       </LeftNavigation>
-      <Content>{renderRoutes()}</Content>
+      <Content>{getRoutes()}</Content>
     </div>
   )
 }
