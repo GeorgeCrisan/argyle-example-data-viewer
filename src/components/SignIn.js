@@ -43,7 +43,7 @@ const UserDetails = ({ onInputChange, email, password, onSubmit }) => (
           name="password"
           type="password"
         />
-        <StyledButton onClick={onSubmit} intent="primary">
+        <StyledButton type="submit" onClick={onSubmit} intent="primary">
           Sign in
         </StyledButton>
       </form>

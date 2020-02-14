@@ -35,43 +35,64 @@ const Name = styled.h3`
   font-size: 32px;
 `
 
+const renderProfileDetails = ({
+  image,
+  fullName,
+  email,
+  phoneNumber,
+  address
+}) => [
+  {
+    label: 'Email',
+    value: email
+  },
+  {
+    label: 'Phone number',
+    value: phoneNumber
+  },
+  {
+    label: 'City',
+    value: address.city
+  },
+  {
+    label: 'Line1',
+    value: address.line1
+  },
+  {
+    label: 'Line2',
+    value: address.line2
+  },
+  {
+    label: 'State',
+    value: address.state
+  },
+  {
+    label: 'Country',
+    value: address.country
+  },
+  {
+    label: 'Postal Code',
+    value: address.postal_code
+  }
+]
+
 const Profile = ({ image, fullName, email, phoneNumber, address }) => (
   <StyledProfile>
     <Image src={image} />
     <ProfileDetails>
       <Name>{fullName}</Name>
-      <DetailWrapper>
-        <DetailLabel>Email:</DetailLabel>
-        <Detail>{email}</Detail>
-      </DetailWrapper>
-      <DetailWrapper>
-        <DetailLabel>Phone number:</DetailLabel>
-        <Detail>{phoneNumber}</Detail>
-      </DetailWrapper>
-      <DetailWrapper>
-        <DetailLabel>City:</DetailLabel>
-        <Detail>{address.city}</Detail>
-      </DetailWrapper>
-      <DetailWrapper>
-        <DetailLabel>Line1:</DetailLabel>
-        <Detail>{address.line1}</Detail>
-      </DetailWrapper>
-      <DetailWrapper>
-        <DetailLabel>Line2:</DetailLabel>
-        <Detail>{address.line2}</Detail>
-      </DetailWrapper>
-      <DetailWrapper>
-        <DetailLabel>State:</DetailLabel>
-        <Detail>{address.state}</Detail>
-      </DetailWrapper>
-      <DetailWrapper>
-        <DetailLabel>Country:</DetailLabel>
-        <Detail>{address.country}</Detail>
-      </DetailWrapper>
-      <DetailWrapper>
-        <DetailLabel>Postal Code:</DetailLabel>
-        <Detail>{address.postal_code}</Detail>
-      </DetailWrapper>
+      {renderProfileDetails({
+        image,
+        fullName,
+        email,
+        phoneNumber,
+        address
+      }).map(({ label, value }, i) => (
+        <DetailWrapper key={`${label}${i}`}>
+          <DetailLabel>{label}:</DetailLabel>
+          <Detail>{value}</Detail>
+        </DetailWrapper>
+      ))}
     </ProfileDetails>
   </StyledProfile>
 )
