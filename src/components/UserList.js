@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import Spinner from './Spinner'
 
 const StyledUserList = styled.div`
-  margin: 10rem auto;
+  margin: 9rem auto;
   max-width: 60rem;
 `
 
@@ -41,6 +41,14 @@ const SignOutButton = styled.button`
   &:focus {
     outline: none;
   }
+`
+
+const UsersTitle = styled.h1`
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 500;
 `
 
 const StyledCard = styled.a`
@@ -108,20 +116,23 @@ const UserList = ({ users, history }) => {
       </TopNavigation>
 
       {users.length ? (
-        users.map(user => (
-          <StyledCard
-            href={`/user-data/${user.userId}/profiles`}
-            key={user.userId + user.email}
-          >
-            <Card interactive={true} elevation={Elevation.TWO}>
-              <Details>
-                <Text>
-                  <Name>{user.email}</Name>
-                </Text>
-              </Details>
-            </Card>
-          </StyledCard>
-        ))
+        <>
+          <UsersTitle> Users list</UsersTitle>
+          {users.map(user => (
+            <StyledCard
+              href={`/user-data/${user.userId}/profiles`}
+              key={user.userId + user.email}
+            >
+              <Card interactive={true} elevation={Elevation.TWO}>
+                <Details>
+                  <Text>
+                    <Name>{user.email}</Name>
+                  </Text>
+                </Details>
+              </Card>
+            </StyledCard>
+          ))}
+        </>
       ) : (
         <StyledSpinner>
           <Spinner />
