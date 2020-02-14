@@ -1,11 +1,46 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Card, Elevation } from '@blueprintjs/core'
+import { withRouter } from 'react-router-dom'
 import Spinner from './Spinner'
 
 const StyledUserList = styled.div`
   margin: 10rem auto;
   max-width: 60rem;
+`
+
+const TopNavigation = styled.div`
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 3px -1px 33px -5px rgba(0, 0, 0, 0.12);
+`
+
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const SignOutButton = styled.button`
+  margin-right: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.4rem;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 `
 
 const StyledCard = styled.a`
@@ -31,17 +66,14 @@ const Name = styled.div`
   margin-right: 2rem;
 `
 
-const TitleBlock = styled.div``
-
 const Title = styled.h1`
-  font-size: 3.6rem;
-  margin-bottom: 1rem;
+  font-size: 2.4rem;
+  margin-right: 1rem;
 `
 
 const Link = styled.a`
   font-size: 2.4rem;
   display: block;
-  margin-bottom: 3rem;
 `
 
 const StyledSpinner = styled.div`
@@ -51,18 +83,30 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
-const UserList = ({ users }) => {
+const UserList = ({ users, history }) => {
   return (
     <StyledUserList>
-      <TitleBlock>
-        <Title>Share this link to connect:</Title>
-        <Link
-          href="https://argyle-deep-dive.firebaseapp.com/start"
-          target="_blank"
+      <TopNavigation>
+        <div></div>
+        <Content>
+          <Title>Share this link to connect:</Title>
+          <Link
+            href="https://argyle-deep-dive.firebaseapp.com/start"
+            target="_blank"
+          >
+            https://argyle-deep-dive.firebaseapp.com/start
+          </Link>
+        </Content>
+        <SignOutButton
+          onClick={() => {
+            localStorage.removeItem('userToken')
+            history.push('/sign-in')
+          }}
         >
-          https://argyle-deep-dive.firebaseapp.com/start
-        </Link>
-      </TitleBlock>
+          Sign Out
+        </SignOutButton>
+      </TopNavigation>
+
       {users.length ? (
         users.map(user => (
           <StyledCard
@@ -87,4 +131,4 @@ const UserList = ({ users }) => {
   )
 }
 
-export default UserList
+export default withRouter(UserList)

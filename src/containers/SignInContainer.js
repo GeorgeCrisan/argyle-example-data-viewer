@@ -17,7 +17,10 @@ class SignInContainer extends Component {
 
     await api.signIn({ email, password })
 
-    history.push('/')
+    const timeout = setTimeout(() => {
+      history.push('/')
+      clearTimeout(timeout)
+    }, 1500)
   }
 
   render() {

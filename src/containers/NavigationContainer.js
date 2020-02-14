@@ -62,6 +62,7 @@ const TopNavigation = styled.div`
   z-index: 1;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   box-shadow: 3px -1px 33px -5px rgba(0, 0, 0, 0.12);
 `
 
@@ -69,6 +70,20 @@ const NavItems = styled.div`
   display: flex;
   align-items: center;
   margin-left: 30rem;
+`
+
+const SignOutButton = styled.button`
+  margin-right: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.4rem;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 `
 
 const NavItem = styled.div`
@@ -136,7 +151,7 @@ const StyledNavLink = styled(NavLink)`
   }
 `
 
-const NavigationContainer = ({ match }) => {
+const NavigationContainer = ({ match, history }) => {
   const { userId } = match.params
   const [accounts, setAccounts] = useState([])
   const [selectedAccountId, selectAccount] = useState(null)
@@ -144,6 +159,11 @@ const NavigationContainer = ({ match }) => {
   useEffect(() => {
     const fetchAccounts = async () => {
       const results = await api.getAccounts(userId)
+      if (!results.length) {
+        setAccounts([])
+        selectAccount(null)
+        return
+      }
 
       setAccounts(results)
       selectAccount(results[0].id)
@@ -193,6 +213,14 @@ const NavigationContainer = ({ match }) => {
             </NavItem>
           ))}
         </NavItems>
+        <SignOutButton
+          onClick={() => {
+            localStorage.removeItem('userToken')
+            history.push('/sign-in')
+          }}
+        >
+          Sign Out
+        </SignOutButton>
       </TopNavigation>
       <LeftNavigation>
         <LeftNavItems>
