@@ -27,7 +27,7 @@ const UserDetails = ({ onInputChange, email, password, onSubmit }) => (
         <StyledInput
           disabled={false}
           large={true}
-          placeholder="Email"
+          placeholder="Client ID"
           small={false}
           onChange={onInputChange}
           value={email}
@@ -36,7 +36,7 @@ const UserDetails = ({ onInputChange, email, password, onSubmit }) => (
         <StyledInput
           disabled={false}
           large={true}
-          placeholder="Password"
+          placeholder="Client Secret"
           small={false}
           onChange={onInputChange}
           value={password}
