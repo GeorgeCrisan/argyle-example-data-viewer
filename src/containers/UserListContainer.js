@@ -16,7 +16,6 @@ class UserListContainer extends Component {
 
     results.forEach(({ id }) => {
       database.ref(`user-details/${id}`).on('value', snapshot => {
-        console.log(snapshot.val())
         if (snapshot.val()) {
           updatedUsers.push(snapshot.val())
           this.setState({ users: updatedUsers })
