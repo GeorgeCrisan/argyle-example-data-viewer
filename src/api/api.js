@@ -54,7 +54,7 @@ class Api {
     return resp.data.results
   }
 
-  async getProfile(accountId) {
+  async getProfiles(accountId) {
     const resp = await this.api.get('/profiles', {
       params: {
         limit: 100,
@@ -63,7 +63,7 @@ class Api {
       }
     })
 
-    return resp.data.results[0]
+    return resp.data.results
   }
 
   async getVehicles(accountId) {

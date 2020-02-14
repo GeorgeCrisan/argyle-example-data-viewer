@@ -29,6 +29,14 @@ const ItemValue = styled.div`
   margin-bottom: 1.5rem;
 `
 
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  ${({ header }) => header && 'height: 2px;'}
+`
+
 const Table = ({ items, headerItems }) => (
   <StyledTable>
     <Header columns={headerItems.length}>
@@ -36,13 +44,17 @@ const Table = ({ items, headerItems }) => (
         <HeaderItem key={`${item}${i}`}>{item}</HeaderItem>
       ))}
     </Header>
+    <Divider header />
     {items.map(item => (
-      <Item columns={headerItems.length} key={item.id}>
-        {Object.keys(item).map(key => {
-          if (key === 'id') return null
-          return <ItemValue key={key}>{item[key]}</ItemValue>
-        })}
-      </Item>
+      <div key={item.id}>
+        <Item columns={headerItems.length}>
+          {Object.keys(item).map(key => {
+            if (key === 'id') return null
+            return <ItemValue key={key}>{item[key]}</ItemValue>
+          })}
+        </Item>
+        <Divider />
+      </div>
     ))}
   </StyledTable>
 )

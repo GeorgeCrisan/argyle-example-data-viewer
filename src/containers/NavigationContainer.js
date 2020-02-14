@@ -69,7 +69,7 @@ const TopNavigation = styled.div`
 const NavItems = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 30rem;
+  margin-left: 25rem;
 `
 
 const SignOutButton = styled.button`
@@ -92,22 +92,26 @@ const NavItem = styled.div`
   justify-content: center;
   cursor: pointer;
   margin-left: 3rem;
-  padding: 0.6rem;
+  padding: 0.7rem;
   ${({ active }) =>
     active
-      ? 'border-bottom: 6px solid #86a9ad;'
-      : 'border-bottom: 6px solid white;'}
+      ? 'border-bottom: 5px solid #86a9ad;'
+      : 'border-bottom: 5px solid white;'}
 `
 
 const DataPartnerLogo = styled.img`
   width: 32px;
   height: 32px;
-  margin-right: 10px;
+  margin-right: 15px;
 `
 
 const PartnerName = styled.span`
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 3.2rem;
+  font-weight: 500;
+`
+
+const AccountsTitle = styled.div`
+  font-size: 2.8rem;
 `
 
 const Content = styled.div`
@@ -199,19 +203,23 @@ const NavigationContainer = ({ match, history }) => {
     <div>
       <TopNavigation>
         <NavItems>
-          {accounts.map(({ id, data_partner }) => (
-            <NavItem
-              active={selectedAccountId === id}
-              onClick={() => selectAccount(id)}
-              key={id}
-            >
-              <DataPartnerLogo
-                alt={data_partner}
-                src={`https://storage.googleapis.com/argyle-api-media/images/${data_partner}.png`}
-              />
-              <PartnerName>{data_partner}</PartnerName>
-            </NavItem>
-          ))}
+          {!accounts.length ? (
+            <AccountsTitle>No Accounts connected / Show all data</AccountsTitle>
+          ) : (
+            accounts.map(({ id, data_partner }) => (
+              <NavItem
+                active={selectedAccountId === id}
+                onClick={() => selectAccount(id)}
+                key={id}
+              >
+                <DataPartnerLogo
+                  alt={data_partner}
+                  src={`https://storage.googleapis.com/argyle-api-media/images/${data_partner}.png`}
+                />
+                <PartnerName>{data_partner}</PartnerName>
+              </NavItem>
+            ))
+          )}
         </NavItems>
         <SignOutButton
           onClick={() => {

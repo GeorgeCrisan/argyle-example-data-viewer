@@ -11,37 +11,44 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
+const StyledProfile = styled.div`
+  margin-bottom: 5rem;
+`
+
 const ProfilesContainer = ({ accountId }) => {
-  const [profile, setProfile] = useState(null)
+  const [profiles, setProfiles] = useState(null)
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchProfile = async () => {
       setLoading(true)
-      const profileResponse = await api.getProfile(accountId)
+      const profilesResponse = await api.getProfiles(accountId)
       setLoading(false)
 
-      setProfile(profileResponse)
+      setProfiles(profilesResponse)
     }
     fetchProfile()
   }, [accountId])
 
-  if (!profile || isLoading)
+  if (!profiles || isLoading)
     return (
       <StyledSpinner>
         <Spinner />
       </StyledSpinner>
     )
-  const { full_name, email, phone_number, picture_url, address } = profile
 
-  return (
-    <Profile
-      image={picture_url}
-      fullName={full_name}
-      email={email}
-      phoneNumber={phone_number}
-      address={address}
-    />
+  return profiles.map(
+    ({ full_name, email, phone_number, picture_url, address, id }) => (
+      <StyledProfile key={id}>
+        <Profile
+          image={picture_url}
+          fullName={full_name}
+          email={email}
+          phoneNumber={phone_number}
+          address={address}
+        />
+      </StyledProfile>
+    )
   )
 }
 

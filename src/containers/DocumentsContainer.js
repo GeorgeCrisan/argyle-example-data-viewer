@@ -1,17 +1,36 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import api from '../api/api'
 import Table from '../components/Table'
+import Spinner from '../components/Spinner'
+
+const StyledSpinner = styled.div`
+  min-height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const DocumentsContainer = ({ accountId }) => {
   const [documents, setDocuments] = useState([])
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchDocuments = async () => {
+      setLoading(true)
       const response = await api.getDocuments(accountId)
       setDocuments(response)
+      setLoading(false)
     }
     fetchDocuments()
   }, [accountId])
+
+  if (isLoading)
+    return (
+      <StyledSpinner>
+        <Spinner />
+      </StyledSpinner>
+    )
 
   return (
     <Table

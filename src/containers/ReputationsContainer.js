@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import api from '../api/api'
 import Table from '../components/Table'
+import Spinner from '../components/Spinner'
+
+const StyledSpinner = styled.div`
+  min-height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const Achievements = styled.div`
   margin-top: 2rem;
@@ -30,14 +38,24 @@ const AchievementDescription = styled.div``
 
 const ReputationsContainer = ({ accountId }) => {
   const [reputations, setReputations] = useState([])
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchReputations = async () => {
+      setLoading(true)
       const response = await api.getReputations(accountId)
       setReputations(response)
+      setLoading(false)
     }
     fetchReputations()
   }, [accountId])
+
+  if (isLoading)
+    return (
+      <StyledSpinner>
+        <Spinner />
+      </StyledSpinner>
+    )
 
   return (
     <>
