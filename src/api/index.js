@@ -6,5 +6,5 @@ export const signIn = async ({ email, password }) => {
       resolve()
     })
 
-  return prom()
+  await prom()
 }
