@@ -11,19 +11,19 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
-const CareersContainer = ({ accountId }) => {
+const CareersContainer = ({ selectedAccount }) => {
   const [careers, setCareers] = useState([])
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchCareers = async () => {
       setLoading(true)
-      const response = await api.getCareers(accountId)
+      const response = await api.getCareers(selectedAccount.id)
       setCareers(response)
       setLoading(false)
     }
     fetchCareers()
-  }, [accountId])
+  }, [selectedAccount.id])
 
   if (isLoading)
     return (

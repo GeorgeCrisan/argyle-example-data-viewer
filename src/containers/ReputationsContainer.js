@@ -36,19 +36,19 @@ const AchievementLabel = styled.div`
 
 const AchievementDescription = styled.div``
 
-const ReputationsContainer = ({ accountId }) => {
+const ReputationsContainer = ({ selectedAccount }) => {
   const [reputations, setReputations] = useState([])
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchReputations = async () => {
       setLoading(true)
-      const response = await api.getReputations(accountId)
+      const response = await api.getReputations(selectedAccount.id)
       setReputations(response)
       setLoading(false)
     }
     fetchReputations()
-  }, [accountId])
+  }, [selectedAccount.id])
 
   if (isLoading)
     return (

@@ -15,20 +15,28 @@ const StyledProfile = styled.div`
   margin-bottom: 5rem;
 `
 
-const ProfilesContainer = ({ accountId }) => {
+const Error = styled.div`
+  font-size: 2.4rem;
+`
+
+const ProfilesContainer = ({ selectedAccount }) => {
   const [profiles, setProfiles] = useState(null)
   const [isLoading, setLoading] = useState(true)
+  const [isError, setError] = useState(false)
 
   useEffect(() => {
     const fetchProfile = async () => {
       setLoading(true)
-      const profilesResponse = await api.getProfiles(accountId)
-      setLoading(false)
+      const profilesResponse = await api.getProfiles(selectedAccount.id)
+      if (!profilesResponse.length) {
+        setError(true)
+      }
 
+      setLoading(false)
       setProfiles(profilesResponse)
     }
     fetchProfile()
-  }, [accountId])
+  }, [selectedAccount.id])
 
   if (!profiles || isLoading)
     return (
@@ -36,6 +44,14 @@ const ProfilesContainer = ({ accountId }) => {
         <Spinner />
       </StyledSpinner>
     )
+
+  if (isError) {
+    return (
+      <Error>
+        {selectedAccount.status} {selectedAccount.error_code}
+      </Error>
+    )
+  }
 
   return profiles.map(
     ({ full_name, email, phone_number, picture_url, address, id }) => (

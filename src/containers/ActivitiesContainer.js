@@ -11,19 +11,19 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
-const ActivitiesContainer = ({ accountId }) => {
+const ActivitiesContainer = ({ selectedAccount }) => {
   const [activities, setActivities] = useState([])
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchActivities = async () => {
       setLoading(true)
-      const activitiesResponse = await api.getActivities(accountId)
+      const activitiesResponse = await api.getActivities(selectedAccount.id)
       setActivities(activitiesResponse)
       setLoading(false)
     }
     fetchActivities()
-  }, [accountId])
+  }, [selectedAccount.id])
 
   if (isLoading)
     return (

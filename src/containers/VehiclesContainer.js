@@ -11,19 +11,19 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
-const VehiclesContainer = ({ accountId }) => {
+const VehiclesContainer = ({ selectedAccount }) => {
   const [vehicles, setVehicles] = useState([])
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchVehicles = async () => {
       setLoading(true)
-      const response = await api.getVehicles(accountId)
+      const response = await api.getVehicles(selectedAccount.id)
       setVehicles(response)
       setLoading(false)
     }
     fetchVehicles()
-  }, [accountId])
+  }, [selectedAccount.id])
 
   if (isLoading)
     return (

@@ -171,7 +171,7 @@ const StyledNavLink = styled(NavLink)`
 const NavigationContainer = ({ match, history }) => {
   const { userId } = match.params
   const [accounts, setAccounts] = useState([])
-  const [selectedAccountId, selectAccount] = useState(null)
+  const [selectedAccount, selectAccount] = useState({})
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -186,7 +186,7 @@ const NavigationContainer = ({ match, history }) => {
       }
 
       setAccounts(results)
-      selectAccount(results[0].id)
+      selectAccount(results[0])
       setLoading(false)
     }
     fetchAccounts()
@@ -214,7 +214,7 @@ const NavigationContainer = ({ match, history }) => {
                 <Component
                   {...props}
                   {...routeProps}
-                  accountId={selectedAccountId}
+                  selectedAccount={selectedAccount}
                 />
               )}
             />
@@ -233,7 +233,7 @@ const NavigationContainer = ({ match, history }) => {
           ) : (
             accounts.map(({ id, data_partner }) => (
               <NavItem
-                active={selectedAccountId === id}
+                active={selectedAccount.id === id}
                 onClick={() => selectAccount(id)}
                 key={id}
               >

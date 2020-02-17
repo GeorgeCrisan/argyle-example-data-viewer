@@ -11,19 +11,19 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
-const IncomesContainer = ({ accountId }) => {
+const IncomesContainer = ({ selectedAccount }) => {
   const [incomes, setIncomes] = useState([])
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchIncomes = async () => {
       setLoading(true)
-      const response = await api.getIncomes(accountId)
+      const response = await api.getIncomes(selectedAccount.id)
       setIncomes(response)
       setLoading(false)
     }
     fetchIncomes()
-  }, [accountId])
+  }, [selectedAccount.id])
 
   if (isLoading)
     return (

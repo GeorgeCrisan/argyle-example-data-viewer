@@ -11,19 +11,19 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
-const DocumentsContainer = ({ accountId }) => {
+const DocumentsContainer = ({ selectedAccount }) => {
   const [documents, setDocuments] = useState([])
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchDocuments = async () => {
       setLoading(true)
-      const response = await api.getDocuments(accountId)
+      const response = await api.getDocuments(selectedAccount.id)
       setDocuments(response)
       setLoading(false)
     }
     fetchDocuments()
-  }, [accountId])
+  }, [selectedAccount.id])
 
   if (isLoading)
     return (
