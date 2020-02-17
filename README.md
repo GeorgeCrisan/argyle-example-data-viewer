@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## How to start
+First Create firebase project, go to https://console.firebase.google.com Add a Project, choose web and get API Keys there, for the database choose Realtime database. 
+
+go to `.env.example` in the root folder, rename to `.env`, add your values retrieved from firebase.
+
+Go to https://console.argyle.io/ to get your plugin key, add the value in `.env`,
+to Sign in use the `Client ID` and `Client Secret` retrieved from Argyle Console.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -21,7 +29,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
+re
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 

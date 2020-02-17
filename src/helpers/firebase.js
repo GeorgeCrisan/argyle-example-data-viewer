@@ -6,11 +6,10 @@ import 'firebase/auth'
 import 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_ARGYLE_FIREBASE_API_KEY,
-  databaseURL: process.env.REACT_APP_ARGYLE_FIREBASE_DATABASE_URL,
-  authDomain: process.env.REACT_APP_ARGYLE_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_ARGYLE_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_ARGYLE_FIREBASE_STORAGE_BUCKET
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID
 }
 
 // Initialize Firebase
