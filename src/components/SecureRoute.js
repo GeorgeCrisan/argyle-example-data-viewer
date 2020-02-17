@@ -3,8 +3,9 @@ import { Route, Redirect } from 'react-router-dom'
 
 const SecureRoute = ({ component: Component, path, exact }) => {
   const hasToken =
-    !!localStorage.getItem('userToken') &&
-    !!localStorage.getItem('userToken').length
+    !!localStorage.getItem('clientID') &&
+    !!localStorage.getItem('clientSecret') &&
+    !!localStorage.getItem('clientID').length
 
   if (!hasToken) {
     return <Redirect to="/sign-in" />

@@ -107,7 +107,8 @@ const UserList = ({ users, history }) => {
         </Content>
         <SignOutButton
           onClick={() => {
-            localStorage.removeItem('userToken')
+            localStorage.removeItem('clientID')
+            localStorage.removeItem('clientSecret')
             history.push('/sign-in')
           }}
         >

@@ -248,7 +248,8 @@ const NavigationContainer = ({ match, history }) => {
         </NavItems>
         <SignOutButton
           onClick={() => {
-            localStorage.removeItem('userToken')
+            localStorage.removeItem('clientID')
+            localStorage.removeItem('clientSecret')
             history.push('/sign-in')
           }}
         >

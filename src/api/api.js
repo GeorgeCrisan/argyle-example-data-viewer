@@ -7,6 +7,11 @@ const DEFAULT_HEADERS = {
   'Content-Type': 'application/json'
 }
 
+const AUTH = {
+  username: localStorage.getItem('clientID'),
+  password: localStorage.getItem('clientSecret')
+}
+
 class Api {
   constructor() {
     this.api = axios.create({
@@ -16,8 +21,7 @@ class Api {
         ...DEFAULT_HEADERS
       },
       auth: {
-        username: process.env.REACT_APP_CLIENT_ID,
-        password: process.env.REACT_APP_CLIENT_SECRET
+        ...AUTH
       }
     })
   }
