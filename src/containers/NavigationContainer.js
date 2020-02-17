@@ -178,7 +178,6 @@ const NavigationContainer = ({ match, history }) => {
     const fetchAccounts = async () => {
       setLoading(true)
       const results = await api.getAccounts(userId)
-      setLoading(false)
 
       if (!results.length) {
         setAccounts([])
@@ -188,9 +187,18 @@ const NavigationContainer = ({ match, history }) => {
 
       setAccounts(results)
       selectAccount(results[0].id)
+      setLoading(false)
     }
     fetchAccounts()
   }, [userId])
+
+  if (isLoading) {
+    return (
+      <StyledSpinner>
+        <Spinner />
+      </StyledSpinner>
+    )
+  }
 
   const getRoutes = () => (
     <Route
@@ -215,14 +223,6 @@ const NavigationContainer = ({ match, history }) => {
       )}
     />
   )
-
-  if (isLoading) {
-    return (
-      <StyledSpinner>
-        <Spinner />
-      </StyledSpinner>
-    )
-  }
 
   return (
     <div>
