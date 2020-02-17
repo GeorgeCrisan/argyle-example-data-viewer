@@ -239,7 +239,7 @@ const NavigationContainer = ({ match, history }) => {
               >
                 <DataPartnerLogo
                   alt={data_partner}
-                  src={`https://storage.googleapis.com/argyle-api-media/images/${data_partner}.png`}
+                  src={`https://res.cloudinary.com/argyle-media/image/upload/c_lfill,w_auto,g_auto,q_auto,dpr_auto,f_auto/v1566809938/partner-logos/${data_partner}.png`}
                 />
                 <PartnerName>{data_partner}</PartnerName>
               </NavItem>
