@@ -229,7 +229,7 @@ const NavigationContainer = ({ match, history }) => {
       <TopNavigation>
         <NavItems>
           {!accounts.length ? (
-            <AccountsTitle>No Accounts connected / Show all data</AccountsTitle>
+            <AccountsTitle>No Accounts connected</AccountsTitle>
           ) : (
             accounts.map(({ id, data_partner }) => (
               <NavItem
