@@ -67,10 +67,16 @@ const Activities = ({ activities }) => {
         }) => (
           <div key={id}>
             <Activity onClick={() => expandActivity(id)}>
-              <ItemValue>{new Date(start_date).toDateString()}</ItemValue>
-              <ItemValue>{type}</ItemValue>
-              <ItemValue>{status}</ItemValue>
-              <ItemValue>{`${income.total_charge} ${income.currency}`}</ItemValue>
+              <ItemValue>
+                {start_date ? new Date(start_date).toDateString() : 'Null'}
+              </ItemValue>
+              <ItemValue>{type || 'Null'}</ItemValue>
+              <ItemValue>{status || 'Null'}</ItemValue>
+              <ItemValue>
+                {income.total_charge
+                  ? `${income.total_charge} ${income.currency}`
+                  : 'Null'}
+              </ItemValue>
             </Activity>
 
             {activityExpandedId === id && (

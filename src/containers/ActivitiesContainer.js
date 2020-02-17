@@ -11,14 +11,23 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
+const Error = styled.div`
+  font-size: 2.4rem;
+`
+
 const ActivitiesContainer = ({ selectedAccount }) => {
   const [activities, setActivities] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [isError, setError] = useState(false)
 
   useEffect(() => {
     const fetchActivities = async () => {
       setLoading(true)
       const activitiesResponse = await api.getActivities(selectedAccount.id)
+      if (!activitiesResponse.length) {
+        setError(true)
+      }
+
       setActivities(activitiesResponse)
       setLoading(false)
     }
@@ -31,6 +40,14 @@ const ActivitiesContainer = ({ selectedAccount }) => {
         <Spinner />
       </StyledSpinner>
     )
+
+  if (isError) {
+    return (
+      <Error>
+        Status: {selectedAccount.status} {selectedAccount.error_code}, No data
+      </Error>
+    )
+  }
 
   return <Activities activities={activities} />
 }

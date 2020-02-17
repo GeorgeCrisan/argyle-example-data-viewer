@@ -11,14 +11,22 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
+const Error = styled.div`
+  font-size: 2.4rem;
+`
+
 const CareersContainer = ({ selectedAccount }) => {
   const [careers, setCareers] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [isError, setError] = useState(false)
 
   useEffect(() => {
     const fetchCareers = async () => {
       setLoading(true)
       const response = await api.getCareers(selectedAccount.id)
+      if (!response.length) {
+        setError(true)
+      }
       setCareers(response)
       setLoading(false)
     }
@@ -31,6 +39,14 @@ const CareersContainer = ({ selectedAccount }) => {
         <Spinner />
       </StyledSpinner>
     )
+
+  if (isError) {
+    return (
+      <Error>
+        Status: {selectedAccount.status} {selectedAccount.error_code}, No Data
+      </Error>
+    )
+  }
 
   return (
     <Table

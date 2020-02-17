@@ -11,14 +11,22 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
+const Error = styled.div`
+  font-size: 2.4rem;
+`
+
 const DocumentsContainer = ({ selectedAccount }) => {
   const [documents, setDocuments] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [isError, setError] = useState(false)
 
   useEffect(() => {
     const fetchDocuments = async () => {
       setLoading(true)
       const response = await api.getDocuments(selectedAccount.id)
+      if (!response.length) {
+        setError(true)
+      }
       setDocuments(response)
       setLoading(false)
     }
@@ -31,6 +39,14 @@ const DocumentsContainer = ({ selectedAccount }) => {
         <Spinner />
       </StyledSpinner>
     )
+
+  if (isError) {
+    return (
+      <Error>
+        Status: {selectedAccount.status} {selectedAccount.error_code}, No data
+      </Error>
+    )
+  }
 
   return (
     <Table

@@ -48,7 +48,7 @@ const ProfilesContainer = ({ selectedAccount }) => {
   if (isError) {
     return (
       <Error>
-        {selectedAccount.status} {selectedAccount.error_code}
+        Status: {selectedAccount.status} {selectedAccount.error_code}, No Data
       </Error>
     )
   }

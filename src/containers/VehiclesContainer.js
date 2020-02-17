@@ -11,14 +11,22 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
+const Error = styled.div`
+  font-size: 2.4rem;
+`
+
 const VehiclesContainer = ({ selectedAccount }) => {
   const [vehicles, setVehicles] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [isError, setError] = useState(false)
 
   useEffect(() => {
     const fetchVehicles = async () => {
       setLoading(true)
       const response = await api.getVehicles(selectedAccount.id)
+      if (!response.length) {
+        setError(true)
+      }
       setVehicles(response)
       setLoading(false)
     }
@@ -31,6 +39,14 @@ const VehiclesContainer = ({ selectedAccount }) => {
         <Spinner />
       </StyledSpinner>
     )
+
+  if (isError) {
+    return (
+      <Error>
+        Status: {selectedAccount.status} {selectedAccount.error_code}, No Data
+      </Error>
+    )
+  }
 
   return (
     <Table

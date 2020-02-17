@@ -36,14 +36,22 @@ const AchievementLabel = styled.div`
 
 const AchievementDescription = styled.div``
 
+const Error = styled.div`
+  font-size: 2.4rem;
+`
+
 const ReputationsContainer = ({ selectedAccount }) => {
   const [reputations, setReputations] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [isError, setError] = useState(false)
 
   useEffect(() => {
     const fetchReputations = async () => {
       setLoading(true)
       const response = await api.getReputations(selectedAccount.id)
+      if (!response.length) {
+        setError(true)
+      }
       setReputations(response)
       setLoading(false)
     }
@@ -56,6 +64,14 @@ const ReputationsContainer = ({ selectedAccount }) => {
         <Spinner />
       </StyledSpinner>
     )
+
+  if (isError) {
+    return (
+      <Error>
+        Status: {selectedAccount.status} {selectedAccount.error_code}, No Data
+      </Error>
+    )
+  }
 
   return (
     <>
