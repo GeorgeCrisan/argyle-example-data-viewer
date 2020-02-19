@@ -26,6 +26,15 @@ class Api {
     })
   }
 
+  setAuthCredentials({ email, password }) {
+    Object.assign(this.api.defaults, {
+      auth: {
+        username: email,
+        password
+      }
+    })
+  }
+
   async getUsers() {
     const resp = await this.api.get('/users', {
       params: {

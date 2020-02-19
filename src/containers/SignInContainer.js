@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { signIn } from '../api'
+import api from '../api/api'
 import SignIn from '../components/SignIn'
 
 class SignInContainer extends Component {
@@ -15,7 +16,8 @@ class SignInContainer extends Component {
     const { email, password } = this.state
     const { history } = this.props
 
-    await signIn({ email, password })
+    signIn({ email, password })
+    api.setAuthCredentials({ email, password })
     history.push('/')
   }
 
