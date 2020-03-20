@@ -19,7 +19,7 @@ export default `
 
   body {
     position: relative;
-    background-color: #F5F5F5;
+    background-color: #f4f4f4;
     margin: 0;
     font-family: "Roboto", "Oxygen",
       "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",

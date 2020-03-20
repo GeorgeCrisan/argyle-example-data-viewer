@@ -1,54 +1,66 @@
 import React from 'react'
 import styled from 'styled-components'
-import { InputGroup, Button, Card, Elevation } from '@blueprintjs/core'
+import Input from './Input'
+import Button from './Button'
+import Header from './Header'
+import Footer from './Footer'
 
-const StyledUserDetails = styled.div`
-  margin: 10rem auto;
+const StyledSignInPage = styled.div`
+  margin: 0 auto;
   max-width: 60rem;
+  padding: 18.4rem 0;
+  height: 100%;
 `
 
-const Title = styled.h1`
-  margin-bottom: 3rem;
-  color: #0f6ba3;
-  font-weight: 500;
+const PageContent = styled.div`
+  margin: 0 auto;
+  max-width: 50rem;
 `
 
-const StyledInput = styled(InputGroup)`
-  margin-bottom: 3rem;
+const Title = styled.h2`
+  font-size: 25px;
+  font-weight: 300;
+  color: #40ac74;
+  margin-bottom: 4.2rem;
 `
 
-const StyledButton = styled(Button)``
+const StyledInput = styled(Input)`
+  && {
+    margin-bottom: 3rem;
+  }
+`
 
-const UserDetails = ({ onInputChange, email, password, onSubmit }) => (
-  <StyledUserDetails>
-    <Card interactive={true} elevation={Elevation.TWO}>
-      <form onSubmit={onSubmit}>
-        <Title>Sign In</Title>
-        <StyledInput
-          disabled={false}
-          large={true}
-          placeholder="Client ID"
-          small={false}
-          onChange={onInputChange}
-          value={email}
-          name="email"
-        />
-        <StyledInput
-          disabled={false}
-          large={true}
-          placeholder="Client Secret"
-          small={false}
-          onChange={onInputChange}
-          value={password}
-          name="password"
-          type="password"
-        />
-        <StyledButton type="submit" onClick={onSubmit} intent="primary">
-          Sign in
-        </StyledButton>
-      </form>
-    </Card>
-  </StyledUserDetails>
+const SignInPage = ({ onInputChange, email, password, onSubmit }) => (
+  <>
+    <Header />
+    <StyledSignInPage>
+      <PageContent>
+        <Title>Sign in to DataViewer</Title>
+        <form onSubmit={onSubmit}>
+          <StyledInput
+            label="Client ID"
+            onChange={onInputChange}
+            value={email}
+            name="email"
+            inputId="clientIdInput"
+            type="text"
+          />
+          <StyledInput
+            label="Client Secret"
+            inputId="clientSecretInput"
+            onChange={onInputChange}
+            value={password}
+            name="password"
+            type="password"
+          />
+          <Button type="submit" onClick={onSubmit} intent="primary">
+            Continue
+          </Button>
+        </form>
+      </PageContent>
+    </StyledSignInPage>
+    <Footer />
+  </>
 )
 
-export default UserDetails
+export default SignInPage
