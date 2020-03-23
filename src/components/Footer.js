@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledFooter = styled.div`
+  margin-top: auto;
   padding: 0 3rem 2.8rem 3rem;
 `
 

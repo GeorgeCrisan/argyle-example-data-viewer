@@ -5,31 +5,31 @@ import SignIn from '../components/SignIn'
 
 class SignInContainer extends Component {
   state = {
-    email: '',
-    password: ''
+    clientId: '',
+    clientSecret: ''
   }
 
   onInputChange = e => this.setState({ [e.target.name]: e.target.value })
 
   signIn = async e => {
     e.preventDefault()
-    const { email, password } = this.state
+    const { clientId, clientSecret } = this.state
     const { history } = this.props
 
-    signIn({ email, password })
-    api.setAuthCredentials({ email, password })
+    signIn({ clientId, clientSecret })
+    api.setAuthCredentials({ clientId, clientSecret })
     history.push('/')
   }
 
   render() {
-    const { email, password } = this.state
+    const { clientId, clientSecret } = this.state
 
     return (
       <SignIn
         onInputChange={this.onInputChange}
         onSubmit={this.signIn}
-        email={email}
-        password={password}
+        clientId={clientId}
+        clientSecret={clientSecret}
       />
     )
   }

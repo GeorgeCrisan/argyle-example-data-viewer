@@ -1,6 +1,7 @@
 const colors = {
   white: '#ffffff',
-  black: '#000000'
+  black: '#000000',
+  defaultGreen: '#40ac74'
 }
 
 const mediaQueries = {

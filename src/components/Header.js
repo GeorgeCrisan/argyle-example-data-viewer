@@ -8,7 +8,7 @@ const StyledHeader = styled.div`
 const PageName = styled.div`
   font-size: 16px;
   font-weight: 500;
-  color: #40ac74;
+  color: ${({ theme }) => theme.colors.defaultGreen};
 `
 
 const Header = () => (

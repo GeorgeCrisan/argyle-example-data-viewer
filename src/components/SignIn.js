@@ -2,8 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Input from './Input'
 import Button from './Button'
-import Header from './Header'
-import Footer from './Footer'
+import PageWrapper from './PageWrapper'
 
 const StyledSignInPage = styled.div`
   margin: 0 auto;
@@ -20,7 +19,7 @@ const PageContent = styled.div`
 const Title = styled.h2`
   font-size: 25px;
   font-weight: 300;
-  color: #40ac74;
+  color: ${({ theme }) => theme.colors.defaultGreen};
   margin-bottom: 4.2rem;
 `
 
@@ -30,9 +29,8 @@ const StyledInput = styled(Input)`
   }
 `
 
-const SignInPage = ({ onInputChange, email, password, onSubmit }) => (
-  <>
-    <Header />
+const SignInPage = ({ onInputChange, clientId, clientSecret, onSubmit }) => (
+  <PageWrapper>
     <StyledSignInPage>
       <PageContent>
         <Title>Sign in to DataViewer</Title>
@@ -40,8 +38,8 @@ const SignInPage = ({ onInputChange, email, password, onSubmit }) => (
           <StyledInput
             label="Client ID"
             onChange={onInputChange}
-            value={email}
-            name="email"
+            value={clientId}
+            name="clientId"
             inputId="clientIdInput"
             type="text"
           />
@@ -49,18 +47,17 @@ const SignInPage = ({ onInputChange, email, password, onSubmit }) => (
             label="Client Secret"
             inputId="clientSecretInput"
             onChange={onInputChange}
-            value={password}
-            name="password"
-            type="password"
+            value={clientSecret}
+            name="clientSecret"
+            type="clientSecret"
           />
-          <Button type="submit" onClick={onSubmit} intent="primary">
+          <Button type="submit" onClick={onSubmit} arrowLeft>
             Continue
           </Button>
         </form>
       </PageContent>
     </StyledSignInPage>
-    <Footer />
-  </>
+  </PageWrapper>
 )
 
 export default SignInPage
