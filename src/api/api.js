@@ -26,11 +26,11 @@ class Api {
     })
   }
 
-  setAuthCredentials({ email, password }) {
+  setAuthCredentials({ clientId, clientSecret }) {
     Object.assign(this.api.defaults, {
       auth: {
-        username: email,
-        password
+        username: clientId,
+        password: clientSecret
       }
     })
   }
