@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import api from '../api/api'
-import UserList from '../components/UserList'
+import HomePage from '../components/HomePage'
 import firebase from '../helpers/firebase'
 
 class UserListContainer extends Component {
@@ -26,7 +26,7 @@ class UserListContainer extends Component {
 
   render() {
     const { users } = this.state
-    return <UserList users={users} />
+    return <HomePage users={users} />
   }
 }
 

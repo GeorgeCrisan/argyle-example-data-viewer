@@ -1,4 +1,4 @@
-export const signIn = ({ email, password }) => {
-  localStorage.setItem('clientID', email)
-  localStorage.setItem('clientSecret', password)
+export const signIn = ({ clientId, clientSecret }) => {
+  localStorage.setItem('clientID', clientId)
+  localStorage.setItem('clientSecret', clientSecret)
 }
