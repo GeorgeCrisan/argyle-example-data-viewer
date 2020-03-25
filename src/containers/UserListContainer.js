@@ -11,6 +11,9 @@ class UserListContainer extends Component {
   async componentDidMount() {
     const database = firebase.database()
     const results = await api.getUsers()
+    // const profilesResponse = await api.getProfiles(selectedAccount.id)
+
+    // console.log(results)
 
     let updatedUsers = []
 
@@ -18,6 +21,7 @@ class UserListContainer extends Component {
       database.ref(`user-details/${id}`).on('value', snapshot => {
         if (snapshot.val()) {
           updatedUsers.push(snapshot.val())
+          console.log(snapshot.val())
           this.setState({ users: updatedUsers })
         }
       })
