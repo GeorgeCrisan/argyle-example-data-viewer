@@ -11,9 +11,6 @@ class UserListContainer extends Component {
   async componentDidMount() {
     const database = firebase.database()
     const results = await api.getUsers()
-    // const profilesResponse = await api.getProfiles(selectedAccount.id)
-
-    // console.log(results)
 
     let updatedUsers = []
 
