@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Switch, Route, NavLink } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import PageWrapper from '../components/PageWrapper'
 import api from '../api/api'
 import Profiles from './ProfilesContainer'
@@ -112,34 +112,6 @@ const LeftNavigation = styled.div`
   box-shadow: 9px 75px 33px -5px rgba(0, 0, 0, 0.08);
 `
 
-const BackButton = styled.div`
-  padding: 2rem;
-  cursor: pointer;
-  font-size: 2.4rem;
-`
-
-const LeftNavItems = styled.div`
-  padding: 2rem;
-`
-
-const StyledNavLink = styled(NavLink)`
-  display: block;
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 1.8rem;
-  cursor: pointer;
-  margin-bottom: 0.8rem;
-  font-family: 'Roboto', sans-serif;
-
-  &.selected {
-    font-weight: 600;
-  }
-
-  &:hover {
-    text-decoration: none;
-    color: #86a9ad;
-  }
-`
-
 const StyledPageContent = styled.div`
   margin-top: 2rem;
 `
@@ -209,6 +181,8 @@ const NavigationContainer = ({ match, history }) => {
           accounts={accounts}
           selectAccount={selectAccount}
           selectedAccount={selectedAccount}
+          renderRoutes={renderRoutes}
+          userId={userId}
         />
       </StyledPageContent>
       {/* <NavItems>

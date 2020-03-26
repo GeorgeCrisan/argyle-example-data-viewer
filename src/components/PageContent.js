@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import CallMerge from '@material-ui/icons/CallMerge'
+import { NavLink } from 'react-router-dom'
 
 const StyledPageContent = styled.div`
   border-radius: 5px;
@@ -79,8 +80,52 @@ const StyledCallMerge = styled(CallMerge)`
   }
 `
 
-const PageContent = ({ routes, accounts, selectAccount, selectedAccount }) => {
+const Divider = styled.div`
+  width: 100%;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.05);
+`
+
+const Content = styled.div`
+  display: flex;
+`
+
+const LeftNavigation = styled.div`
+  background-color: rgba(244, 244, 244, 0.5);
+  padding-top: 2rem;
+  min-height: 50rem;
+`
+
+const StyledNavLink = styled(NavLink)`
+  display: block;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0.7rem 3rem;
+  min-width: 16rem;
+
+  &.selected {
+    font-weight: 500;
+    color: black;
+    background-color: rgba(217, 217, 217, 0.5);
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: #86a9ad;
+  }
+`
+
+const PageContent = ({
+  routes,
+  renderRoutes,
+  userId,
+  accounts,
+  selectAccount,
+  selectedAccount
+}) => {
   const combinedId = 'combined'
+
   return (
     <StyledPageContent>
       <NavItems>
@@ -108,6 +153,19 @@ const PageContent = ({ routes, accounts, selectAccount, selectedAccount }) => {
             </NavItem>
           ))}
       </NavItems>
+      <Divider />
+      <Content>
+        <LeftNavigation>
+          {renderRoutes(userId).map(
+            ({ path, navLinkName }) =>
+              navLinkName && (
+                <StyledNavLink key={path} to={path} activeClassName="selected">
+                  {navLinkName}
+                </StyledNavLink>
+              )
+          )}
+        </LeftNavigation>
+      </Content>
     </StyledPageContent>
   )
 }
