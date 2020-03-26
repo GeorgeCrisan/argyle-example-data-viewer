@@ -112,7 +112,7 @@ const StyledNavLink = styled(NavLink)`
 
   &:hover {
     text-decoration: none;
-    color: #86a9ad;
+    color: black;
   }
 `
 

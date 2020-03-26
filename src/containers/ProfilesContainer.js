@@ -5,7 +5,8 @@ import Spinner from '../components/Spinner'
 import Profile from '../components/Profile'
 
 const StyledSpinner = styled.div`
-  min-height: 20rem;
+  min-height: 30rem;
+  min-width: 50rem;
   display: flex;
   justify-content: center;
   align-items: center;

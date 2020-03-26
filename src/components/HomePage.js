@@ -76,7 +76,6 @@ const ButtonWrapper = styled.div`
 
 const HomePage = ({ history, users }) => {
   const [isTooltipOpen, toggleTooltip] = useState(false)
-  console.log(users)
 
   return (
     <PageWrapper showSignOutButton>

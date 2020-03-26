@@ -28,12 +28,7 @@ const renderRoutes = userId => [
   {
     path: `/user-data/${userId}/profiles`,
     component: Profiles,
-    navLinkName: 'Profiles'
-  },
-  {
-    path: `/user-data/${userId}/activities`,
-    component: Activities,
-    navLinkName: 'Activities'
+    navLinkName: 'Profile'
   },
   {
     path: `/user-data/${userId}/vehicles`,
@@ -46,19 +41,24 @@ const renderRoutes = userId => [
     navLinkName: 'Documents'
   },
   {
+    path: `/user-data/${userId}/reputations`,
+    component: Reputations,
+    navLinkName: 'Reputation'
+  },
+  {
+    path: `/user-data/${userId}/activities`,
+    component: Activities,
+    navLinkName: 'Activities'
+  },
+  {
     path: `/user-data/${userId}/incomes`,
     component: Incomes,
-    navLinkName: 'Incomes'
+    navLinkName: 'Income'
   },
   {
     path: `/user-data/${userId}/careers`,
     component: Careers,
-    navLinkName: 'Careers'
-  },
-  {
-    path: `/user-data/${userId}/reputations`,
-    component: Reputations,
-    navLinkName: 'Reputations'
+    navLinkName: 'Career'
   }
 ]
 
@@ -121,7 +121,6 @@ const NavigationContainer = ({ match, history }) => {
       )}
     />
   )
-  console.log(accounts, selectedAccount)
 
   return (
     <PageWrapper showSignOutButton userName={'Rachel Wallace'}>
