@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import NavigateNext from '@material-ui/icons/NavigateNext'
+import Add from '@material-ui/icons/Add'
 
 const StyledButton = styled.button`
   border: none;
@@ -15,6 +16,7 @@ const StyledButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
+  white-space: nowrap;
 
   text-decoration: none;
   border-radius: 4px;
@@ -25,7 +27,7 @@ const StyledButton = styled.button`
   }
 
   ${props =>
-    props.arrowLeft
+    props.leftIcon
       ? 'padding: 0.8rem 1.8rem 0.8rem 0.9rem;'
       : 'padding: 0.8rem 1.8rem;'}
 
@@ -38,9 +40,14 @@ const StyledNavigateNext = styled(NavigateNext)`
   margin-right: 5px;
 `
 
-const Button = ({ children, arrowLeft, disabled, href, ...rest }) => (
-  <StyledButton arrowLeft={arrowLeft} disabled={disabled} {...rest}>
+const StyledAddIcon = styled(Add)`
+  margin-right: 5px;
+`
+
+const Button = ({ children, arrowLeft, addIcon, disabled, ...rest }) => (
+  <StyledButton leftIcon={arrowLeft || addIcon} disabled={disabled} {...rest}>
     {arrowLeft && <StyledNavigateNext />}
+    {addIcon && <StyledAddIcon />}
     {children}
   </StyledButton>
 )

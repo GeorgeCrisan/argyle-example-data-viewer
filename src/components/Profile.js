@@ -5,11 +5,15 @@ const StyledProfile = styled.div`
   display: flex;
 `
 
-const Image = styled.img`
-  width: 150px;
-  height: 150px;
-  margin-bottom: 10px;
-  margin-right: 20px;
+const Image = styled.div`
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-right: 4rem;
+  background-image: ${({ image }) => `url(${image})`};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `
 
 const ProfileDetails = styled.div``
@@ -17,31 +21,27 @@ const ProfileDetails = styled.div``
 const DetailWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
 `
 
 const DetailLabel = styled.div`
-  font-size: 24px;
-  font-weight: 500;
-  margin-right: 1rem;
+  font-size: 1.6rem;
+  margin-right: 3rem;
+  color: rgba(0, 0, 0, 0.4);
+  min-width: 10.4rem;
 `
 
 const Detail = styled.div`
-  font-size: 24px;
+  font-size: 1.6rem;
 `
 
 const Name = styled.h3`
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: bold;
-  font-size: 32px;
+  font-size: 3rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
 `
 
-const renderProfileDetails = ({
-  image,
-  fullName,
-  email,
-  phoneNumber,
-  address
-}) => [
+const renderProfileDetails = ({ email, phoneNumber, address }) => [
   {
     label: 'Email',
     value: email
@@ -78,12 +78,10 @@ const renderProfileDetails = ({
 
 const Profile = ({ image, fullName, email, phoneNumber, address }) => (
   <StyledProfile>
-    <Image src={image} />
+    <Image image={image} />
     <ProfileDetails>
       <Name>{fullName}</Name>
       {renderProfileDetails({
-        image,
-        fullName,
         email,
         phoneNumber,
         address
