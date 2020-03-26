@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
-import Spinner from './Spinner'
 import PageWrapper from './PageWrapper'
 import Button from './Button'
 import Tooltip from './Tooltip'
@@ -37,13 +36,6 @@ const Email = styled.div`
   color: rgba(0, 0, 0, 0.4);
 `
 
-const StyledSpinner = styled.div`
-  min-height: 50rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
 const PageContent = styled.div`
   margin: 0 auto;
   max-width: 70rem;
@@ -74,7 +66,7 @@ const ButtonWrapper = styled.div`
   overflow: visible;
 `
 
-const HomePage = ({ history, users }) => {
+const HomePage = ({ users }) => {
   const [isTooltipOpen, toggleTooltip] = useState(false)
 
   return (
