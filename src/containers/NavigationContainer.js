@@ -62,56 +62,6 @@ const renderRoutes = userId => [
   }
 ]
 
-const TopNavigation = styled.div`
-  height: 60px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 3px -1px 33px -5px rgba(0, 0, 0, 0.12);
-`
-
-const SignOutButton = styled.button`
-  margin-right: 2rem;
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  background-color: white;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.4rem;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-`
-
-const AccountsTitle = styled.div`
-  font-size: 2.8rem;
-`
-
-const Content = styled.div`
-  height: 100%;
-  background-color: white;
-  margin: 8rem 2rem 2rem 27rem;
-  padding: 2rem;
-`
-
-const LeftNavigation = styled.div`
-  background-color: white;
-  width: 25rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 2;
-  box-shadow: 9px 75px 33px -5px rgba(0, 0, 0, 0.08);
-`
-
 const StyledPageContent = styled.div`
   margin-top: 2rem;
 `
@@ -185,35 +135,6 @@ const NavigationContainer = ({ match, history }) => {
           userId={userId}
         />
       </StyledPageContent>
-      {/* <NavItems>
-        {!accounts.length ? (
-          <AccountsTitle>No Accounts connected</AccountsTitle>
-        ) : (
-          accounts.map(({ id, data_partner }) => (
-            <NavItem
-              active={selectedAccount.id === id}
-              onClick={() => selectAccount(id)}
-              key={id}
-            >
-              <DataPartnerLogo
-                alt={data_partner}
-                src={`https://res.cloudinary.com/argyle-media/image/upload/c_lfill,w_auto,g_auto,q_auto,dpr_auto,f_auto/v1566809938/partner-logos/${data_partner}.png`}
-              />
-              <PartnerName>{data_partner}</PartnerName>
-            </NavItem>
-          ))
-        )}
-      </NavItems>
-      <LeftNavigation>
-        <LeftNavItems>
-          {renderRoutes(userId).map(({ path, navLinkName }) => (
-            <StyledNavLink key={path} to={path} activeClassName="selected">
-              {navLinkName}
-            </StyledNavLink>
-          ))}
-        </LeftNavItems>
-      </LeftNavigation>
-      <Content>{getRoutes()}</Content> */}
     </PageWrapper>
   )
 }

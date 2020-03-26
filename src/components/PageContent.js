@@ -116,6 +116,10 @@ const StyledNavLink = styled(NavLink)`
   }
 `
 
+const RoutesWrapper = styled.div`
+  padding: 4rem;
+`
+
 const PageContent = ({
   routes,
   renderRoutes,
@@ -165,6 +169,7 @@ const PageContent = ({
               )
           )}
         </LeftNavigation>
+        <RoutesWrapper>{routes}</RoutesWrapper>
       </Content>
     </StyledPageContent>
   )
