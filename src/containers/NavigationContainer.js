@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Switch, Route, NavLink } from 'react-router-dom'
+import PageWrapper from '../components/PageWrapper'
 import api from '../api/api'
 import Profiles from './ProfilesContainer'
 import Activities from './ActivitiesContainer'
@@ -10,6 +11,7 @@ import Incomes from './IncomesContainer'
 import Careers from './CareersContainer'
 import Reputations from './ReputationsContainer'
 import Spinner from '../components/Spinner'
+import PageContent from '../components/PageContent'
 
 const StyledSpinner = styled.div`
   min-height: 50rem;
@@ -74,12 +76,6 @@ const TopNavigation = styled.div`
   box-shadow: 3px -1px 33px -5px rgba(0, 0, 0, 0.12);
 `
 
-const NavItems = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 25rem;
-`
-
 const SignOutButton = styled.button`
   margin-right: 2rem;
   padding: 1rem 2rem;
@@ -92,30 +88,6 @@ const SignOutButton = styled.button`
   &:focus {
     outline: none;
   }
-`
-
-const NavItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-left: 3rem;
-  padding: 0.7rem;
-  ${({ active }) =>
-    active
-      ? 'border-bottom: 5px solid #86a9ad;'
-      : 'border-bottom: 5px solid white;'}
-`
-
-const DataPartnerLogo = styled.img`
-  width: 32px;
-  height: 32px;
-  margin-right: 15px;
-`
-
-const PartnerName = styled.span`
-  font-size: 3.2rem;
-  font-weight: 500;
 `
 
 const AccountsTitle = styled.div`
@@ -166,6 +138,10 @@ const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     color: #86a9ad;
   }
+`
+
+const StyledPageContent = styled.div`
+  margin-top: 2rem;
 `
 
 const NavigationContainer = ({ match, history }) => {
@@ -223,41 +199,38 @@ const NavigationContainer = ({ match, history }) => {
       )}
     />
   )
+  console.log(accounts, selectedAccount)
 
   return (
-    <div>
-      <TopNavigation>
-        <NavItems>
-          {!accounts.length ? (
-            <AccountsTitle>No Accounts connected</AccountsTitle>
-          ) : (
-            accounts.map(({ id, data_partner }) => (
-              <NavItem
-                active={selectedAccount.id === id}
-                onClick={() => selectAccount(id)}
-                key={id}
-              >
-                <DataPartnerLogo
-                  alt={data_partner}
-                  src={`https://res.cloudinary.com/argyle-media/image/upload/c_lfill,w_auto,g_auto,q_auto,dpr_auto,f_auto/v1566809938/partner-logos/${data_partner}.png`}
-                />
-                <PartnerName>{data_partner}</PartnerName>
-              </NavItem>
-            ))
-          )}
-        </NavItems>
-        <SignOutButton
-          onClick={() => {
-            localStorage.removeItem('clientID')
-            localStorage.removeItem('clientSecret')
-            history.push('/sign-in')
-          }}
-        >
-          Sign Out
-        </SignOutButton>
-      </TopNavigation>
+    <PageWrapper showSignOutButton userName={'Rachel Wallace'}>
+      <StyledPageContent>
+        <PageContent
+          routes={getRoutes()}
+          accounts={accounts}
+          selectAccount={selectAccount}
+          selectedAccount={selectedAccount}
+        />
+      </StyledPageContent>
+      {/* <NavItems>
+        {!accounts.length ? (
+          <AccountsTitle>No Accounts connected</AccountsTitle>
+        ) : (
+          accounts.map(({ id, data_partner }) => (
+            <NavItem
+              active={selectedAccount.id === id}
+              onClick={() => selectAccount(id)}
+              key={id}
+            >
+              <DataPartnerLogo
+                alt={data_partner}
+                src={`https://res.cloudinary.com/argyle-media/image/upload/c_lfill,w_auto,g_auto,q_auto,dpr_auto,f_auto/v1566809938/partner-logos/${data_partner}.png`}
+              />
+              <PartnerName>{data_partner}</PartnerName>
+            </NavItem>
+          ))
+        )}
+      </NavItems>
       <LeftNavigation>
-        <BackButton onClick={() => history.push('/')}>Go Back</BackButton>
         <LeftNavItems>
           {renderRoutes(userId).map(({ path, navLinkName }) => (
             <StyledNavLink key={path} to={path} activeClassName="selected">
@@ -266,8 +239,8 @@ const NavigationContainer = ({ match, history }) => {
           ))}
         </LeftNavItems>
       </LeftNavigation>
-      <Content>{getRoutes()}</Content>
-    </div>
+      <Content>{getRoutes()}</Content> */}
+    </PageWrapper>
   )
 }
 

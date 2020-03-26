@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import NavigateNext from '@material-ui/icons/NavigateNext'
 import { withRouter } from 'react-router-dom'
 
 const StyledHeader = styled.div`
@@ -12,6 +13,7 @@ const PageName = styled.div`
   font-size: 16px;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.defaultGreen};
+  cursor: pointer;
 `
 
 const SignOutButton = styled.button`
@@ -28,7 +30,25 @@ const SignOutButton = styled.button`
   }
 `
 
-const Header = ({ showSignOutButton = false, history }) => {
+const NameWrapper = styled.div`
+  display: flex;
+`
+
+const StyledNavigateNext = styled(NavigateNext)`
+  && {
+    color: rgba(0, 0, 0, 0.2);
+    width: 18px;
+    height: 18px;
+    margin: 2px 10px;
+  }
+`
+
+const UserName = styled.div`
+  font-size: 1.6rem;
+  font-weight: 500;
+`
+
+const Header = ({ history, showSignOutButton = false, userName = null }) => {
   const signOut = () => {
     localStorage.removeItem('clientID')
     localStorage.removeItem('clientSecret')
@@ -37,7 +57,16 @@ const Header = ({ showSignOutButton = false, history }) => {
 
   return (
     <StyledHeader>
-      <PageName>DataViewer</PageName>
+      <NameWrapper>
+        <PageName onClick={() => history.push('/')}>DataViewer</PageName>
+        {userName && (
+          <>
+            <StyledNavigateNext />
+            <UserName>{userName}</UserName>
+          </>
+        )}
+      </NameWrapper>
+
       {showSignOutButton && (
         <SignOutButton onClick={signOut}>Sign Out</SignOutButton>
       )}
