@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
+import ArrowForward from '@material-ui/icons/ArrowForward'
 import PageWrapper from './PageWrapper'
 import Button from './Button'
 import Tooltip from './Tooltip'
@@ -18,6 +19,10 @@ const UserCard = styled.a`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &:hover {
+    text-decoration: none;
+  }
 `
 
 const Details = styled.div`
@@ -29,6 +34,12 @@ const Name = styled.div`
   font-size: 1.6rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.8);
+  min-width: 12rem;
+  margin-right: 5rem;
+
+  ${UserCard}:hover & {
+    color: ${({ theme }) => theme.colors.defaultGreen};
+  }
 `
 
 const Email = styled.div`
@@ -66,6 +77,28 @@ const ButtonWrapper = styled.div`
   overflow: visible;
 `
 
+const StyledArrowForward = styled(ArrowForward)`
+  && {
+    width: 18px;
+    height: 18px;
+    color: #999999;
+
+    ${UserCard}:hover & {
+      color: ${({ theme }) => theme.colors.defaultGreen};
+    }
+  }
+`
+
+const ArrowWrapper = styled.div`
+  background-color: #f5f5f5;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const HomePage = ({ users }) => {
   const [isTooltipOpen, toggleTooltip] = useState(false)
 
@@ -95,10 +128,12 @@ const HomePage = ({ users }) => {
                 bottom={i === users.length - 1}
               >
                 <Details>
-                  <Name>{user.email}</Name>
+                  <Name>{user.fullName}</Name>
                   <Email>{user.email}</Email>
                 </Details>
-                <div>arrow</div>
+                <ArrowWrapper>
+                  <StyledArrowForward />
+                </ArrowWrapper>
               </UserCard>
             ))}
           </PageContent>
