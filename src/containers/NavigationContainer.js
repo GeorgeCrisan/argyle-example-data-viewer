@@ -133,6 +133,7 @@ const NavigationContainer = ({ match, location }) => {
           selectedAccount={selectedAccount}
           renderRoutes={renderRoutes}
           userId={userId}
+          fullName={fullName}
         />
       </StyledPageContent>
     </PageWrapper>
