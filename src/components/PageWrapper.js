@@ -9,9 +9,13 @@ const StyledPageWrapper = styled.div`
   height: 100%;
 `
 
-const PageWrapper = ({ children, showSignOutButton, userName }) => (
+const PageWrapper = ({ children, showSignOutButton, userName, purple }) => (
   <StyledPageWrapper>
-    <Header showSignOutButton={showSignOutButton} userName={userName} />
+    <Header
+      showSignOutButton={showSignOutButton}
+      userName={userName}
+      purple={purple}
+    />
     {children}
     <Footer />
   </StyledPageWrapper>

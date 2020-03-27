@@ -135,7 +135,7 @@ const PageContent = ({
       <NavItems>
         <NavItem
           active={selectedAccount.id === combinedId}
-          onClick={() => selectAccount({ id: combinedId })}
+          onClick={() => selectAccount({ id: combinedId, userId })}
         >
           <IconWrapper>
             <StyledCallMerge />

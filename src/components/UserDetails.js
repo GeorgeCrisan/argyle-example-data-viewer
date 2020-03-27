@@ -33,7 +33,7 @@ const StyledInput = styled(Input)`
 `
 
 const UserDetails = ({ onInputChange, email, fullName, onSubmit }) => (
-  <PageWrapper>
+  <PageWrapper purple>
     <StyledUserDetails>
       <Title>Add your work accounts</Title>
       <Subtitle>
