@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import PageWrapper from './PageWrapper'
 import Button from './Button'
 import Tooltip from './Tooltip'
 
-const UserCard = styled.a`
+const SanitizedLink = ({ top, bottom, ...rest }) => <Link {...rest} />
+
+const UserCard = styled(SanitizedLink)`
   display: block;
   ${({ top }) => top && 'border-radius: 5px 5px 0 0;'}
   ${({ bottom }) =>
@@ -122,7 +124,10 @@ const HomePage = ({ users }) => {
 
             {users.map((user, i) => (
               <UserCard
-                href={`/user-data/${user.userId}/profiles`}
+                to={{
+                  pathname: `/user-data/${user.userId}/profiles`,
+                  state: { fullName: user.fullName }
+                }}
                 key={user.userId + user.email}
                 top={i === 0}
                 bottom={i === users.length - 1}
