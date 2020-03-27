@@ -13,8 +13,10 @@ const StyledFormControl = styled(FormControl)`
     }
   }
 `
+const SanitizedInputLabel = ({ purple, ...rest }) => <InputLabel {...rest} />
+const SanitizedInput = ({ purple, ...rest }) => <MaterialInput {...rest} />
 
-const StyledInputLabel = styled(InputLabel)`
+const StyledInputLabel = styled(SanitizedInputLabel)`
   && {
     color: rgba(0, 0, 0, 0.4);
     font-size: 1.6rem;
@@ -26,12 +28,13 @@ const StyledInputLabel = styled(InputLabel)`
     }
 
     &.Mui-focused {
-      color: ${({ theme }) => theme.colors.defaultGreen};
+      color: ${({ theme, purple }) =>
+        purple ? theme.colors.purple : theme.colors.defaultGreen};
     }
   }
 `
 
-const StyledInput = styled(MaterialInput)`
+const StyledInput = styled(SanitizedInput)`
   && {
     margin-top: 0.8rem;
     margin-bottom: 0.2rem;
@@ -45,18 +48,35 @@ const StyledInput = styled(MaterialInput)`
     &.MuiInput-underline:before {
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
+
     &.MuiInput-underline:after {
-      border-bottom: 1px solid ${({ theme }) => theme.colors.defaultGreen};
+      border-bottom: 1px solid
+        ${({ theme, purple }) =>
+          purple ? theme.colors.purple : theme.colors.defaultGreen};
     }
+
     &.MuiInput-underline:hover:not(.Mui-disabled):before {
-      border-bottom: 1px solid ${({ theme }) => theme.colors.defaultGreen};
+      border-bottom: 1px solid
+        ${({ theme, purple }) =>
+          purple ? theme.colors.purple : theme.colors.defaultGreen};
     }
   }
 `
 
-const Input = ({ value, name, inputId, onChange, label, type, ...props }) => (
+const Input = ({
+  value,
+  name,
+  inputId,
+  onChange,
+  label,
+  type,
+  purple = false,
+  ...props
+}) => (
   <StyledFormControl>
-    <StyledInputLabel htmlFor={inputId}>{label}</StyledInputLabel>
+    <StyledInputLabel purple={purple} htmlFor={inputId}>
+      {label}
+    </StyledInputLabel>
     <StyledInput
       {...props}
       name={name}
@@ -64,6 +84,7 @@ const Input = ({ value, name, inputId, onChange, label, type, ...props }) => (
       onChange={onChange}
       id={inputId}
       type={type}
+      purple={purple}
     />
   </StyledFormControl>
 )

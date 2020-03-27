@@ -4,7 +4,8 @@ import firebase from '../helpers/firebase'
 
 class UserDetailsContainer extends Component {
   state = {
-    email: ''
+    email: '',
+    fullName: ''
   }
 
   componentDidMount() {
@@ -28,17 +29,18 @@ class UserDetailsContainer extends Component {
 
   onSubmit = e => {
     e.preventDefault()
-    const { email } = this.state
+    const { email, fullName } = this.state
     const database = firebase.database()
     const uid = localStorage.getItem('uid')
 
-    if (!email) return
+    if (!email && !fullName) return
 
     window.initArgyle().open()
     window.userCreated = ({ userToken, userId }) => {
       database.ref(`user-details/${userId}`).set({
         uid,
         email,
+        fullName,
         userId,
         userToken
       })
@@ -46,13 +48,14 @@ class UserDetailsContainer extends Component {
   }
 
   render() {
-    const { email } = this.state
+    const { email, fullName } = this.state
 
     return (
       <UserDetails
         onInputChange={this.onInputChange}
         onSubmit={this.onSubmit}
         email={email}
+        fullName={fullName}
       />
     )
   }
