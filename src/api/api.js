@@ -45,6 +45,11 @@ class Api {
     return resp.data.results
   }
 
+  async getAccount(accountId) {
+    const resp = await this.api.get(`/accounts/${accountId}`)
+    return resp.data
+  }
+
   async getAccounts(userId) {
     const resp = await this.api.get('/accounts', {
       params: {
@@ -82,12 +87,14 @@ class Api {
     return resp.data.results
   }
 
-  async getVehicles(accountId) {
+  async getVehicles({ accountId, userId }) {
+    const idObj = accountId ? { account: accountId } : { user: userId }
+
     const resp = await this.api.get('/vehicles', {
       params: {
         limit: 100,
         ordering: '-created_at',
-        account: accountId
+        ...idObj
       }
     })
     return resp.data.results

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import api from '../api/api'
-import Table from '../components/Table'
 import Spinner from '../components/Spinner'
+import Vehicles from '../components/Vehicles'
 
 const StyledSpinner = styled.div`
-  min-height: 20rem;
+  min-height: 30rem;
+  min-width: 50rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,15 +24,32 @@ const VehiclesContainer = ({ selectedAccount }) => {
   useEffect(() => {
     const fetchVehicles = async () => {
       setLoading(true)
-      const response = await api.getVehicles(selectedAccount.id)
+
+      const response =
+        selectedAccount.id === 'combined'
+          ? await api.getVehicles({
+              userId: selectedAccount.userId
+            })
+          : await api.getVehicles({
+              accountId: selectedAccount.id
+            })
+
       if (!response.length) {
         setError(true)
       }
-      setVehicles(response)
+
+      const accounts = await Promise.all(
+        response.map(async vehicle => {
+          const account = await api.getAccount(vehicle.account)
+          return { ...vehicle, ...account }
+        })
+      )
+
+      setVehicles(accounts)
       setLoading(false)
     }
     fetchVehicles()
-  }, [selectedAccount.id])
+  }, [selectedAccount.id, selectedAccount.userId])
 
   if (isLoading)
     return (
@@ -48,18 +66,9 @@ const VehiclesContainer = ({ selectedAccount }) => {
     )
   }
 
-  return (
-    <Table
-      headerItems={['Make', 'Model', 'Year', 'Identification']}
-      items={vehicles.map(({ id, make, model, year, identification }) => ({
-        id,
-        make,
-        model,
-        year,
-        identification
-      }))}
-    />
-  )
+  if (!vehicles.length) return null
+
+  return <Vehicles vehicles={vehicles} />
 }
 
 export default VehiclesContainer

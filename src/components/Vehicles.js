@@ -1,0 +1,81 @@
+import React from 'react'
+import styled from 'styled-components'
+import { DirectionsCar, DirectionsBike } from '@material-ui/icons'
+
+const StyledVehicles = styled.div``
+
+const StyledVehicle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(249, 249, 249, 0.9);
+  padding: 1.5rem 2rem;
+  width: 53rem;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+`
+
+const Details = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const VehicleIcon = styled.div`
+  margin-right: 2rem;
+
+  svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: #0000004d;
+  }
+`
+
+const Name = styled.div`
+  font-size: 1.6rem;
+  font-weight: 500;
+`
+
+const PlateNumber = styled.span`
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.4);
+  margin-left: 0.5rem;
+`
+
+const DataPartnerIcon = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+`
+
+const Vehicles = ({ vehicles }) => (
+  <StyledVehicles>
+    {vehicles.map(
+      ({ id, model, year, identification, type, data_partner }, i) => {
+        if (!model && !type) return null
+
+        return (
+          <StyledVehicle key={id + i}>
+            <Details>
+              <VehicleIcon>
+                {type === 'bicycle' ? <DirectionsBike /> : <DirectionsCar />}
+              </VehicleIcon>
+              <Name>
+                {type === 'car' && model
+                  ? `${model} ${year}`
+                  : type.charAt(0).toUpperCase() + type.substring(1)}
+                <PlateNumber>{identification}</PlateNumber>
+              </Name>
+            </Details>
+            <DataPartnerIcon
+              alt={data_partner}
+              src={`https://res.cloudinary.com/argyle-media/image/upload/c_lfill,w_auto,g_auto,q_auto,dpr_auto,f_auto/v1566809938/partner-logos/${data_partner}.png`}
+            />
+          </StyledVehicle>
+        )
+      }
+    )}
+  </StyledVehicles>
+)
+
+export default Vehicles
