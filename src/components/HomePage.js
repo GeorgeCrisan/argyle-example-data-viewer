@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
+import ArrowForward from '@material-ui/icons/ArrowForward'
 import PageWrapper from './PageWrapper'
 import Button from './Button'
 import Tooltip from './Tooltip'
 
-const UserCard = styled.a`
+const SanitizedLink = ({ top, bottom, ...rest }) => <Link {...rest} />
+
+const UserCard = styled(SanitizedLink)`
   display: block;
   ${({ top }) => top && 'border-radius: 5px 5px 0 0;'}
   ${({ bottom }) =>
@@ -18,6 +21,10 @@ const UserCard = styled.a`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &:hover {
+    text-decoration: none;
+  }
 `
 
 const Details = styled.div`
@@ -29,6 +36,12 @@ const Name = styled.div`
   font-size: 1.6rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.8);
+  min-width: 12rem;
+  margin-right: 5rem;
+
+  ${UserCard}:hover & {
+    color: ${({ theme }) => theme.colors.defaultGreen};
+  }
 `
 
 const Email = styled.div`
@@ -66,6 +79,28 @@ const ButtonWrapper = styled.div`
   overflow: visible;
 `
 
+const StyledArrowForward = styled(ArrowForward)`
+  && {
+    width: 18px;
+    height: 18px;
+    color: #999999;
+
+    ${UserCard}:hover & {
+      color: ${({ theme }) => theme.colors.defaultGreen};
+    }
+  }
+`
+
+const ArrowWrapper = styled.div`
+  background-color: #f5f5f5;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const HomePage = ({ users }) => {
   const [isTooltipOpen, toggleTooltip] = useState(false)
 
@@ -89,16 +124,21 @@ const HomePage = ({ users }) => {
 
             {users.map((user, i) => (
               <UserCard
-                href={`/user-data/${user.userId}/profiles`}
+                to={{
+                  pathname: `/user-data/${user.userId}/profiles`,
+                  state: { fullName: user.fullName }
+                }}
                 key={user.userId + user.email}
                 top={i === 0}
                 bottom={i === users.length - 1}
               >
                 <Details>
-                  <Name>{user.email}</Name>
+                  <Name>{user.fullName}</Name>
                   <Email>{user.email}</Email>
                 </Details>
-                <div>arrow</div>
+                <ArrowWrapper>
+                  <StyledArrowForward />
+                </ArrowWrapper>
               </UserCard>
             ))}
           </PageContent>

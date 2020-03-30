@@ -68,12 +68,14 @@ class Api {
     return resp.data.results
   }
 
-  async getProfiles(accountId) {
+  async getProfiles({ accountId, userId }) {
+    const idObj = accountId ? { account: accountId } : { user: userId }
+
     const resp = await this.api.get('/profiles', {
       params: {
         limit: 100,
         ordering: '-created_at',
-        account: accountId
+        ...idObj
       }
     })
 

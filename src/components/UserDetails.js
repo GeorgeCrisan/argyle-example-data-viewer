@@ -1,48 +1,70 @@
 import React from 'react'
 import styled from 'styled-components'
-import { InputGroup, Button, Card, Elevation } from '@blueprintjs/core'
+import Input from './Input'
+import Button from './Button'
+import PageWrapper from './PageWrapper'
 
 const StyledUserDetails = styled.div`
-  margin: 10rem auto;
-  max-width: 60rem;
+  margin: 19.3rem auto 10rem auto;
+  max-width: 70rem;
 `
 
 const Title = styled.h1`
-  margin-bottom: 3rem;
-  color: #0f6ba3;
+  font-size: 4.5rem;
   font-weight: 500;
-  font-size: 3.6rem;
+  margin-bottom: 1.4rem;
 `
 
-const StyledInput = styled(InputGroup)`
-  margin-bottom: 3rem;
+const Subtitle = styled.h3`
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #794ed0;
+  margin-bottom: 4.4rem;
 `
 
-const StyledButton = styled(Button)`
-  &:focus {
-    outline: none;
+const StyledForm = styled.form`
+  max-width: 40rem;
+`
+
+const StyledInput = styled(Input)`
+  && {
+    margin-bottom: 3rem;
   }
 `
 
-const UserDetails = ({ onInputChange, email, onSubmit }) => (
-  <StyledUserDetails>
-    <Card interactive={true} elevation={Elevation.TWO}>
-      <Title>Connect your account</Title>
-      <StyledInput
-        disabled={false}
-        large={true}
-        placeholder="Email"
-        small={false}
-        onChange={onInputChange}
-        value={email}
-        name="email"
-      />
+const UserDetails = ({ onInputChange, email, fullName, onSubmit }) => (
+  <PageWrapper purple>
+    <StyledUserDetails>
+      <Title>Add your work accounts</Title>
+      <Subtitle>
+        You’ve been invited to add your work accounts to DataViewer.
+      </Subtitle>
+      <StyledForm onSubmit={onSubmit}>
+        <StyledInput
+          label="Full Name"
+          inputId="fullNameUserDetails"
+          onChange={onInputChange}
+          value={fullName}
+          name="fullName"
+          type="text"
+          purple
+        />
+        <StyledInput
+          label="Email"
+          onChange={onInputChange}
+          value={email}
+          name="email"
+          inputId="emailUserDetails"
+          type="email"
+          purple
+        />
 
-      <StyledButton onClick={onSubmit} intent="primary">
-        Open Plugin
-      </StyledButton>
-    </Card>
-  </StyledUserDetails>
+        <Button type="submit" onClick={onSubmit} addIcon purple>
+          Add work accounts
+        </Button>
+      </StyledForm>
+    </StyledUserDetails>
+  </PageWrapper>
 )
 
 export default UserDetails

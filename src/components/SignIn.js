@@ -17,7 +17,7 @@ const PageContent = styled.div`
 `
 
 const Title = styled.h2`
-  font-size: 25px;
+  font-size: 2.5rem;
   font-weight: 300;
   color: ${({ theme }) => theme.colors.defaultGreen};
   margin-bottom: 4.2rem;
@@ -49,7 +49,7 @@ const SignInPage = ({ onInputChange, clientId, clientSecret, onSubmit }) => (
             onChange={onInputChange}
             value={clientSecret}
             name="clientSecret"
-            type="clientSecret"
+            type="password"
           />
           <Button type="submit" onClick={onSubmit} arrowLeft>
             Continue

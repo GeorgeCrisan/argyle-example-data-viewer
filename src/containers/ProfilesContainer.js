@@ -28,7 +28,14 @@ const ProfilesContainer = ({ selectedAccount }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       setLoading(true)
-      const profilesResponse = await api.getProfiles(selectedAccount.id)
+      const profilesResponse =
+        selectedAccount.id === 'combined'
+          ? await api.getProfiles({
+              userId: selectedAccount.userId
+            })
+          : await api.getProfiles({
+              accountId: selectedAccount.id
+            })
       if (!profilesResponse.length) {
         setError(true)
       }
@@ -37,7 +44,7 @@ const ProfilesContainer = ({ selectedAccount }) => {
       setProfiles(profilesResponse)
     }
     fetchProfile()
-  }, [selectedAccount.id])
+  }, [selectedAccount.id, selectedAccount.userId])
 
   if (!profiles || isLoading)
     return (

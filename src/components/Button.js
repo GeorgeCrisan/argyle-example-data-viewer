@@ -6,7 +6,8 @@ import Add from '@material-ui/icons/Add'
 const StyledButton = styled.button`
   border: none;
   outline: none;
-  background-color: ${({ theme }) => theme.colors.defaultGreen};
+  background-color: ${({ theme, purple }) =>
+    purple ? theme.colors.purple : theme.colors.defaultGreen};
   color: white;
   box-sizing: border-box;
   font-size: 1.6rem;
@@ -44,8 +45,20 @@ const StyledAddIcon = styled(Add)`
   margin-right: 5px;
 `
 
-const Button = ({ children, arrowLeft, addIcon, disabled, ...rest }) => (
-  <StyledButton leftIcon={arrowLeft || addIcon} disabled={disabled} {...rest}>
+const Button = ({
+  children,
+  arrowLeft,
+  addIcon,
+  purple = false,
+  disabled,
+  ...rest
+}) => (
+  <StyledButton
+    purple={purple}
+    leftIcon={arrowLeft || addIcon}
+    disabled={disabled}
+    {...rest}
+  >
     {arrowLeft && <StyledNavigateNext />}
     {addIcon && <StyledAddIcon />}
     {children}

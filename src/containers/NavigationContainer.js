@@ -66,7 +66,8 @@ const StyledPageContent = styled.div`
   margin-top: 2rem;
 `
 
-const NavigationContainer = ({ match, history }) => {
+const NavigationContainer = ({ match, location }) => {
+  const { fullName } = location.state
   const { userId } = match.params
   const [accounts, setAccounts] = useState([])
   const [selectedAccount, selectAccount] = useState({})
@@ -123,7 +124,7 @@ const NavigationContainer = ({ match, history }) => {
   )
 
   return (
-    <PageWrapper showSignOutButton userName={'Rachel Wallace'}>
+    <PageWrapper showSignOutButton userName={fullName}>
       <StyledPageContent>
         <PageContent
           routes={getRoutes()}
@@ -132,6 +133,7 @@ const NavigationContainer = ({ match, history }) => {
           selectedAccount={selectedAccount}
           renderRoutes={renderRoutes}
           userId={userId}
+          fullName={fullName}
         />
       </StyledPageContent>
     </PageWrapper>

@@ -126,7 +126,8 @@ const PageContent = ({
   userId,
   accounts,
   selectAccount,
-  selectedAccount
+  selectedAccount,
+  fullName
 }) => {
   const combinedId = 'combined'
 
@@ -135,7 +136,7 @@ const PageContent = ({
       <NavItems>
         <NavItem
           active={selectedAccount.id === combinedId}
-          onClick={() => selectAccount({ id: combinedId })}
+          onClick={() => selectAccount({ id: combinedId, userId })}
         >
           <IconWrapper>
             <StyledCallMerge />
@@ -163,7 +164,14 @@ const PageContent = ({
           {renderRoutes(userId).map(
             ({ path, navLinkName }) =>
               navLinkName && (
-                <StyledNavLink key={path} to={path} activeClassName="selected">
+                <StyledNavLink
+                  key={path}
+                  to={{
+                    pathname: path,
+                    state: { fullName }
+                  }}
+                  activeClassName="selected"
+                >
                   {navLinkName}
                 </StyledNavLink>
               )

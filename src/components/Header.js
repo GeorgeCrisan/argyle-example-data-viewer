@@ -12,7 +12,8 @@ const StyledHeader = styled.div`
 const PageName = styled.div`
   font-size: 16px;
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.defaultGreen};
+  color: ${({ theme, purple }) =>
+    purple ? theme.colors.purple : theme.colors.defaultGreen};
   cursor: pointer;
 `
 
@@ -48,7 +49,12 @@ const UserName = styled.div`
   font-weight: 500;
 `
 
-const Header = ({ history, showSignOutButton = false, userName = null }) => {
+const Header = ({
+  history,
+  showSignOutButton = false,
+  userName = null,
+  purple = false
+}) => {
   const signOut = () => {
     localStorage.removeItem('clientID')
     localStorage.removeItem('clientSecret')
@@ -58,7 +64,9 @@ const Header = ({ history, showSignOutButton = false, userName = null }) => {
   return (
     <StyledHeader>
       <NameWrapper>
-        <PageName onClick={() => history.push('/')}>DataViewer</PageName>
+        <PageName purple={purple} onClick={() => history.push('/')}>
+          DataViewer
+        </PageName>
         {userName && (
           <>
             <StyledNavigateNext />
