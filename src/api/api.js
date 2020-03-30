@@ -100,12 +100,14 @@ class Api {
     return resp.data.results
   }
 
-  async getDocuments(accountId) {
+  async getDocuments({ accountId, userId }) {
+    const idObj = accountId ? { account: accountId } : { user: userId }
+
     const resp = await this.api.get('/documents', {
       params: {
         limit: 100,
         ordering: '-created_at',
-        account: accountId
+        ...idObj
       }
     })
     return resp.data.results

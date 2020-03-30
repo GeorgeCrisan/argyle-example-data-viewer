@@ -36,10 +36,8 @@ const ProfilesContainer = ({ selectedAccount }) => {
           : await api.getProfiles({
               accountId: selectedAccount.id
             })
-      if (!profilesResponse.length) {
-        setError(true)
-      }
 
+      setError(!profilesResponse.length)
       setLoading(false)
       setProfiles(profilesResponse)
     }

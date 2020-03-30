@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { DirectionsCar, DirectionsBike } from '@material-ui/icons'
+import { firstWordToUpperCase } from '../helpers'
 
 const StyledVehicles = styled.div``
 
@@ -63,7 +64,7 @@ const Vehicles = ({ vehicles }) => (
               <Name>
                 {type === 'car' && model
                   ? `${model} ${year}`
-                  : type.charAt(0).toUpperCase() + type.substring(1)}
+                  : firstWordToUpperCase(type)}
                 <PlateNumber>{identification}</PlateNumber>
               </Name>
             </Details>

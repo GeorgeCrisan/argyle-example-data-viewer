@@ -14,3 +14,6 @@ export const copyStringToClipboard = str => {
   // Remove temporary element
   document.body.removeChild(el)
 }
+
+export const firstWordToUpperCase = str =>
+  str.charAt(0).toUpperCase() + str.substring(1)

@@ -34,9 +34,7 @@ const VehiclesContainer = ({ selectedAccount }) => {
               accountId: selectedAccount.id
             })
 
-      if (!response.length) {
-        setError(true)
-      }
+      setError(!response.length)
 
       const accounts = await Promise.all(
         response.map(async vehicle => {
@@ -67,7 +65,6 @@ const VehiclesContainer = ({ selectedAccount }) => {
   }
 
   if (!vehicles.length) return null
-
   return <Vehicles vehicles={vehicles} />
 }
 
