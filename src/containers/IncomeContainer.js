@@ -5,7 +5,8 @@ import Income from '../components/Income'
 import Spinner from '../components/Spinner'
 
 const StyledSpinner = styled.div`
-  min-height: 20rem;
+  min-height: 30rem;
+  min-width: 50rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,7 +57,7 @@ const IncomeContainer = ({ selectedAccount }) => {
   }
 
   const sumItems = (a, b, item) =>
-    ((a[item] * 100 + b[item] * 100) * 0.01).toFixed(2)
+    ((a[item] * 100 + (b[item] ? b[item] * 100 : 0)) * 0.01).toFixed(2)
 
   const income = incomes.reduce(
     (a, b) => ({

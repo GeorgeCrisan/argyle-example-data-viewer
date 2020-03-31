@@ -126,12 +126,14 @@ class Api {
     return resp.data.results
   }
 
-  async getCareers(accountId) {
+  async getCareers({ accountId, userId }) {
+    const idObj = accountId ? { account: accountId } : { user: userId }
+
     const resp = await this.api.get('/careers', {
       params: {
         limit: 100,
         ordering: '-created_at',
-        account: accountId
+        ...idObj
       }
     })
     return resp.data.results
