@@ -35,7 +35,6 @@ const ActivitiesContainer = ({ selectedAccount }) => {
             })
 
       setError(!response.length)
-
       setActivities(response)
       setLoading(false)
     }
@@ -57,6 +56,7 @@ const ActivitiesContainer = ({ selectedAccount }) => {
     )
   }
 
+  console.log(activities)
   return <Activities activities={activities} />
 }
 
