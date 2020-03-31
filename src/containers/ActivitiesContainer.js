@@ -56,8 +56,11 @@ const ActivitiesContainer = ({ selectedAccount }) => {
     )
   }
 
-  console.log(activities)
-  return <Activities activities={activities} />
+  const sortedActivities = activities.sort(
+    (a, b) => b.start_date - a.start_date
+  )
+  console.log(sortedActivities)
+  return <Activities activities={sortedActivities} />
 }
 
 export default ActivitiesContainer
