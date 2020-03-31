@@ -62,94 +62,45 @@ class Api {
     return resp.data.results
   }
 
-  async getActivities(accountId) {
-    const resp = await this.api.get('/activities', {
+  async getData({ accountId, userId, endpoint }) {
+    const idObj = accountId ? { account: accountId } : { user: userId }
+
+    const resp = await this.api.get(endpoint, {
       params: {
         limit: 100,
         ordering: '-created_at',
-        account: accountId
+        ...idObj
       }
     })
     return resp.data.results
+  }
+
+  getActivities({ accountId, userId }) {
+    return this.getData({ accountId, userId, endpoint: '/activities' })
   }
 
   async getProfiles({ accountId, userId }) {
-    const idObj = accountId ? { account: accountId } : { user: userId }
-
-    const resp = await this.api.get('/profiles', {
-      params: {
-        limit: 100,
-        ordering: '-created_at',
-        ...idObj
-      }
-    })
-
-    return resp.data.results
+    return this.getData({ accountId, userId, endpoint: '/profiles' })
   }
 
   async getVehicles({ accountId, userId }) {
-    const idObj = accountId ? { account: accountId } : { user: userId }
-
-    const resp = await this.api.get('/vehicles', {
-      params: {
-        limit: 100,
-        ordering: '-created_at',
-        ...idObj
-      }
-    })
-    return resp.data.results
+    return this.getData({ accountId, userId, endpoint: '/vehicles' })
   }
 
   async getDocuments({ accountId, userId }) {
-    const idObj = accountId ? { account: accountId } : { user: userId }
-
-    const resp = await this.api.get('/documents', {
-      params: {
-        limit: 100,
-        ordering: '-created_at',
-        ...idObj
-      }
-    })
-    return resp.data.results
+    return this.getData({ accountId, userId, endpoint: '/documents' })
   }
 
   async getIncomes({ accountId, userId }) {
-    const idObj = accountId ? { account: accountId } : { user: userId }
-
-    const resp = await this.api.get('/incomes', {
-      params: {
-        limit: 100,
-        ordering: '-created_at',
-        ...idObj
-      }
-    })
-    return resp.data.results
+    return this.getData({ accountId, userId, endpoint: '/incomes' })
   }
 
   async getCareers({ accountId, userId }) {
-    const idObj = accountId ? { account: accountId } : { user: userId }
-
-    const resp = await this.api.get('/careers', {
-      params: {
-        limit: 100,
-        ordering: '-created_at',
-        ...idObj
-      }
-    })
-    return resp.data.results
+    return this.getData({ accountId, userId, endpoint: '/careers' })
   }
 
   async getReputations({ accountId, userId }) {
-    const idObj = accountId ? { account: accountId } : { user: userId }
-
-    const resp = await this.api.get('/reputations', {
-      params: {
-        limit: 100,
-        ordering: '-created_at',
-        ...idObj
-      }
-    })
-    return resp.data.results
+    return this.getData({ accountId, userId, endpoint: '/reputations' })
   }
 }
 

@@ -5,7 +5,8 @@ import Activities from '../components/Activities'
 import Spinner from '../components/Spinner'
 
 const StyledSpinner = styled.div`
-  min-height: 20rem;
+  min-height: 30rem;
+  min-width: 50rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,16 +24,23 @@ const ActivitiesContainer = ({ selectedAccount }) => {
   useEffect(() => {
     const fetchActivities = async () => {
       setLoading(true)
-      const activitiesResponse = await api.getActivities(selectedAccount.id)
-      if (!activitiesResponse.length) {
-        setError(true)
-      }
 
-      setActivities(activitiesResponse)
+      const response =
+        selectedAccount.id === 'combined'
+          ? await api.getActivities({
+              userId: selectedAccount.userId
+            })
+          : await api.getActivities({
+              accountId: selectedAccount.id
+            })
+
+      setError(!response.length)
+
+      setActivities(response)
       setLoading(false)
     }
     fetchActivities()
-  }, [selectedAccount.id])
+  }, [selectedAccount.id, selectedAccount.userId])
 
   if (isLoading)
     return (
