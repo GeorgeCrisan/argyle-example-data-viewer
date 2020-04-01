@@ -64,7 +64,8 @@ const IconWrapper = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #d9d9d9;
+  background-color: ${({ active, theme }) =>
+    active ? theme.colors.defaultGreen : '#d9d9d9'};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,7 +139,7 @@ const PageContent = ({
           active={selectedAccount.id === combinedId}
           onClick={() => selectAccount({ id: combinedId, userId })}
         >
-          <IconWrapper>
+          <IconWrapper active={selectedAccount.id === combinedId}>
             <StyledCallMerge />
           </IconWrapper>
           <PartnerName>Combined</PartnerName>
