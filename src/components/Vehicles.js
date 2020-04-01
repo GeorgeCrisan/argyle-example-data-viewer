@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { DirectionsCar, DirectionsBike } from '@material-ui/icons'
+import {
+  DirectionsCar,
+  DirectionsBike,
+  DirectionsWalk
+} from '@material-ui/icons'
 import { firstWordToUpperCase } from '../helpers'
 
 const StyledVehicles = styled.div``
@@ -49,6 +53,19 @@ const DataPartnerIcon = styled.img`
   border-radius: 50%;
 `
 
+const RenderVehicleIcon = type => {
+  switch (type) {
+    case 'bicycle':
+      return <DirectionsBike />
+    case 'pedestrian':
+      return <DirectionsWalk />
+    case 'car':
+      return <DirectionsCar />
+    default:
+      return <DirectionsCar />
+  }
+}
+
 const Vehicles = ({ vehicles }) => (
   <StyledVehicles>
     {vehicles.map(
@@ -58,9 +75,7 @@ const Vehicles = ({ vehicles }) => (
         return (
           <StyledVehicle key={id + i}>
             <Details>
-              <VehicleIcon>
-                {type === 'bicycle' ? <DirectionsBike /> : <DirectionsCar />}
-              </VehicleIcon>
+              <VehicleIcon>{RenderVehicleIcon(type)}</VehicleIcon>
               <Name>
                 {type === 'car' && model
                   ? `${model} ${year}`
