@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## How to set up the app:
 
-##### Create and Setup Firebase project
+#### Create and Setup Firebase project
 
 Firebase is used in this project to store user Ids, Full Name and Email in the user list, so the users added to this app only would be displayed in the list.
 
@@ -26,9 +26,9 @@ Firebase is used in this project to store user Ids, Full Name and Email in the u
   };
 ```
 
-##### Rename `.env.example` to `.env` in the root folder:
+#### Rename `.env.example` to `.env` in the root folder:
 
-##### Add the keys in `.env` file in the root folder:
+#### Add the keys in `.env` file in the root folder:
 
 ```
 REACT_APP_API_URL=https://api.argyle.io/v1
@@ -46,11 +46,11 @@ REACT_APP_PLUGIN_KEY=
 
 Run:
 
-##### `npm install`
+#### `npm install`
 
 Installs all the dependencies for the project.
 
-##### `npm start`
+#### `npm start`
 
 Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -58,7 +58,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-##### `npm run build`
+#### `npm run build`
 
 Builds the app for production to the `build` folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -68,7 +68,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-##### `firebase deploy`
+#### `firebase deploy`
 
 Run this command to deploy the app on firebase. `npm run build` should be run before that.
 For this to work you need to install firebase tools globally
