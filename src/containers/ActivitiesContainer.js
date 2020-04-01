@@ -18,7 +18,6 @@ const Error = styled.div`
 
 const ActivitiesContainer = ({ selectedAccount }) => {
   const [activities, setActivities] = useState([])
-  const [vehicles, setVehicles] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
 
@@ -34,17 +33,7 @@ const ActivitiesContainer = ({ selectedAccount }) => {
             accountId: selectedAccount.id
           }))
 
-      const vehicles =
-        selectedAccount.id === 'combined'
-          ? await api.getVehicles({
-              userId: selectedAccount.userId
-            })
-          : await api.getVehicles({
-              accountId: selectedAccount.id
-            })
-
       setError(!response.length)
-      setVehicles(vehicles)
       setActivities(response)
       setLoading(false)
     }
