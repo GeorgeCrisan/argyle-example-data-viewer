@@ -15,14 +15,14 @@ Firebase is used in this project to store user ids, full name and email in the u
 
 ```
   var firebaseConfig = {
-    apiKey: "341341341341dcfaefeaGmE1J4w",
-    authDomain: "testing-40f73db.firebaseapp.com",
-    databaseURL: "https://testing-40f5d7b.firebaseio.com",
-    projectId: "testing-40ffd7b",
-    storageBucket: "testing-40fa7b.appspot.com",
-    messagingSenderId: "93461daad9648870",
-    appId: "1:934619648870:web:4f2275ddaf9b0509f1c98eea7",
-    measurementId: "G-XBPBYLdadaN2L9"
+    apiKey: "example-api-key",
+    authDomain: "example-domain.firebaseapp.com",
+    databaseURL: "https://example-urk.firebaseio.com",
+    projectId: "example-id",
+    storageBucket: "example-bucket-id",
+    messagingSenderId: "example-sender-id",
+    appId: "example-app-id",
+    measurementId: "example-measurement-id"
   };
 ```
 
