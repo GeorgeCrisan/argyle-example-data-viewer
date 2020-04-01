@@ -115,6 +115,33 @@ const TipsItem = styled.div`
   margin-right: 1rem;
 `
 
+const ActivityInfo = styled.div`
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  padding: 2rem 2rem 1.5rem 2rem;
+`
+
+const Distance = styled.div`
+  font-size: 2rem;
+  margin-bottom: 1.3rem;
+`
+
+const Data = styled.div`
+  margin-bottom: 1.5rem;
+`
+
+const DataTitle = styled.div`
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.defaultGreen};
+  margin-bottom: 0.5rem;
+`
+
+const Address = styled.div`
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 1.2rem;
+`
+
 const Activities = ({ activities }) => {
   const [activeId, setActiveId] = useState(activities[0].id)
 
@@ -150,9 +177,11 @@ const Activities = ({ activities }) => {
           <TopContentItem>
             {firstWordToUpperCase(selectedActivity.status)}
           </TopContentItem>
-          <TopContentItem>
-            {moment(selectedActivity.end_date).format('ddd MMM DD YYYY')}
-          </TopContentItem>
+          {selectedActivity.end_date && (
+            <TopContentItem>
+              {moment(selectedActivity.end_date).format('ddd MMM DD YYYY')}
+            </TopContentItem>
+          )}
         </TopContent>
         <HorizontalDivider />
         <TotalTitle>
@@ -162,6 +191,37 @@ const Activities = ({ activities }) => {
           <TipsItem>{`Tips $${selectedActivity.income.tips}`}</TipsItem>
           <TipsItem>{`Bonus $${selectedActivity.income.bonus}`}</TipsItem>
         </TipsWrapper>
+        <ActivityInfo>
+          <Distance>
+            {selectedActivity.distance
+              ? `${selectedActivity.distance} miles`
+              : '-'}
+          </Distance>
+
+          {selectedActivity.start_date && selectedActivity.start_location && (
+            <Data>
+              <DataTitle>
+                {moment.utc(selectedActivity.start_date).format('h:mm A')}
+              </DataTitle>
+              <Address>
+                {selectedActivity.start_location.formatted_address ||
+                  `lat: ${selectedActivity.start_location.lat}, lng: ${selectedActivity.start_location.lng}`}
+              </Address>
+            </Data>
+          )}
+
+          {selectedActivity.end_date && selectedActivity.end_location && (
+            <Data>
+              <DataTitle>
+                {moment.utc(selectedActivity.end_date).format('h:mm A')}
+              </DataTitle>
+              <Address>
+                {selectedActivity.end_location.formatted_address ||
+                  `lat: ${selectedActivity.end_location.lat}, lng: ${selectedActivity.end_location.lng}`}
+              </Address>
+            </Data>
+          )}
+        </ActivityInfo>
       </Content>
     </StyledActivities>
   )

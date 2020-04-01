@@ -25,14 +25,13 @@ const ActivitiesContainer = ({ selectedAccount }) => {
     const fetchActivities = async () => {
       setLoading(true)
 
-      const response =
-        selectedAccount.id === 'combined'
-          ? await api.getActivities({
-              userId: selectedAccount.userId
-            })
-          : await api.getActivities({
-              accountId: selectedAccount.id
-            })
+      const response = await (selectedAccount.id === 'combined'
+        ? api.getActivities({
+            userId: selectedAccount.userId
+          })
+        : api.getActivities({
+            accountId: selectedAccount.id
+          }))
 
       setError(!response.length)
       setActivities(response)
@@ -59,6 +58,8 @@ const ActivitiesContainer = ({ selectedAccount }) => {
   const sortedActivities = activities.sort(
     (a, b) => b.start_date - a.start_date
   )
+
+  console.log(sortedActivities)
 
   return <Activities activities={sortedActivities} />
 }
