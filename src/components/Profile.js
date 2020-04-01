@@ -10,10 +10,18 @@ const Image = styled.div`
   height: 90px;
   border-radius: 50%;
   margin-right: 4rem;
-  background-image: ${({ image }) => `url(${image})`};
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+
+  ${({ image }) =>
+    image
+      ? `
+      background-image: url(${image});
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  `
+      : `
+        background-color: rgba(0, 0, 0, 0.1);
+      `}
 `
 
 const ProfileDetails = styled.div``
