@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 #### Create and Setup Firebase project
 
-Firebase is used in this project to store user Ids, Full Name and Email in the user list, so the users added to this app only would be displayed in the list.
+Firebase is used in this project to store user ids, full name and email in the user list, so the users added to this app only would be displayed in the list.
 
 - Go to https://console.firebase.google.com
 - Click `Add Project` button
