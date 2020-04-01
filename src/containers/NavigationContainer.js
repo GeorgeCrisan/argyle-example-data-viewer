@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import PageWrapper from '../components/PageWrapper'
 import api from '../api/api'
 import Profiles from './ProfilesContainer'
 import Activities from './ActivitiesContainer'
 import Vehicles from './VehiclesContainer'
 import Documents from './DocumentsContainer'
-import Incomes from './IncomesContainer'
-import Careers from './CareersContainer'
+import Incomes from './IncomeContainer'
+import Career from './CareerContainer'
 import Reputations from './ReputationsContainer'
 import Spinner from '../components/Spinner'
 import PageContent from '../components/PageContent'
@@ -56,8 +56,8 @@ const renderRoutes = userId => [
     navLinkName: 'Income'
   },
   {
-    path: `/user-data/${userId}/careers`,
-    component: Careers,
+    path: `/user-data/${userId}/career`,
+    component: Career,
     navLinkName: 'Career'
   }
 ]
@@ -67,7 +67,6 @@ const StyledPageContent = styled.div`
 `
 
 const NavigationContainer = ({ match, location }) => {
-  const { fullName } = location.state
   const { userId } = match.params
   const [accounts, setAccounts] = useState([])
   const [selectedAccount, selectAccount] = useState({})
@@ -98,6 +97,10 @@ const NavigationContainer = ({ match, location }) => {
       </StyledSpinner>
     )
   }
+
+  if (!location.state) return <Redirect to="/" />
+
+  const { fullName } = location.state
 
   const getRoutes = () => (
     <Route

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import api from '../api/api'
-import Table from '../components/Table'
+import Documents from '../components/Documents'
 import Spinner from '../components/Spinner'
 
 const StyledSpinner = styled.div`
-  min-height: 20rem;
+  min-height: 30rem;
+  min-width: 50rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,15 +24,22 @@ const DocumentsContainer = ({ selectedAccount }) => {
   useEffect(() => {
     const fetchDocuments = async () => {
       setLoading(true)
-      const response = await api.getDocuments(selectedAccount.id)
-      if (!response.length) {
-        setError(true)
-      }
+
+      const response =
+        selectedAccount.id === 'combined'
+          ? await api.getDocuments({
+              userId: selectedAccount.userId
+            })
+          : await api.getDocuments({
+              accountId: selectedAccount.id
+            })
+
+      setError(!response.length)
       setDocuments(response)
       setLoading(false)
     }
     fetchDocuments()
-  }, [selectedAccount.id])
+  }, [selectedAccount, selectedAccount.id, selectedAccount.userId])
 
   if (isLoading)
     return (
@@ -48,33 +56,7 @@ const DocumentsContainer = ({ selectedAccount }) => {
     )
   }
 
-  return (
-    <Table
-      headerItems={[
-        'Document Number',
-        'Document Type',
-        'Expiration Date',
-        'Created At'
-      ]}
-      items={documents.map(
-        ({
-          id,
-          document_number,
-          document_type,
-          expiration_date,
-          created_at
-        }) => ({
-          id,
-          document_number,
-          document_type,
-          expiration_date: expiration_date
-            ? new Date(expiration_date).toDateString()
-            : null,
-          created_at: new Date(created_at).toDateString()
-        })
-      )}
-    />
-  )
+  return <Documents documents={documents} />
 }
 
 export default DocumentsContainer
