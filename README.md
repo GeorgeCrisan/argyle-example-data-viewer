@@ -26,6 +26,8 @@ Firebase is used in this project to store user Ids, Full Name and Email in the u
   };
 ```
 
+##### Rename `.env.example` to `.env` in the root folder:
+
 ##### Add the keys in `.env` file in the root folder:
 
 ```
