@@ -41,11 +41,11 @@ const NavItem = styled.div`
   ${({ active }) =>
     active &&
     `
-    background-color: #f4f4f4;
-    border-radius: 19px;
-    margin-right: 1.5rem;
-    padding-right: 1.5rem;
-    color: black;
+      background-color: #f4f4f4;
+      border-radius: 19px;
+      margin-right: 1.5rem;
+      padding-right: 1.5rem;
+      color: black;
   `}
 `
 
