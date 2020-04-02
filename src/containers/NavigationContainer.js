@@ -23,42 +23,50 @@ const StyledSpinner = styled.div`
 const renderRoutes = userId => [
   {
     path: `/user-data/${userId}`,
-    component: Profiles
+    component: Profiles,
+    id: 'profiles'
   },
   {
     path: `/user-data/${userId}/profiles`,
     component: Profiles,
-    navLinkName: 'Profile'
+    navLinkName: 'Profile',
+    id: 'profiles'
   },
   {
     path: `/user-data/${userId}/vehicles`,
     component: Vehicles,
-    navLinkName: 'Vehicles'
+    navLinkName: 'Vehicles',
+    id: 'vehicles'
   },
   {
     path: `/user-data/${userId}/documents`,
     component: Documents,
-    navLinkName: 'Documents'
+    navLinkName: 'Documents',
+    id: 'documents'
   },
   {
     path: `/user-data/${userId}/reputations`,
     component: Reputations,
-    navLinkName: 'Reputation'
+    navLinkName: 'Reputation',
+    id: 'reputations'
   },
   {
     path: `/user-data/${userId}/activities`,
     component: Activities,
-    navLinkName: 'Activities'
+    navLinkName: 'Activities',
+    id: 'activities'
   },
   {
     path: `/user-data/${userId}/incomes`,
     component: Incomes,
-    navLinkName: 'Income'
+    navLinkName: 'Income',
+    id: 'incomes'
   },
   {
     path: `/user-data/${userId}/career`,
     component: Career,
-    navLinkName: 'Career'
+    navLinkName: 'Career',
+    id: 'careers'
   }
 ]
 
@@ -100,6 +108,14 @@ const NavigationContainer = ({ match, location }) => {
 
   if (!location.state) return <Redirect to="/" />
 
+  const availbility = accounts.map(({ availability }) => availability)
+  const combinedAccountsData = availbility.reduce((a, b) => {
+    const syncingData = Object.keys(b).filter(
+      ({ status }) => status === 'in_progress'
+    )
+    return { ...syncingData, ...a }
+  }, availbility[0])
+
   const { fullName } = location.state
 
   const getRoutes = () => (
@@ -135,6 +151,7 @@ const NavigationContainer = ({ match, location }) => {
           selectAccount={selectAccount}
           selectedAccount={selectedAccount}
           renderRoutes={renderRoutes}
+          combinedAccountsData={combinedAccountsData}
           userId={userId}
           fullName={fullName}
         />
