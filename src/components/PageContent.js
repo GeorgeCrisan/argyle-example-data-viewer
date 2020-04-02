@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import CallMerge from '@material-ui/icons/CallMerge'
+import Loop from '@material-ui/icons/Loop'
 import { NavLink } from 'react-router-dom'
 
 const StyledPageContent = styled.div`
@@ -98,12 +99,14 @@ const LeftNavigation = styled.div`
 `
 
 const StyledNavLink = styled(NavLink)`
-  display: block;
   color: rgba(0, 0, 0, 0.4);
   font-size: 1.6rem;
   cursor: pointer;
-  padding: 0.7rem 3rem;
+  padding: 0.7rem 2rem 0.7rem 3rem;
   min-width: 16rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   &.selected {
     font-weight: 500;
@@ -117,6 +120,32 @@ const StyledNavLink = styled(NavLink)`
   }
 `
 
+const SpinningIcon = styled.div`
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #bae6f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: rotate 3s infinite linear;
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+    color: white;
+  }
+`
+
 const RoutesWrapper = styled.div`
   padding: 4rem;
 `
@@ -124,6 +153,7 @@ const RoutesWrapper = styled.div`
 const PageContent = ({
   routes,
   renderRoutes,
+  combinedAccountsData,
   userId,
   accounts,
   selectAccount,
@@ -163,7 +193,7 @@ const PageContent = ({
       <Content>
         <LeftNavigation>
           {renderRoutes(userId).map(
-            ({ path, navLinkName }) =>
+            ({ path, navLinkName, id }) =>
               navLinkName && (
                 <StyledNavLink
                   key={path}
@@ -174,6 +204,11 @@ const PageContent = ({
                   activeClassName="selected"
                 >
                   {navLinkName}
+                  {combinedAccountsData[id].status === 'in_progress' && (
+                    <SpinningIcon>
+                      <Loop />
+                    </SpinningIcon>
+                  )}
                 </StyledNavLink>
               )
           )}
