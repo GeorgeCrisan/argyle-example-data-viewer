@@ -20,54 +20,54 @@ const StyledSpinner = styled.div`
   align-items: center;
 `
 
-const renderRoutes = userId => [
+const renderRoutes = (userId) => [
   {
     path: `/user-data/${userId}`,
     component: Profiles,
-    id: 'profiles'
+    id: 'profiles',
   },
   {
     path: `/user-data/${userId}/profiles`,
     component: Profiles,
     navLinkName: 'Profile',
-    id: 'profiles'
+    id: 'profiles',
   },
   {
     path: `/user-data/${userId}/vehicles`,
     component: Vehicles,
     navLinkName: 'Vehicles',
-    id: 'vehicles'
+    id: 'vehicles',
   },
   {
     path: `/user-data/${userId}/documents`,
     component: Documents,
     navLinkName: 'Documents',
-    id: 'documents'
+    id: 'documents',
   },
   {
     path: `/user-data/${userId}/reputations`,
     component: Reputations,
     navLinkName: 'Reputation',
-    id: 'reputations'
+    id: 'reputations',
   },
   {
     path: `/user-data/${userId}/activities`,
     component: Activities,
     navLinkName: 'Activities',
-    id: 'activities'
+    id: 'activities',
   },
   {
     path: `/user-data/${userId}/incomes`,
     component: Incomes,
     navLinkName: 'Income',
-    id: 'incomes'
+    id: 'incomes',
   },
   {
     path: `/user-data/${userId}/career`,
     component: Career,
     navLinkName: 'Career',
-    id: 'careers'
-  }
+    id: 'careers',
+  },
 ]
 
 const StyledPageContent = styled.div`
@@ -77,7 +77,7 @@ const StyledPageContent = styled.div`
 const NavigationContainer = ({ match, location }) => {
   const { userId } = match.params
   const [accounts, setAccounts] = useState([])
-  const [selectedAccount, selectAccount] = useState({})
+  const [selectedAccount, selectAccount] = useState({ id: 'combined', userId })
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -87,12 +87,11 @@ const NavigationContainer = ({ match, location }) => {
 
       if (!results.length) {
         setAccounts([])
-        selectAccount(null)
+        selectAccount({ id: 'combined', userId })
         return
       }
 
       setAccounts(results)
-      selectAccount(results[0])
       setLoading(false)
     }
     fetchAccounts()
@@ -121,14 +120,14 @@ const NavigationContainer = ({ match, location }) => {
   const getRoutes = () => (
     <Route
       path="/user-data/:userId"
-      render={props => (
+      render={(props) => (
         <Switch>
           {renderRoutes(userId).map(({ path, component: Component }) => (
             <Route
               key={path}
               exact
               path={path}
-              render={routeProps => (
+              render={(routeProps) => (
                 <Component
                   {...props}
                   {...routeProps}
