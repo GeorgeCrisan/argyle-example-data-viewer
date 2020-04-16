@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import moment from 'moment'
 import api from '../api/api'
 import Career from '../components/Career'
-import Spinner from '../components/Spinner'
-
-const StyledSpinner = styled.div`
-  min-height: 30rem;
-  min-width: 50rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const Error = styled.div`
-  font-size: 2.4rem;
-`
+import { WrappedSpinner as Spinner } from '../components/Spinner'
+import ErrorMsg from '../components/ErrorMsg'
 
 const CareerContainer = ({ selectedAccount }) => {
   const [careers, setCareers] = useState([])
@@ -28,10 +16,10 @@ const CareerContainer = ({ selectedAccount }) => {
       const response =
         selectedAccount.id === 'combined'
           ? await api.getCareers({
-              userId: selectedAccount.userId
+              userId: selectedAccount.userId,
             })
           : await api.getCareers({
-              accountId: selectedAccount.id
+              accountId: selectedAccount.id,
             })
 
       setError(!response.length)
@@ -41,19 +29,10 @@ const CareerContainer = ({ selectedAccount }) => {
     fetchCareers()
   }, [selectedAccount.id, selectedAccount.userId])
 
-  if (isLoading)
-    return (
-      <StyledSpinner>
-        <Spinner />
-      </StyledSpinner>
-    )
+  if (isLoading) return <Spinner />
 
   if (isError) {
-    return (
-      <Error>
-        Status: {selectedAccount.status} {selectedAccount.error_code}, No Data
-      </Error>
-    )
+    return <ErrorMsg selectedAccount={selectedAccount} />
   }
 
   const sumItems = (a, b, item) => a[item] + (b[item] ? parseInt(b[item]) : 0)
@@ -72,13 +51,13 @@ const CareerContainer = ({ selectedAccount }) => {
         moment(a.last_activity_date, 'YYYY-MM-DD')
       )
         ? b.last_activity_date
-        : a.last_activity_date
+        : a.last_activity_date,
     }),
     {
       total_hours_spent_working: 0,
       length_of_work: 0,
       last_activity_date: '1991-11-11', // fake older date
-      first_activity_date: '2222-01-22' // fake future date to compare
+      first_activity_date: '2222-01-22', // fake future date to compare
     }
   )
 

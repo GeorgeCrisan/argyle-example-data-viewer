@@ -1,20 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import api from '../api/api'
 import Activities from '../components/Activities'
-import Spinner from '../components/Spinner'
-
-const StyledSpinner = styled.div`
-  min-height: 30rem;
-  min-width: 50rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const Error = styled.div`
-  font-size: 2.4rem;
-`
+import { WrappedSpinner as Spinner } from '../components/Spinner'
+import ErrorMsg from '../components/ErrorMsg'
 
 const ActivitiesContainer = ({ selectedAccount }) => {
   const [activities, setActivities] = useState([])
@@ -27,10 +15,10 @@ const ActivitiesContainer = ({ selectedAccount }) => {
 
       const response = await (selectedAccount.id === 'combined'
         ? api.getActivities({
-            userId: selectedAccount.userId
+            userId: selectedAccount.userId,
           })
         : api.getActivities({
-            accountId: selectedAccount.id
+            accountId: selectedAccount.id,
           }))
 
       setError(!response.length)
@@ -40,19 +28,10 @@ const ActivitiesContainer = ({ selectedAccount }) => {
     fetchActivities()
   }, [selectedAccount.id, selectedAccount.userId])
 
-  if (isLoading)
-    return (
-      <StyledSpinner>
-        <Spinner />
-      </StyledSpinner>
-    )
+  if (isLoading) return <Spinner />
 
   if (isError) {
-    return (
-      <Error>
-        Status: {selectedAccount.status} {selectedAccount.error_code}, No data
-      </Error>
-    )
+    return <ErrorMsg selectedAccount={selectedAccount} />
   }
 
   const sortedActivities = activities.sort(

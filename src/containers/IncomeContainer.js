@@ -1,20 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
 import api from '../api/api'
 import Income from '../components/Income'
-import Spinner from '../components/Spinner'
-
-const StyledSpinner = styled.div`
-  min-height: 30rem;
-  min-width: 50rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const Error = styled.div`
-  font-size: 2.4rem;
-`
+import { WrappedSpinner as Spinner } from '../components/Spinner'
+import ErrorMsg from '../components/ErrorMsg'
 
 const IncomeContainer = ({ selectedAccount }) => {
   const [incomes, setIncomes] = useState([])
@@ -28,10 +16,10 @@ const IncomeContainer = ({ selectedAccount }) => {
       const response =
         selectedAccount.id === 'combined'
           ? await api.getIncomes({
-              userId: selectedAccount.userId
+              userId: selectedAccount.userId,
             })
           : await api.getIncomes({
-              accountId: selectedAccount.id
+              accountId: selectedAccount.id,
             })
 
       setError(!response.length)
@@ -41,19 +29,10 @@ const IncomeContainer = ({ selectedAccount }) => {
     fetchIncomes()
   }, [selectedAccount.id, selectedAccount.userId])
 
-  if (isLoading)
-    return (
-      <StyledSpinner>
-        <Spinner />
-      </StyledSpinner>
-    )
+  if (isLoading) return <Spinner />
 
   if (isError) {
-    return (
-      <Error>
-        Status: {selectedAccount.status} {selectedAccount.error_code}, No Data
-      </Error>
-    )
+    return <ErrorMsg selectedAccount={selectedAccount} />
   }
 
   const sumItems = (a, b, item) =>
@@ -67,7 +46,7 @@ const IncomeContainer = ({ selectedAccount }) => {
       bonus: sumItems(a, b, 'bonus'),
       fees: sumItems(a, b, 'fees'),
       total: sumItems(a, b, 'total'),
-      currency: b.currency
+      currency: b.currency,
     }),
     { total: 0, pay: 0, tips: 0, bonus: 0, fees: 0 }
   )

@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
 const spinnerImg = `https://res.cloudinary.com/argyle-media/image/upload/c_lfill,w_auto,g_auto,q_auto,dpr_auto,f_auto/v1566809938/spinner.png`
 
@@ -14,8 +13,8 @@ const StyledSpinner = styled.div`
 
 const SpinnerImg = styled.img`
   animation: rotate 1s infinite linear;
-  width: ${props => props.width}px;
-  height: ${props => props.height}px;
+  width: ${(props) => props.width}px;
+  height: ${(props) => props.height}px;
 
   @keyframes rotate {
     0% {
@@ -27,20 +26,24 @@ const SpinnerImg = styled.img`
   }
 `
 
-const Spinner = ({ width, height }) => (
+const Spinner = ({ width = 26, height = 26 }) => (
   <StyledSpinner>
     <SpinnerImg width={width} height={height} src={spinnerImg} />
   </StyledSpinner>
 )
 
-Spinner.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number
-}
+const SpinnerWrapper = styled.div`
+  min-height: 30rem;
+  min-width: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
-Spinner.defaultProps = {
-  width: 26,
-  height: 26
-}
+export const WrappedSpinner = () => (
+  <SpinnerWrapper>
+    <Spinner />
+  </SpinnerWrapper>
+)
 
 export default Spinner

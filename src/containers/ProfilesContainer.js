@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import api from '../api/api'
-import Spinner from '../components/Spinner'
+import { WrappedSpinner as Spinner } from '../components/Spinner'
 import Profile from '../components/Profile'
-
-const StyledSpinner = styled.div`
-  min-height: 30rem;
-  min-width: 50rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+import ErrorMsg from '../components/ErrorMsg'
 
 const StyledProfile = styled.div`
   margin-bottom: 5rem;
-`
-
-const Error = styled.div`
-  font-size: 2.4rem;
 `
 
 const ProfilesContainer = ({ selectedAccount }) => {
@@ -31,10 +20,10 @@ const ProfilesContainer = ({ selectedAccount }) => {
       const profilesResponse =
         selectedAccount.id === 'combined'
           ? await api.getProfiles({
-              userId: selectedAccount.userId
+              userId: selectedAccount.userId,
             })
           : await api.getProfiles({
-              accountId: selectedAccount.id
+              accountId: selectedAccount.id,
             })
 
       setError(!profilesResponse.length)
@@ -44,19 +33,10 @@ const ProfilesContainer = ({ selectedAccount }) => {
     fetchProfile()
   }, [selectedAccount.id, selectedAccount.userId])
 
-  if (!profiles || isLoading)
-    return (
-      <StyledSpinner>
-        <Spinner />
-      </StyledSpinner>
-    )
+  if (!profiles || isLoading) return <Spinner />
 
   if (isError) {
-    return (
-      <Error>
-        Status: {selectedAccount.status} {selectedAccount.error_code}, No Data
-      </Error>
-    )
+    return <ErrorMsg selectedAccount={selectedAccount} />
   }
 
   return profiles.map(
