@@ -1,7 +1,33 @@
 import React from 'react'
 import styled from 'styled-components'
+import { firstWordToUpperCase } from '../helpers'
 
-const StyledReputation = styled.div``
+const StyledReputations = styled.div`
+  max-width: 90rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+`
+
+const StyledReputation = styled.div`
+  border-radius: 5px;
+  margin-right: 4rem;
+  margin-bottom: 4rem;
+  min-width: 26rem;
+  min-height: 20rem;
+  ${({ greyBackground }) =>
+    greyBackground &&
+    `
+  background-color: rgba(249, 249, 249, 0.9);
+  padding: 1.6rem 2rem;
+  `}
+`
+
+const Title = styled.div`
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+`
 
 const RatingWrapper = styled.div`
   display: flex;
@@ -50,39 +76,53 @@ const AchievementDescription = styled.div`
   color: rgba(0, 0, 0, 0.4);
 `
 
-const Reputation = ({ acceptanceRate, rating, achievements }) => (
-  <StyledReputation>
-    <RatingWrapper>
-      {rating ? (
-        <RatingItem>
-          <Rating>{rating}</Rating>
-          <Label>Rating</Label>
-        </RatingItem>
-      ) : (
-        '-'
-      )}
-      <VerticalDivider />
-      {acceptanceRate ? (
-        <RatingItem>
-          <Rating>{acceptanceRate}%</Rating>
-          <Label>Acceptance Rate</Label>
-        </RatingItem>
-      ) : (
-        '-'
-      )}
-    </RatingWrapper>
-    {!!achievements.length && (
-      <Achievements>
-        <AchievementsTitle>Achievements</AchievementsTitle>
-        {achievements.map(({ label, description }, i) => (
-          <Achievement key={label + i}>
-            <AchievementLabel>{label}</AchievementLabel>
-            <AchievementDescription>{description}</AchievementDescription>
-          </Achievement>
-        ))}
-      </Achievements>
-    )}
-  </StyledReputation>
+const Reputation = ({ reputations }) => (
+  <StyledReputations>
+    {reputations.map((reputation, i) => (
+      <StyledReputation
+        greyBackground={reputations.length > 1}
+        key={reputation.id + i}
+      >
+        {reputations.length > 1 && (
+          <Title>
+            {reputation.type === 'combined'
+              ? 'Combined'
+              : firstWordToUpperCase(reputation.account)}
+          </Title>
+        )}
+        <RatingWrapper>
+          {reputation.rating ? (
+            <RatingItem>
+              <Rating>{reputation.rating}</Rating>
+              <Label>Rating</Label>
+            </RatingItem>
+          ) : (
+            '-'
+          )}
+          <VerticalDivider />
+          {reputation.acceptance_rate ? (
+            <RatingItem>
+              <Rating>{reputation.acceptance_rate}%</Rating>
+              <Label>Acceptance Rate</Label>
+            </RatingItem>
+          ) : (
+            '-'
+          )}
+        </RatingWrapper>
+        {reputation.achievements && !!reputation.achievements.length && (
+          <Achievements>
+            <AchievementsTitle>Achievements</AchievementsTitle>
+            {reputation.achievements.map(({ label, description }, i) => (
+              <Achievement key={label + i}>
+                <AchievementLabel>{label}</AchievementLabel>
+                <AchievementDescription>{description}</AchievementDescription>
+              </Achievement>
+            ))}
+          </Achievements>
+        )}
+      </StyledReputation>
+    ))}
+  </StyledReputations>
 )
 
 export default Reputation

@@ -132,6 +132,7 @@ const NavigationContainer = ({ match, location }) => {
                   {...props}
                   {...routeProps}
                   selectedAccount={selectedAccount}
+                  accounts={accounts}
                 />
               )}
             />

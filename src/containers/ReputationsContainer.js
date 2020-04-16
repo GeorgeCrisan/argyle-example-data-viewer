@@ -4,7 +4,7 @@ import Reputation from '../components/Reputation'
 import { WrappedSpinner as Spinner } from '../components/Spinner'
 import ErrorMsg from '../components/ErrorMsg'
 
-const ReputationsContainer = ({ selectedAccount }) => {
+const ReputationsContainer = ({ selectedAccount, accounts }) => {
   const [reputations, setReputations] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
@@ -48,11 +48,25 @@ const ReputationsContainer = ({ selectedAccount }) => {
     []
   )
 
+  const combinedReputations = {
+    acceptance_rate: acceptanceRate,
+    rating: formattedRating,
+    achievements,
+    type: 'combined',
+  }
+
+  const allReputations = [
+    combinedReputations,
+    ...reputations.map((career) => ({
+      ...career,
+      account: accounts.find((account) => account.id === career.account)
+        .data_partner,
+    })),
+  ]
+
   return (
     <Reputation
-      acceptanceRate={acceptanceRate}
-      rating={formattedRating}
-      achievements={achievements}
+      reputations={reputations.length > 1 ? allReputations : reputations}
     />
   )
 }

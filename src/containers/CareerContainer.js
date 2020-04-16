@@ -5,7 +5,7 @@ import Career from '../components/Career'
 import { WrappedSpinner as Spinner } from '../components/Spinner'
 import ErrorMsg from '../components/ErrorMsg'
 
-const CareerContainer = ({ selectedAccount }) => {
+const CareerContainer = ({ selectedAccount, accounts }) => {
   const [careers, setCareers] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
@@ -37,9 +37,10 @@ const CareerContainer = ({ selectedAccount }) => {
 
   const sumItems = (a, b, item) => a[item] + (b[item] ? parseInt(b[item]) : 0)
 
-  const career = careers.reduce(
+  const combinedCareers = careers.reduce(
     (a, b) => ({
       id: b.id,
+      type: 'combined',
       total_hours_spent_working: sumItems(a, b, 'total_hours_spent_working'),
       length_of_work: sumItems(a, b, 'length_of_work'),
       first_activity_date: moment(b.first_activity_date, 'YYYY-MM-DD').isBefore(
@@ -61,7 +62,16 @@ const CareerContainer = ({ selectedAccount }) => {
     }
   )
 
-  return <Career career={career} />
+  const allCareers = [
+    combinedCareers,
+    ...careers.map((career) => ({
+      ...career,
+      account: accounts.find((account) => account.id === career.account)
+        .data_partner,
+    })),
+  ]
+
+  return <Career careers={careers.length > 1 ? allCareers : careers} />
 }
 
 export default CareerContainer

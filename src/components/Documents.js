@@ -7,7 +7,7 @@ const StyledDocuments = styled.div`
   max-width: 70rem;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
 `
 
 const Document = styled.div`

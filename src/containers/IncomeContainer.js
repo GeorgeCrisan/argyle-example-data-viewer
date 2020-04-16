@@ -4,7 +4,7 @@ import Income from '../components/Income'
 import { WrappedSpinner as Spinner } from '../components/Spinner'
 import ErrorMsg from '../components/ErrorMsg'
 
-const IncomeContainer = ({ selectedAccount }) => {
+const IncomeContainer = ({ selectedAccount, accounts }) => {
   const [incomes, setIncomes] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
@@ -38,7 +38,7 @@ const IncomeContainer = ({ selectedAccount }) => {
   const sumItems = (a, b, item) =>
     ((a[item] * 100 + (b[item] ? b[item] * 100 : 0)) * 0.01).toFixed(2)
 
-  const income = incomes.reduce(
+  const combinedIncome = incomes.reduce(
     (a, b) => ({
       id: b.id,
       pay: sumItems(a, b, 'pay'),
@@ -47,11 +47,21 @@ const IncomeContainer = ({ selectedAccount }) => {
       fees: sumItems(a, b, 'fees'),
       total: sumItems(a, b, 'total'),
       currency: b.currency,
+      type: 'combined',
     }),
     { total: 0, pay: 0, tips: 0, bonus: 0, fees: 0 }
   )
 
-  return <Income income={income} />
+  const allIncomes = [
+    combinedIncome,
+    ...incomes.map((income) => ({
+      ...income,
+      account: accounts.find((account) => account.id === income.account)
+        .data_partner,
+    })),
+  ]
+
+  return <Income incomes={incomes.length > 1 ? allIncomes : incomes} />
 }
 
 export default IncomeContainer

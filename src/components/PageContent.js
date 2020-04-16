@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import CallMerge from '@material-ui/icons/CallMerge'
 import Loop from '@material-ui/icons/Loop'
 import { NavLink } from 'react-router-dom'
+import { firstWordToUpperCase } from '../helpers'
 
 const StyledPageContent = styled.div`
   border-radius: 5px;
@@ -158,7 +159,7 @@ const PageContent = ({
   accounts,
   selectAccount,
   selectedAccount,
-  fullName
+  fullName,
 }) => {
   const combinedId = 'combined'
 
@@ -175,7 +176,7 @@ const PageContent = ({
           <PartnerName>Combined</PartnerName>
         </NavItem>
         {accounts.length &&
-          accounts.map(account => (
+          accounts.map((account) => (
             <NavItem
               active={selectedAccount.id === account.id}
               onClick={() => selectAccount(account)}
@@ -185,7 +186,9 @@ const PageContent = ({
                 alt={account.data_partner}
                 src={`https://res.cloudinary.com/argyle-media/image/upload/c_lfill,w_auto,g_auto,q_auto,dpr_auto,f_auto/v1566809938/partner-logos/${account.data_partner}.png`}
               />
-              <PartnerName>{account.data_partner}</PartnerName>
+              <PartnerName>
+                {firstWordToUpperCase(account.data_partner)}
+              </PartnerName>
             </NavItem>
           ))}
       </NavItems>
@@ -199,16 +202,17 @@ const PageContent = ({
                   key={path}
                   to={{
                     pathname: path,
-                    state: { fullName }
+                    state: { fullName },
                   }}
                   activeClassName="selected"
                 >
                   {navLinkName}
-                  {combinedAccountsData[id].status === 'in_progress' && (
-                    <SpinningIcon>
-                      <Loop />
-                    </SpinningIcon>
-                  )}
+                  {combinedAccountsData[id] &&
+                    combinedAccountsData[id].status === 'in_progress' && (
+                      <SpinningIcon>
+                        <Loop />
+                      </SpinningIcon>
+                    )}
                 </StyledNavLink>
               )
           )}
