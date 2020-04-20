@@ -42,9 +42,21 @@ const Text = styled.div`
 const Documents = ({ documents }) => (
   <StyledDocuments>
     {documents.map(
-      ({ id, document_number, document_type, expiration_date, created_at }) => (
+      ({
+        id,
+        document_number,
+        document_type,
+        expiration_date,
+        created_at,
+        data_partner,
+        empty,
+      }) => (
         <Document key={id}>
-          <Title>{firstWordToUpperCase(document_type)}</Title>
+          <Title>
+            {empty
+              ? `No Data (${firstWordToUpperCase(data_partner)})`
+              : firstWordToUpperCase(document_type)}
+          </Title>
           {document_number && (
             <Item>
               <Label>Document number</Label>
