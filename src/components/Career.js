@@ -52,46 +52,57 @@ const Label = styled.div`
 
 const Career = ({ careers }) => (
   <StyledCareers>
-    {careers.map((career, i) => (
-      <StyledCareer greyBackground={careers.length > 1} key={career.id + i}>
-        {!!careers.length > 1 && (
-          <Title>
-            {career.type === 'combined'
-              ? 'Combined'
-              : firstWordToUpperCase(career.account)}
-          </Title>
-        )}
-        <CareerItem>
-          <TotalHours>{`${
-            career.total_hours_spent_working || 0
-          } hours`}</TotalHours>
-          <Label>Total hours working</Label>
-        </CareerItem>
+    {careers.map(
+      (
+        {
+          length_of_work,
+          first_activity_date,
+          id,
+          account,
+          type,
+          total_hours_spent_working,
+          last_activity_date,
+        },
+        i
+      ) => (
+        <StyledCareer greyBackground={careers.length > 1} key={id + i}>
+          {!!careers.length > 1 && (
+            <Title>
+              {type === 'combined' ? 'Combined' : firstWordToUpperCase(account)}
+            </Title>
+          )}
+          <CareerItem>
+            <TotalHours>{`${total_hours_spent_working || 0} hours`}</TotalHours>
+            <Label>Total hours working</Label>
+          </CareerItem>
 
-        <CareerItem>
-          <Value>{`${career.length_of_work || 0} days`}</Value>
-          <Label>Length of work</Label>
-        </CareerItem>
+          <CareerItem>
+            <Value>{`${
+              length_of_work ? Math.round(length_of_work) : 0
+            } days`}</Value>
+            <Label>Length of work</Label>
+          </CareerItem>
 
-        <CareerItem>
-          <Value>
-            {career.first_activity_date
-              ? moment(career.first_activity_date).format('MMM D, YYYY')
-              : '-'}
-          </Value>
-          <Label>First activity date</Label>
-        </CareerItem>
+          <CareerItem>
+            <Value>
+              {first_activity_date
+                ? moment(first_activity_date).format('MMM D, YYYY')
+                : '-'}
+            </Value>
+            <Label>First activity date</Label>
+          </CareerItem>
 
-        <CareerItem>
-          <Value>
-            {career.last_activity_date
-              ? moment(career.last_activity_date).format('MMM D, YYYY')
-              : '-'}
-          </Value>
-          <Label>Last activity date</Label>
-        </CareerItem>
-      </StyledCareer>
-    ))}
+          <CareerItem>
+            <Value>
+              {last_activity_date
+                ? moment(last_activity_date).format('MMM D, YYYY')
+                : '-'}
+            </Value>
+            <Label>Last activity date</Label>
+          </CareerItem>
+        </StyledCareer>
+      )
+    )}
   </StyledCareers>
 )
 
