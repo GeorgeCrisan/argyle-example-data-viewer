@@ -78,50 +78,39 @@ const AchievementDescription = styled.div`
 
 const Reputation = ({ reputations }) => (
   <StyledReputations>
-    {reputations.map((reputation, i) => (
-      <StyledReputation
-        greyBackground={reputations.length > 1}
-        key={reputation.id + i}
-      >
-        {reputations.length > 1 && (
-          <Title>
-            {reputation.type === 'combined'
-              ? 'Combined'
-              : firstWordToUpperCase(reputation.account)}
-          </Title>
-        )}
-        <RatingWrapper>
-          {reputation.rating ? (
+    {reputations.map(
+      ({ type, id, account, rating, acceptance_rate, achievements }, i) => (
+        <StyledReputation greyBackground={reputations.length > 1} key={id + i}>
+          {reputations.length > 1 && (
+            <Title>
+              {type === 'combined' ? 'Combined' : firstWordToUpperCase(account)}
+            </Title>
+          )}
+          <RatingWrapper>
             <RatingItem>
-              <Rating>{reputation.rating}</Rating>
+              <Rating>{rating || '-'}</Rating>
               <Label>Rating</Label>
             </RatingItem>
-          ) : (
-            '-'
-          )}
-          <VerticalDivider />
-          {reputation.acceptance_rate ? (
+            <VerticalDivider />
             <RatingItem>
-              <Rating>{reputation.acceptance_rate}%</Rating>
+              <Rating>{acceptance_rate ? `${acceptance_rate}%` : '-'}</Rating>
               <Label>Acceptance Rate</Label>
             </RatingItem>
-          ) : (
-            '-'
+          </RatingWrapper>
+          {achievements && !!achievements.length && (
+            <Achievements>
+              <AchievementsTitle>Achievements</AchievementsTitle>
+              {achievements.map(({ label, description }, i) => (
+                <Achievement key={label + i}>
+                  <AchievementLabel>{label}</AchievementLabel>
+                  <AchievementDescription>{description}</AchievementDescription>
+                </Achievement>
+              ))}
+            </Achievements>
           )}
-        </RatingWrapper>
-        {reputation.achievements && !!reputation.achievements.length && (
-          <Achievements>
-            <AchievementsTitle>Achievements</AchievementsTitle>
-            {reputation.achievements.map(({ label, description }, i) => (
-              <Achievement key={label + i}>
-                <AchievementLabel>{label}</AchievementLabel>
-                <AchievementDescription>{description}</AchievementDescription>
-              </Achievement>
-            ))}
-          </Achievements>
-        )}
-      </StyledReputation>
-    ))}
+        </StyledReputation>
+      )
+    )}
   </StyledReputations>
 )
 
