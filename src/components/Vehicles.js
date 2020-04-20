@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {
   DirectionsCar,
   DirectionsBike,
-  DirectionsWalk
+  DirectionsWalk,
 } from '@material-ui/icons'
 import { firstWordToUpperCase } from '../helpers'
 
@@ -53,43 +53,39 @@ const DataPartnerIcon = styled.img`
   border-radius: 50%;
 `
 
-const RenderVehicleIcon = type => {
-  switch (type) {
-    case 'bicycle':
-      return <DirectionsBike />
-    case 'pedestrian':
-      return <DirectionsWalk />
-    case 'car':
-      return <DirectionsCar />
-    default:
-      return <DirectionsCar />
-  }
+const vehicleIcon = {
+  bicycle: <DirectionsBike />,
+  pedestrian: <DirectionsWalk />,
+  car: <DirectionsCar />,
 }
 
 const Vehicles = ({ vehicles }) => (
   <StyledVehicles>
     {vehicles.map(
-      ({ id, model, year, identification, type, data_partner }, i) => {
-        if (!model && !type) return null
-
-        return (
-          <StyledVehicle key={id + i}>
-            <Details>
-              <VehicleIcon>{RenderVehicleIcon(type)}</VehicleIcon>
-              <Name>
-                {type === 'car' && model
-                  ? `${model} ${year}`
-                  : firstWordToUpperCase(type)}
-                <PlateNumber>{identification}</PlateNumber>
-              </Name>
-            </Details>
+      (
+        { id, model, year, identification, type = 'car', data_partner, empty },
+        i
+      ) => (
+        <StyledVehicle key={id + i}>
+          <Details>
+            <VehicleIcon>{vehicleIcon[type]}</VehicleIcon>
+            <Name>
+              {empty
+                ? 'No Data'
+                : type === 'car' && model
+                ? `${model} ${year}`
+                : firstWordToUpperCase(type)}
+              <PlateNumber>{identification}</PlateNumber>
+            </Name>
+          </Details>
+          {data_partner && (
             <DataPartnerIcon
               alt={data_partner}
               src={`https://res.cloudinary.com/argyle-media/image/upload/c_lfill,w_auto,g_auto,q_auto,dpr_auto,f_auto/v1566809938/partner-logos/${data_partner}.png`}
             />
-          </StyledVehicle>
-        )
-      }
+          )}
+        </StyledVehicle>
+      )
     )}
   </StyledVehicles>
 )
