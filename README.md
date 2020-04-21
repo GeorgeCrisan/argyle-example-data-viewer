@@ -1,6 +1,6 @@
 # Argyle Data Viewer
 
-Argyle Data Viewer app covers all possible endpoints you can access from Argyle API. [Argyle Docs](https://argyle.io/docs/api-reference). Using the data received from each of these endpoints we created a visual representation how to integrate it into your app in a simple way. It covers both [Argyle API](https://argyle.io/docs/api-reference) and [Argyle Link](https://argyle.io/docs/argyle-link/overview) integration.
+Argyle Data Viewer app covers all possible endpoints you can access from [Argyle API](https://argyle.io/docs/api-reference). Using the data received from each of these endpoints we created a visual representation how to integrate it into your app in a simple way. It covers both [Argyle API](https://argyle.io/docs/api-reference) and [Argyle Link](https://argyle.io/docs/argyle-link/overview) integration.
 
 ## Features
 
