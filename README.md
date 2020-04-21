@@ -55,7 +55,7 @@ Firebase is used in this project to store `userId`, `fullName` and `email` for e
 
 #### Steps for creating a Firebase project:
 
-- Go to https://console.firebase.google.com
+- Go to [Firebase Console](https://console.firebase.google.com)
 - Click **Add Project** button
 - Add project name, follow the steps displayed
 - Under _Get started by adding Firebase to your app.._ choose **Web** icon and create a web project
