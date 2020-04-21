@@ -41,13 +41,13 @@ When signed in you can access all connected users data from firebase. The `userI
 
 ---
 
-> This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ⚛️
 
-## How to set up the app locally:
+## How to set up and run the app locally:
 
-#### Create and Setup Firebase project
+### Create and set up a project in [Firebase](https://firebase.google.com/docs/web/setup)
 
-Firebase is used in this project to store user ids, full name and email in the user list, so the users added to this app only would be displayed in the list.
+Firebase is used in this project to store `userId`, `fullName` and `email` for each user in the user list. As mentioned above `userId` is neccessary to fetch data for each user individually. For example [list profiles](https://argyle.io/docs/api-reference/profiles/list-profiles).
 
 - Go to https://console.firebase.google.com
 - Click `Add Project` button
