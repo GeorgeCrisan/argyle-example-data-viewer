@@ -11,7 +11,7 @@ When running locally you can add users visiting `http://localhost:3000/start`. F
 <details open><summary>Link Demo</summary>
 <br>
   <p align="center">
-    <img src="./demo-gifs/plugin.gif" alt="A gif to plugin">
+    <img src="./demo-gifs/link.gif" alt="link gif">
   </p>
 </details>
 
@@ -35,7 +35,7 @@ When signed in you can access all connected users data from firebase. The `userI
 <details open><summary>User Demo</summary>
 <br>
   <p align="center">
-    <img src="./demo-gifs/profile.gif" alt="A gif to profile">
+    <img src="./demo-gifs/profile.gif" alt="profile gif">
   </p>
 </details>
 

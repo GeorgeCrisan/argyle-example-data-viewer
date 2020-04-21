@@ -23,7 +23,7 @@
           onUserCreated: ({ userId, userToken }) => {
             localStorage.setItem('jwtToken', userToken)
             window.userCreated({ userToken, userId })
-          }
+          },
         })
       }
     </script>
