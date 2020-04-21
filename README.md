@@ -2,7 +2,17 @@
 
 Argyle Data Viewer app covers all possible endpoints you can access from Argyle API. [Argyle Docs](https://argyle.io/docs/api-reference)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+[Authentication](https://argyle.io/docs/api-reference/authentication) using `client_id` and `client_secret` which you can find in [Argyle Console](https://console.argyle.io)
+
+<details open><summary>Sign In Demo</summary>
+  <p align="center">
+    <img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process">
+  </p>
+</details>
+
+
+> This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## How to set up the app:
 
@@ -78,11 +88,7 @@ Run this command to deploy the app on firebase. `npm run build` should be run be
 For this to work you need to install firebase tools globally
 `npm install -g firebase-tools`
 
-<details open><summary>Sign In Demo</summary>
-  <p align="center">
-    <img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process">
-  </p>
-</details>
+
 
 <details open><summary>Profile Demo</summary>
   <p align="center">
