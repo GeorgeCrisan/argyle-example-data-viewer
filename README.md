@@ -77,3 +77,11 @@ For this to work you need to install firebase tools globally
 <details open><summary>Sign In Demo</summary>
 <img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process" align="center">
 </details>
+
+<details open><summary>Profile Demo</summary>
+<img src="./demo-gifs/profile.gif" alt="A gif to profile" align="center">
+</details>
+
+<details open><summary>Plugin Demo</summary>
+<img src="./demo-gifs/plugin.gif" alt="A gif to plugin" align="center">
+</details>
