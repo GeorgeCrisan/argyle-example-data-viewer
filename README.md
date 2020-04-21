@@ -86,7 +86,7 @@ For this to work you need to install firebase tools globally
   </p>
 </details>
 
-<details open><summary>Plugin Demo</summary>
+<details open><summary>Link Demo</summary>
   <p align="center">
     <img src="./demo-gifs/plugin.gif" alt="A gif to plugin">
   </p>
