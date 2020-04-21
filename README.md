@@ -5,13 +5,16 @@ Argyle Data Viewer app covers all possible endpoints you can access from Argyle 
 ## Features
 
 ### :lock: [Authentication](https://argyle.io/docs/api-reference/authentication) 
-Use `client_id` and `client_secret` to Sign in. These keys can be found in [Argyle Console](https://console.argyle.io)
+Use `client_id` and `client_secret` to Sign in. These keys can be found in [Argyle Console](https://console.argyle.io).
 
 <details open><summary>Sign In Demo</summary>
   <p align="center">
     <img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process">
   </p>
 </details>
+
+
+
 
 ### :raising_hand: User View, ...
 
