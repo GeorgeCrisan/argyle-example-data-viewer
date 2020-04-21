@@ -4,36 +4,42 @@ Argyle Data Viewer app covers all possible endpoints you can access from Argyle 
 
 ## Features
 
-### :lock: [Authentication](https://argyle.io/docs/api-reference/authentication) 
-Use `client_id` and `client_secret` to Sign in. These keys can be found in [Argyle Console](https://console.argyle.io).
+### :space_invader: Usage of the Link
 
-<details open><summary>Sign In Demo</summary>
-  <p align="center">
-    <img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process">
-  </p>
-</details>
-
-
-
-
-### :raising_hand: User View, ...
-
-<details open><summary>Profile Demo</summary>
-  <p align="center">
-    <img src="./demo-gifs/profile.gif" alt="A gif to profile">
-  </p>
-</details>
-
-### :space_invader: Link integration, ...
+When running locally you can add users visiting `http://localhost:3000/start`. Full name and email is required so the user reference can be saved in the database. User can choose work accounts he/she works for and connect using his/her credentials. When connecting the first account, a new `userId` is generated and stored in the firebase database. This `id` is used in seperate user view to call API endpoints for getting all neccessary data.
 
 <details open><summary>Link Demo</summary>
+<br>
   <p align="center">
     <img src="./demo-gifs/plugin.gif" alt="A gif to plugin">
   </p>
 </details>
 
+### :lock: [Authentication](https://argyle.io/docs/api-reference/authentication)
 
-------
+Use `client_id` and `client_secret` to Sign in. These keys can be found in [Argyle Console](https://console.argyle.io). Authentication is needed to access and use all protected API endpoints, these keys are set in `auth` headers.
+<br>
+<br>
+
+<details open><summary>Sign In / Sign Out Demo</summary>
+<br>
+  <p align="center">
+    <img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process">
+  </p>
+</details>
+
+### :raising_hand: User View
+
+When signed in you can access all connected users data
+
+<details open><summary>User Demo</summary>
+<br>
+  <p align="center">
+    <img src="./demo-gifs/profile.gif" alt="A gif to profile">
+  </p>
+</details>
+
+---
 
 > This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -110,4 +116,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 Run this command to deploy the app on firebase. `npm run build` should be run before that.
 For this to work you need to install firebase tools globally
 `npm install -g firebase-tools`
-
