@@ -1,3 +1,7 @@
+# Argyle Data Viewer
+
+Argyle Data Viewer app covers all possible endpoints you can access from Argyle API. [Argyle Docs](https://argyle.io/docs/api-reference)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## How to set up the app:
