@@ -4,7 +4,7 @@ Argyle Data Viewer app covers all possible endpoints you can access from Argyle 
 
 ## Features
 
-- 🔒[Authentication](https://argyle.io/docs/api-reference/authentication) using `client_id` and `client_secret` which you can find in [Argyle Console](https://console.argyle.io)
+- 🔒![Authentication](https://argyle.io/docs/api-reference/authentication) using `client_id` and `client_secret` which you can find in [Argyle Console](https://console.argyle.io)
 
 <details open><summary>Sign In Demo</summary>
   <p align="center">
@@ -29,6 +29,7 @@ Argyle Data Viewer app covers all possible endpoints you can access from Argyle 
 </details>
 
 
+------
 
 > This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
