@@ -4,7 +4,7 @@ Argyle Data Viewer app covers all possible endpoints you can access from Argyle 
 
 ## Features
 
-### :space_invader: Usage of the Link
+### :space_invader: [Usage of the Link](https://argyle.io/docs/argyle-link/overview)
 
 When running locally you can add users visiting `http://localhost:3000/start`. Full name and email is required so the user reference can be saved in the database. User can choose work accounts he/she works for and connect using his/her credentials. When connecting the first account, a new `userId` is generated and stored in the firebase database. This `id` is used in seperate user view to call API endpoints for getting all neccessary data.
 
@@ -17,7 +17,7 @@ When running locally you can add users visiting `http://localhost:3000/start`. F
 
 ### :lock: [Authentication](https://argyle.io/docs/api-reference/authentication)
 
-Use `client_id` and `client_secret` to Sign in. These keys can be found in [Argyle Console](https://console.argyle.io). Authentication is needed to access and use all protected API endpoints, these keys are set in `auth` headers.
+Use `client_id` and `client_secret` to Sign in. These keys can be found in [Argyle Console](https://console.argyle.io). Authentication is needed to access and use all protected API endpoints, these keys are set in HTTP request `auth` headers.
 <br>
 <br>
 
@@ -30,7 +30,7 @@ Use `client_id` and `client_secret` to Sign in. These keys can be found in [Argy
 
 ### :raising_hand: User View
 
-When signed in you can access all connected users data
+When signed in you can access all connected users data from firebase. The `userId` stored in firebase is used to call API requests for each user individually, for example [list all accounts](https://argyle.io/docs/api-reference/accounts/list-accounts) for the user.
 
 <details open><summary>User Demo</summary>
 <br>
