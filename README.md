@@ -12,7 +12,7 @@ Argyle Data Viewer app covers all possible endpoints you can access from Argyle 
   </p>
 </details>
 
-- User View, ...
+- :raising_hand: User View, ...
 
 <details open><summary>Profile Demo</summary>
   <p align="center">
