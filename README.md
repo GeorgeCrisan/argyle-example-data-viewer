@@ -48,11 +48,14 @@ When signed in you can access all connected users data from firebase. The `userI
 ### Create and set up a project in [Firebase](https://firebase.google.com/docs/web/setup)
 
 Firebase is used in this project to store `userId`, `fullName` and `email` for each user in the user list. As mentioned above `userId` is neccessary to fetch data for each user individually. For example [list profiles](https://argyle.io/docs/api-reference/profiles/list-profiles).
+<br>
+
+#### Steps for creating a Firebase project:
 
 - Go to https://console.firebase.google.com
-- Click `Add Project` button
+- Click **Add Project** button
 - Add project name, follow the steps displayed
-- Under 'Get started by adding Firebase to your app..' choose `Web` icon, create web project
+- Under 'Get started by adding Firebase to your app..' choose **Web** icon, create web project
 - Add a name to the Project
 - Save the API keys (you can find them later in project settings)
 
