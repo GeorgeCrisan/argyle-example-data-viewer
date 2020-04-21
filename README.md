@@ -60,7 +60,7 @@ Firebase is used in this project to store `userId`, `fullName` and `email` for e
 - Add project name, follow the steps displayed
 - Under _Get started by adding Firebase to your app.._ choose **Web** icon and create a web project
 - Add a name for the Project
-- Save the API keys (you can find them later in project settings)
+- Save the API keys (you can find them later in the project settings)
 
 ```js
 var firebaseConfig = {
