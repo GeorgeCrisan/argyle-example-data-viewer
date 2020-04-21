@@ -14,7 +14,7 @@ Argyle Data Viewer app covers all possible endpoints you can access from Argyle 
 
 > This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## How to set up the app:
+## How to set up the app locally:
 
 #### Create and Setup Firebase project
 
