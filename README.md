@@ -62,17 +62,17 @@ Firebase is used in this project to store `userId`, `fullName` and `email` for e
 - Add a name for the Project
 - Save the API keys (you can find them later in project settings)
 
-```
-  var firebaseConfig = {
-    apiKey: "example-api-key",
-    authDomain: "example-domain.firebaseapp.com",
-    databaseURL: "https://example-urk.firebaseio.com",
-    projectId: "example-id",
-    storageBucket: "example-bucket-id",
-    messagingSenderId: "example-sender-id",
-    appId: "example-app-id",
-    measurementId: "example-measurement-id"
-  };
+```js
+var firebaseConfig = {
+  apiKey: 'example-api-key',
+  authDomain: 'example-domain.firebaseapp.com',
+  databaseURL: 'https://example-urk.firebaseio.com',
+  projectId: 'example-id',
+  storageBucket: 'example-bucket-id',
+  messagingSenderId: 'example-sender-id',
+  appId: 'example-app-id',
+  measurementId: 'example-measurement-id',
+}
 ```
 
 #### Rename `.env.example` to `.env` in the root folder:
