@@ -75,15 +75,19 @@ For this to work you need to install firebase tools globally
 `npm install -g firebase-tools`
 
 <details open><summary>Sign In Demo</summary>
-<p align="center">
-<img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process">
-</p>
+  <p align="center">
+    <img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process">
+  </p>
 </details>
 
 <details open><summary>Profile Demo</summary>
-<img src="./demo-gifs/profile.gif" alt="A gif to profile" align="center">
+  <p align="center">
+    <img src="./demo-gifs/profile.gif" alt="A gif to profile">
+  </p>
 </details>
 
 <details open><summary>Plugin Demo</summary>
-<img src="./demo-gifs/plugin.gif" alt="A gif to plugin" align="center">
+  <p align="center">
+    <img src="./demo-gifs/plugin.gif" alt="A gif to plugin">
+  </p>
 </details>
