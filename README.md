@@ -55,8 +55,8 @@ Firebase is used in this project to store `userId`, `fullName` and `email` for e
 - Go to https://console.firebase.google.com
 - Click **Add Project** button
 - Add project name, follow the steps displayed
-- Under 'Get started by adding Firebase to your app..' choose **Web** icon, create web project
-- Add a name to the Project
+- Under _Get started by adding Firebase to your app.._ choose **Web** icon and create a web project
+- Add a name for the Project
 - Save the API keys (you can find them later in project settings)
 
 ```
@@ -85,8 +85,8 @@ REACT_APP_FIREBASE_PROJECT_ID=
 REACT_APP_PLUGIN_KEY=
 ```
 
-- `REACT_APP_FIREBASE_API_KEY`, `REACT_APP_FIREBASE_DATABASE_URL`, `REACT_APP_FIREBASE_AUTH_DOMAIN`, `REACT_APP_FIREBASE_PROJECT_ID`- use 'apiKey, databaseURL, authDomain, projectId' which you retrieved from firebase setup (or settings in your created app).
-- `REACT_APP_PLUGIN_KEY` - go to https://console.argyle.io and copy the `plugin_key` value from API Keys, the `client_id` and `client_secret` keys will be used for signing in.
+- `REACT_APP_FIREBASE_API_KEY`, `REACT_APP_FIREBASE_DATABASE_URL`, `REACT_APP_FIREBASE_AUTH_DOMAIN`, `REACT_APP_FIREBASE_PROJECT_ID`- use _apiKey, databaseURL, authDomain, projectId_ which you retrieved from firebase setup (or settings in your created app).
+- `REACT_APP_PLUGIN_KEY` - go to [Argyle Console](https://console.argyle.io) and copy the `plugin_key` value from API Keys, the `client_id` and `client_secret` keys will be used for signing in.
 
 ## Start the app:
 
