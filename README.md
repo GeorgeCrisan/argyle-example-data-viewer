@@ -75,7 +75,9 @@ For this to work you need to install firebase tools globally
 `npm install -g firebase-tools`
 
 <details open><summary>Sign In Demo</summary>
-<img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process" align="center">
+<p align="center">
+<img src="./demo-gifs/sign_in.gif" alt="A gif to show sign in process">
+</p>
 </details>
 
 <details open><summary>Profile Demo</summary>
