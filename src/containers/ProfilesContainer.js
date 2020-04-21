@@ -39,7 +39,47 @@ const ProfilesContainer = ({ selectedAccount }) => {
     return <ErrorMsg selectedAccount={selectedAccount} />
   }
 
-  return profiles.map(
+  const mockProfiles = [
+    {
+      id: 'c3950afe-93d5-4932-967c-796283426779',
+      full_name: 'Rachel Wallace',
+      email: 'rachel@gmail.com',
+      phone_number: '+19129413464',
+      birth_date: null,
+      picture_url:
+        'https://res.cloudinary.com/argyle-media/image/upload/v1587463764/rachel.jpg',
+      address: {
+        city: 'BRONX',
+        line1: '2410 Green Blvd',
+        line2: null,
+        state: 'CA',
+        country: 'US',
+        postal_code: '83131',
+      },
+      account: '6145982b-2003-450f-aebf-323db5847dc6',
+    },
+    {
+      id: 'e294e6fa-12e7-48d9-97fd-3b79ef0d29e8',
+      full_name: 'Rachel Wallace',
+      email: 'rachel@gmail.com',
+      phone_number: '+19148762532',
+      birth_date: null,
+      picture_url:
+        'https://res.cloudinary.com/argyle-media/image/upload/v1587463764/rachel.jpg',
+      address: {
+        city: 'BRONX',
+        line1: '2410 Green Blvd',
+        line2: null,
+        state: 'CA',
+        country: 'US',
+        postal_code: '83131',
+      },
+      account: '66d5cc76-deff-4814-a02c-af5e59c48968',
+    },
+  ]
+  const x = selectedAccount.id === 'combined' ? mockProfiles : [mockProfiles[0]]
+
+  return x.map(
     ({ full_name, email, phone_number, picture_url, address, id }) => (
       <StyledProfile key={id}>
         <Profile

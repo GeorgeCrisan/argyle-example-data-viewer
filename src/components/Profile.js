@@ -52,36 +52,36 @@ const Name = styled.h3`
 const renderProfileDetails = ({ email, phoneNumber, address }) => [
   {
     label: 'Email',
-    value: email
+    value: email,
   },
   {
     label: 'Phone number',
-    value: phoneNumber
+    value: phoneNumber,
   },
   {
     label: 'City',
-    value: address.city
+    value: address.city,
   },
   {
     label: 'Line1',
-    value: address.line1
+    value: address.line1,
   },
   {
     label: 'Line2',
-    value: address.line2
+    value: address.line2,
   },
   {
     label: 'State',
-    value: address.state
+    value: address.state,
   },
   {
     label: 'Country',
-    value: address.country
+    value: address.country,
   },
   {
     label: 'Postal Code',
-    value: address.postal_code
-  }
+    value: address.postal_code,
+  },
 ]
 
 const Profile = ({ image, fullName, email, phoneNumber, address }) => (
@@ -92,7 +92,7 @@ const Profile = ({ image, fullName, email, phoneNumber, address }) => (
       {renderProfileDetails({
         email,
         phoneNumber,
-        address
+        address,
       }).map(({ label, value }, i) => (
         <DetailWrapper key={`${label}${i}`}>
           <DetailLabel>{label}:</DetailLabel>

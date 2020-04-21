@@ -54,7 +54,6 @@ const VehiclesContainer = ({ selectedAccount, accounts }) => {
     return <ErrorMsg selectedAccount={selectedAccount} />
   }
 
-  if (!vehicles.length) return null
   return <Vehicles vehicles={vehicles} />
 }
 

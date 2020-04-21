@@ -75,7 +75,7 @@ const Vehicles = ({ vehicles }) => (
                 : type === 'car' && model
                 ? `${model} ${year}`
                 : firstWordToUpperCase(type)}
-              <PlateNumber>{identification}</PlateNumber>
+              <PlateNumber>{identification ? 'HRH8465' : ''}</PlateNumber>
             </Name>
           </Details>
           {data_partner && (
