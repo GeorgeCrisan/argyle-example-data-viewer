@@ -88,6 +88,17 @@ REACT_APP_PLUGIN_KEY=
 
 - `REACT_APP_FIREBASE_API_KEY`, `REACT_APP_FIREBASE_DATABASE_URL`, `REACT_APP_FIREBASE_AUTH_DOMAIN`, `REACT_APP_FIREBASE_PROJECT_ID`- use _apiKey, databaseURL, authDomain, projectId_ which you retrieved from firebase setup (or settings in your created app).
 - `REACT_APP_PLUGIN_KEY` - go to [Argyle Console](https://console.argyle.io) and copy the `plugin_key` value from API Keys, the `client_id` and `client_secret` keys will be used for signing in.
+  <br>
+
+#### Add the Firebase project name to `.firebaserc` file in the project root
+
+```
+{
+  "projects": {
+    "default": "<YOUR_PROJECT_NAME>"
+  }
+}
+```
 
 ## Start the app:
 
