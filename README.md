@@ -9,7 +9,7 @@ Additionaly [Firebase Realtime Database](https://firebase.google.com/docs/databa
 
 ### :space_invader: [Usage of the Link](https://argyle.io/docs/argyle-link/overview)
 
-When running locally you can add users visiting `http://localhost:3000/start`. **Full name** and **email** are required to have the user reference saved in the database. User can choose work accounts he/she works for and connect using his/her credentials. When connecting the first account, a new `userId` is generated and stored in the firebase database. This `id` is used in seperate user view to call API endpoints for getting all neccessary data.
+When running locally you can add users visiting `http://localhost:3000/start`. **Full name** and **email** are required to have the user reference saved in the database. User can choose work accounts they work for and connect using their credentials. When connecting the first account, a new `userId` is generated and stored in the firebase database. This `id` is used in seperate user view to call API endpoints for getting all neccessary data.
 
 <details open><summary>Link Demo</summary>
 <br>
