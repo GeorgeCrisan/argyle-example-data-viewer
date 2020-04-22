@@ -1,15 +1,15 @@
 # Argyle Data Viewer
 
-Argyle Data Viewer app covers all possible endpoints you can access from [Argyle API](https://argyle.io/docs/api-reference). Using the data received from each of these endpoints we created a visual representation how to integrate it into your app in a simple way. It covers both [Argyle API](https://argyle.io/docs/api-reference) and [Argyle Link](https://argyle.io/docs/argyle-link/overview) integration.
+Argyle Data Viewer example app covers most of the endpoints you can access in the [Argyle API](https://argyle.io/docs/api-reference). Using the data received from each of these endpoints we created a visual representation of how to integrate it into your app in a simple way. It covers both [Argyle API](https://argyle.io/docs/api-reference) and [Argyle Link](https://argyle.io/docs/argyle-link/overview) integration.
 <br>
 <br>
-Additionaly [Firebase Realtime Database](https://firebase.google.com/docs/database) is used for storing user data, therefore the same app with the same data (using the same `plugin_key`) can be used in multiple sessions and devices.
+Argyle Data Viewer uses [Firebase Realtime Database](https://firebase.google.com/docs/database) to store data. Given you use the same database configuration, and the `plugin_key` (using the same `plugin_key`) can be run multiple instances of the app on different devices.
 
 ## Features
 
 ### :space_invader: [Usage of the Link](https://argyle.io/docs/argyle-link/overview)
 
-When running locally you can add users visiting `http://localhost:3000/start`. **Full name** and **email** are required to have the user reference saved in the database. User can choose work accounts they work for and connect using their credentials. When connecting the first account, a new `userId` is generated and stored in the firebase database. This `id` is used in seperate user view to call API endpoints for getting all neccessary data.
+When running locally, you can add new users to the data viewer by visiting `http://localhost:3000/start`. **Full name** and **email** are required to have the user reference saved in the database. User can choose the work platforms they want to connect and login with their credentials. When connecting the first account, a new `userId` is generated and stored in the firebase database. This `id` is used in a seperate user view to call the API endpoints for getting all neccessary data.
 
 <details open><summary>Link Demo</summary>
 <br>
@@ -20,7 +20,7 @@ When running locally you can add users visiting `http://localhost:3000/start`. *
 
 ### :lock: [Authentication](https://argyle.io/docs/api-reference/authentication)
 
-Use `client_id` and `client_secret` to Sign in. These keys can be found in [Argyle Console](https://console.argyle.io). Authentication is needed to access and use all protected API endpoints, these keys are set in HTTP request `auth` headers.
+To sign in use `client_id` and `client_secret` that you can find in [Argyle's Console](https://console.argyle.io). Authentication is needed to access and use all protected API endpoints, these keys are set in HTTP request `auth` headers.
 <br>
 <br>
 
@@ -33,7 +33,7 @@ Use `client_id` and `client_secret` to Sign in. These keys can be found in [Argy
 
 ### :raising_hand: User View
 
-When signed in you can access all connected users data from firebase. The `userId` stored in firebase is used to call API requests for each user individually, for example [list all accounts](https://argyle.io/docs/api-reference/accounts/list-accounts) for the user.
+When signed in you can access the data of all the users that shared their data with you by connecting their work accounts. The `userId` stored in firebase is used to make API requests for each user individually. For example, [list all accounts](https://argyle.io/docs/api-reference/accounts/list-accounts) is invoked to get a list of all connected work plaforms for the user.
 
 <details open><summary>User Demo</summary>
 <br>
@@ -57,7 +57,7 @@ Firebase is used in this project to store `userId`, `fullName` and `email` for e
 
 - Go to [Firebase Console](https://console.firebase.google.com)
 - Click **Add Project** button
-- Add project name, follow the steps displayed
+- Add your project name, follow the steps displayed.
 - Under _Get started by adding Firebase to your app.._ choose **Web** icon and create a web project
 - Add a name for the Project
 - Save the API keys (you can find them later in the project settings)
