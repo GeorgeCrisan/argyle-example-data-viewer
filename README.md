@@ -44,8 +44,6 @@ When signed in you can access all connected users data from firebase. The `userI
 
 ---
 
-> This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ⚛️
-
 ## How to set up and run the app locally:
 
 ### Create and set up a project in [Firebase](https://firebase.google.com/docs/web/setup)
@@ -92,6 +90,8 @@ REACT_APP_PLUGIN_KEY=
 - `REACT_APP_PLUGIN_KEY` - go to [Argyle Console](https://console.argyle.io) and copy the `plugin_key` value from API Keys, the `client_id` and `client_secret` keys will be used for signing in.
 
 ## Start the app:
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ⚛️
 
 Run:
 

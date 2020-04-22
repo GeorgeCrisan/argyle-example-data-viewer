@@ -1,5 +1,5 @@
 {
-  "name": "argyle-deep-dive",
+  "name": "argyle-example-data-viewer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
