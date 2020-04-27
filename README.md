@@ -7,7 +7,7 @@ Argyle Data Viewer uses [Firebase Realtime Database](https://firebase.google.com
 
 ## Features
 
-### :space_invader: [Usage of the Link](https://argyle.io/docs/argyle-link/overview)
+### :space_invader: [Usage of Link](https://argyle.io/docs/argyle-link/overview)
 
 When running locally, you can add new users to the data viewer by visiting `http://localhost:3000/start`. **Full name** and **email** are required to have the user reference saved in the database. User can choose the work platforms they want to connect and login with their credentials. When connecting the first account, a new `userId` is generated and stored in the firebase database. This `id` is used in a seperate user view to call the API endpoints for getting all neccessary data.
 
