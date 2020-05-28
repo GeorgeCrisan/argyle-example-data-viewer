@@ -57,9 +57,9 @@ const ReputationsContainer = ({ selectedAccount, accounts }) => {
 
   const allReputations = [
     combinedReputations,
-    ...reputations.map((career) => ({
-      ...career,
-      account: accounts.find((account) => account.id === career.account)
+    ...reputations.map((reputation) => ({
+      ...reputation,
+      account: accounts.find((account) => account.id === reputation.account)
         .data_partner,
     })),
   ]

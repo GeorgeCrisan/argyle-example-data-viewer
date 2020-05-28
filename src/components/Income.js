@@ -50,41 +50,43 @@ const Label = styled.div`
 
 const Income = ({ incomes }) => (
   <StyledIncomes>
-    {incomes.map((income, i) => (
-      <StyledIncome greyBackground={incomes.length > 1} key={income.id + i}>
-        {!!incomes.length > 1 && (
-          <Title>
-            {income.type === 'combined'
-              ? 'Combined'
-              : firstWordToUpperCase(income.account)}
-          </Title>
-        )}
-        <IncomeItem>
-          <Amount>${income.pay}</Amount>
-          <Label>Pay</Label>
-        </IncomeItem>
+    {incomes.map((income, i) =>
+      income ? (
+        <StyledIncome greyBackground={incomes.length > 1} key={income.id + i}>
+          {!!incomes.length > 1 && (
+            <Title>
+              {income.type === 'combined'
+                ? 'Combined'
+                : firstWordToUpperCase(income.account)}
+            </Title>
+          )}
+          <IncomeItem>
+            <Amount>${income.pay}</Amount>
+            <Label>Pay</Label>
+          </IncomeItem>
 
-        <IncomeItem>
-          <Amount>${income.tips}</Amount>
-          <Label>Tips</Label>
-        </IncomeItem>
+          <IncomeItem>
+            <Amount>${income.tips}</Amount>
+            <Label>Tips</Label>
+          </IncomeItem>
 
-        <IncomeItem>
-          <Amount>${income.bonus}</Amount>
-          <Label>Bonus</Label>
-        </IncomeItem>
+          <IncomeItem>
+            <Amount>${income.bonus}</Amount>
+            <Label>Bonus</Label>
+          </IncomeItem>
 
-        <IncomeItem>
-          <Amount>${income.fees}</Amount>
-          <Label>Fees</Label>
-        </IncomeItem>
+          <IncomeItem>
+            <Amount>${income.fees}</Amount>
+            <Label>Fees</Label>
+          </IncomeItem>
 
-        <IncomeItem>
-          <TotalAmount>${`${income.total} ${income.currency}`}</TotalAmount>
-          <Label>Total</Label>
-        </IncomeItem>
-      </StyledIncome>
-    ))}
+          <IncomeItem>
+            <TotalAmount>${`${income.total} ${income.currency}`}</TotalAmount>
+            <Label>Total</Label>
+          </IncomeItem>
+        </StyledIncome>
+      ) : null
+    )}
   </StyledIncomes>
 )
 

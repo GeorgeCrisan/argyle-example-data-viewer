@@ -4,12 +4,12 @@ const API_URL = process.env.REACT_APP_API_URL
 
 const DEFAULT_HEADERS = {
   'Accept': 'application/json',
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
 }
 
 const AUTH = {
   username: localStorage.getItem('clientID'),
-  password: localStorage.getItem('clientSecret')
+  password: localStorage.getItem('clientSecret'),
 }
 
 class Api {
@@ -18,11 +18,11 @@ class Api {
       baseURL: API_URL,
       timeout: 5000,
       headers: {
-        ...DEFAULT_HEADERS
+        ...DEFAULT_HEADERS,
       },
       auth: {
-        ...AUTH
-      }
+        ...AUTH,
+      },
     })
   }
 
@@ -30,8 +30,8 @@ class Api {
     Object.assign(this.api.defaults, {
       auth: {
         username: clientId,
-        password: clientSecret
-      }
+        password: clientSecret,
+      },
     })
   }
 
@@ -39,8 +39,8 @@ class Api {
     const resp = await this.api.get('/users', {
       params: {
         limit: 100,
-        ordering: '-created_at'
-      }
+        ordering: '-created_at',
+      },
     })
     return resp.data.results
   }
@@ -55,8 +55,8 @@ class Api {
       params: {
         user: userId,
         limit: 100,
-        ordering: '-created_at'
-      }
+        ordering: '-created_at',
+      },
     })
 
     return resp.data.results
@@ -69,8 +69,8 @@ class Api {
       params: {
         limit: 100,
         ordering: '-created_at',
-        ...idObj
-      }
+        ...idObj,
+      },
     })
     return resp.data.results
   }
@@ -92,11 +92,7 @@ class Api {
   }
 
   async getIncomes({ accountId, userId }) {
-    return this.getData({ accountId, userId, endpoint: '/incomes' })
-  }
-
-  async getCareers({ accountId, userId }) {
-    return this.getData({ accountId, userId, endpoint: '/careers' })
+    return this.getData({ accountId, userId, endpoint: '/payouts' })
   }
 
   async getReputations({ accountId, userId }) {

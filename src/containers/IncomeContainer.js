@@ -52,13 +52,19 @@ const IncomeContainer = ({ selectedAccount, accounts }) => {
     { total: 0, pay: 0, tips: 0, bonus: 0, fees: 0 }
   )
 
+  const getAccount = (income) =>
+    accounts.find((account) => account.id === income.account)
+
   const allIncomes = [
     combinedIncome,
-    ...incomes.map((income) => ({
-      ...income,
-      account: accounts.find((account) => account.id === income.account)
-        .data_partner,
-    })),
+    ...incomes.map((income) =>
+      getAccount(income)
+        ? {
+            ...income,
+            account: getAccount(income).data_partner,
+          }
+        : null
+    ),
   ]
 
   return <Income incomes={incomes.length > 1 ? allIncomes : incomes} />

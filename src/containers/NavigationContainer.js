@@ -8,7 +8,6 @@ import Activities from './ActivitiesContainer'
 import Vehicles from './VehiclesContainer'
 import Documents from './DocumentsContainer'
 import Incomes from './IncomeContainer'
-import Career from './CareerContainer'
 import Reputations from './ReputationsContainer'
 import Spinner from '../components/Spinner'
 import PageContent from '../components/PageContent'
@@ -57,16 +56,10 @@ const renderRoutes = (userId) => [
     id: 'activities',
   },
   {
-    path: `/user-data/${userId}/incomes`,
+    path: `/user-data/${userId}/payouts`,
     component: Incomes,
-    navLinkName: 'Income',
-    id: 'incomes',
-  },
-  {
-    path: `/user-data/${userId}/career`,
-    component: Career,
-    navLinkName: 'Career',
-    id: 'careers',
+    navLinkName: 'Payouts',
+    id: 'payouts',
   },
 ]
 
